@@ -8,7 +8,7 @@
       v-model="time"
       @change="updateTime"
     />
-    <p>{{ time }} {{minutes}}</p>
+    <p>{{ time }} {{ minutes }}</p>
   </div>
 </template>
 
@@ -16,6 +16,7 @@
 import { Options, Vue } from "vue-class-component";
 import { eventEmitter } from "@/main";
 import { i18n } from "@/main";
+import { VehicleType, VehicleTime } from "@/core/VehicleProperties";
 
 @Options({
   components: {},
@@ -30,11 +31,11 @@ import { i18n } from "@/main";
   computed: {},
 })
 export default class TimeController extends Vue {
-  time: number = 10;
-  group!: string;
+  time: number = 0;
+  group!: VehicleType;
 
   mounted() {
-    this.updateTime();
+    this.time = VehicleTime[this.group];
   }
 
   updateTime() {

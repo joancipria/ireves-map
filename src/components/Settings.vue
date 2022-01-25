@@ -22,13 +22,13 @@
         <div class="field mt-5">
           <label class="label">SAMU {{i18n.ISOCHRONE_TIME}}</label>
           <div class="control">
-            <TimeController :group="'SAMU'"></TimeController>
+            <TimeController :group="VehicleType.SAMU"></TimeController>
           </div>
         </div>
         <div class="field mt-5">
           <label class="label">SVB {{i18n.ISOCHRONE_TIME}}</label>
           <div class="control">
-            <TimeController :group="'SVB'"></TimeController>
+            <TimeController :group="VehicleType.SVB"></TimeController>
           </div>
         </div>
       </section>
@@ -45,6 +45,7 @@
 import { Options, Vue } from "vue-class-component";
 import TimeController from "@/components/TimeController.vue";
 import { i18n } from "@/main";
+import { VehicleType } from "@/core/VehicleProperties";
 
 @Options({
   components: {
@@ -53,6 +54,7 @@ import { i18n } from "@/main";
   data() {
     return {
       i18n: i18n,
+      VehicleType: VehicleType,
     };
   },
   computed: {},

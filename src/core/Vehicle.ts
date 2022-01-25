@@ -6,6 +6,8 @@ import { openRoute } from "@/services/openroute.service";
 import { worldPop } from "@/services/worldpop.service";
 import { vehicles, vehicleOverlaps, leafletMap, eventEmitter } from "@/main";
 import { utils } from "./Utils";
+import { VehicleType, VehicleTime } from "@/core/VehicleProperties";
+import { MapEntity } from "@/core/MapEntity"
 
 import { VehiclePopup } from "@/components/VehiclePopup/VehiclePopup";
 
@@ -32,7 +34,7 @@ export default class Vehicle {
     marker: LeafletMarker;
     popup: VehiclePopup;
 
-    constructor(id: number, name: string, lat: number = 0, lng: number = 0, type: string, availability: string = '12 AM', description: string = '') {
+    constructor(id: number, name: string, lat: number = 0, lng: number = 0, type: VehicleType, availability: string = '12 AM', description: string = '') {
         this.id = id;
         this.name = name;
         this.position = new LatLng(lat, lng);
@@ -44,22 +46,23 @@ export default class Vehicle {
         this.polygon = null;
         this.overlaps = [];
         this.population = null;
-
+        this.time = VehicleTime[this.type]
+        
         // Set color based on vehicle type
         switch (this.type) {
             case 'SVB':
                 this.color = '#129fe6'; // Color azul en hex
-                this.marker = new LeafletMarker(this.type, this.position, true, '');
+                this.marker = new LeafletMarker(MapEntity[this.type], this.position, true, '');
                 break;
 
             case 'SAMU':
                 this.color = '#e61212' // Color rojo en hex
-                this.marker = new LeafletMarker(this.type, this.position, true, '');
+                this.marker = new LeafletMarker(MapEntity[this.type], this.position, true, '');
                 break;
 
             default:
                 this.color = '#e61212'
-                this.marker = new LeafletMarker(this.type, this.position, true, '');
+                this.marker = new LeafletMarker(MapEntity[this.type], this.position, true, '');
                 break;
         }
 
