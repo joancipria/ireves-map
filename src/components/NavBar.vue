@@ -101,8 +101,7 @@ export default class NavBar extends Vue {
 nav {
   height: 6vh;
 }
-a.navbar-item,
-.navbar-link {
+div.navbar-brand .navbar-item {
   cursor: default;
 }
 </style>
