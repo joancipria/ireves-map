@@ -1,7 +1,7 @@
 <template>
   <div v-if="base" :class="{ open: base && showDetails }" class="box details">
     <header class="modal-card-head">
-      <p class="modal-card-title">Base details</p>
+      <p class="modal-card-title">{{i18n.BASE_DETAILS}}</p>
       <button @click="hide" class="delete" aria-label="close"></button>
     </header>
     <div class="content mt-5">
@@ -30,7 +30,7 @@
       <div class="columns">
         <div class="column">
           <br />
-          <h1 class="title is-5">Available ambulances</h1>
+          <h1 class="title is-5">{{i18n.AVAILABLE_AMBULANCES}}</h1>
           <div class="list has-visible-pointer-controls">
             <div
               v-for="vehicle of base.vehicles"
@@ -66,7 +66,7 @@
                     <span class="icon is-small">
                       <i class="fas fa-sign-out-alt"></i>
                     </span>
-                    <span>Extract</span>
+                    <span>{{i18n.EXTRACT}}</span>
                   </button>
                 </div>
               </div>
@@ -82,10 +82,16 @@
 import { Options, Vue } from "vue-class-component";
 import Base from "@/core/Base";
 import Vehicle from "@/core/Vehicle";
+import { i18n } from "@/main";
 
 @Options({
   props: {
     base: Base,
+  },
+  data() {
+    return {
+      i18n: i18n,
+    };
   },
 })
 export default class BaseDetails extends Vue {
