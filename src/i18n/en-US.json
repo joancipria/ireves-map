@@ -9,5 +9,22 @@
     "NAME": "Name",
     "DESCRIPTION": "Description",
     "AVAILABILITY": "Availability",
-    "COVERED_POPULATION": "Covered population"
+    "COVERED_POPULATION": "Covered population",
+    "MINUTES": "minutes",
+    "NO_DATA": "¿Don't have any CSV file?",
+    "TRY_DEMO": "Try the demo",
+    "ISOCHRONE_TIME": "isochrone time",
+    "LANGUAGE": "Language",
+    "SETTINGS": "Settings",
+    "SAVE_CHANGES": "Save changes",
+    "SPANISH": "Spanish",
+    "ENGLISH": "English",
+    "CATALAN": "Catalan",
+    "DATA": "Data",
+    "LOAD_DATA": "Load new data",
+    "EXPORT_CSV": "Export to CSV",
+    "ABOUT": "About",
+    "BASE_DETAILS": "Base details",
+    "AVAILABLE_AMBULANCES": "Available ambulances",
+    "EXTRACT": "Extract"
 }

@@ -9,5 +9,22 @@
     "NAME": "Nombre",
     "DESCRIPTION": "Descripción",
     "AVAILABILITY": "Disponibilidad",
-    "COVERED_POPULATION": "Población cubierta"
+    "COVERED_POPULATION": "Población cubierta",
+    "MINUTES": "minutos",
+    "NO_DATA": "¿No tienes un archivo CSV?",
+    "TRY_DEMO": "Prueba la demo",
+    "ISOCHRONE_TIME": "tiempo de la isócrona",
+    "LANGUAGE": "Idioma",
+    "SETTINGS": "Ajustes",
+    "SAVE_CHANGES": "Guardar cambios",
+    "SPANISH": "Castellano",
+    "ENGLISH": "Inglés",
+    "CATALAN": "Valenciano / Catalán",
+    "DATA": "Datos",
+    "LOAD_DATA": "Cargar nuevos datos",
+    "EXPORT_CSV": "Exportar a CSV",
+    "ABOUT": "Acerca de",
+    "BASE_DETAILS": "Detalles de la base",
+    "AVAILABLE_AMBULANCES": "Ambulancias disponibles",
+    "EXTRACT": "Extraer"
 }
