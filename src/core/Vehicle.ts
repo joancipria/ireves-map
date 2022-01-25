@@ -6,7 +6,7 @@ import { openRoute } from "@/services/openroute.service";
 import { worldPop } from "@/services/worldpop.service";
 import { vehicles, vehicleOverlaps, leafletMap, eventEmitter } from "@/main";
 import { utils } from "./Utils";
-import { VehicleType, VehicleTime } from "@/core/VehicleProperties";
+import { VehicleType, VehicleTime, VehicleColor } from "@/core/VehicleProperties";
 import { MapEntity } from "@/core/MapEntity"
 
 import { VehiclePopup } from "@/components/VehiclePopup/VehiclePopup";
@@ -47,24 +47,11 @@ export default class Vehicle {
         this.overlaps = [];
         this.population = null;
         this.time = VehicleTime[this.type]
-        
+
         // Set color based on vehicle type
-        switch (this.type) {
-            case 'SVB':
-                this.color = '#129fe6'; // Color azul en hex
-                this.marker = new LeafletMarker(MapEntity[this.type], this.position, true, '');
-                break;
+        this.color = VehicleColor[this.type]; // Color azul en hex
+        this.marker = new LeafletMarker(MapEntity[this.type], this.position, true, '');
 
-            case 'SAMU':
-                this.color = '#e61212' // Color rojo en hex
-                this.marker = new LeafletMarker(MapEntity[this.type], this.position, true, '');
-                break;
-
-            default:
-                this.color = '#e61212'
-                this.marker = new LeafletMarker(MapEntity[this.type], this.position, true, '');
-                break;
-        }
 
         // --- Define marker events ---
         // On drag start, hide isochroneLayer and overlaps
