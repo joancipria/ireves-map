@@ -23,6 +23,7 @@ export class LeafletMarker extends Marker {
         if (addToMap) {
             this.addToMap();
         }
+        this.added = false;
     }
 
     addToMap() {

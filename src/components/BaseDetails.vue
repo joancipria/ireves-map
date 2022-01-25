@@ -97,7 +97,6 @@ import { i18n } from "@/main";
 export default class BaseDetails extends Vue {
   showDetails: boolean = false;
   base!: Base;
-  selectedVehicle: number;
 
   show() {
     this.showDetails = true;

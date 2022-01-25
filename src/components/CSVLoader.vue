@@ -82,7 +82,7 @@ export default class CSVLoader extends Vue {
     Papa.parse(file, {
       download: mode,
       header: true,
-      complete: (res) => {
+      complete: (res: Papa.ParseResult<Papa.ParseError>,) => {
         if (res.errors.length > 0) {
           res.errors.forEach((error) => {
             console.error(error);
@@ -102,7 +102,7 @@ export default class CSVLoader extends Vue {
         // For each, create new Vehicle
         let id = 0;
         const bases: Base[] = [];
-        data.forEach((row) => {
+        data.forEach((row: any) => {
           // Clean data
           if (
             row &&

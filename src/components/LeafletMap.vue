@@ -20,7 +20,7 @@ import "leaflet/dist/leaflet.css";
   computed: {},
 })
 export default class LeafletMap extends Vue {
-  map: Map;
+  map!: Map;
 
   mounted() {
     let baseLayers = {
