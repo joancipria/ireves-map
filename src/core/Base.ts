@@ -1,6 +1,7 @@
 import { LeafletMarker } from "@/components/LeafletMarker/LeafletMarker";
 import { LatLng } from "leaflet";
 import Vehicle from "./Vehicle";
+import { MapEntity } from "@/core/MapEntity"
 
 export default class Base {
     name: string;
@@ -13,7 +14,7 @@ export default class Base {
         this.name = name;
         this.position = new LatLng(lat, lng);
         this.address = address;
-        this.marker = new LeafletMarker('base', this.position, false, '', true);
+        this.marker = new LeafletMarker(MapEntity.BASE, this.position, false, '', true);
     }
 
     extractVehicle(vehicleToExtract: Vehicle) {

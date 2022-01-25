@@ -5,6 +5,7 @@ import { Feature, center, polygon } from "@turf/turf";
 import { GeoJSON, LatLngExpression } from "leaflet";
 import { LeafletMarker } from "@/components/LeafletMarker/LeafletMarker";
 import { OverlapPopup } from '@/components/OverlapPopup/OverlapPopup';
+import { MapEntity } from "@/core/MapEntity"
 
 export class Overlap {
 
@@ -44,7 +45,7 @@ export class Overlap {
         const markerCoords: LatLngExpression = center(feature).geometry.coordinates.reverse() as LatLngExpression;
 
         // Create marker
-        this.marker = new LeafletMarker('layer-group', markerCoords, false, 'overlap-marker');
+        this.marker = new LeafletMarker(MapEntity.OVERLAP, markerCoords, false, 'overlap-marker');
 
         // Set popup content
         this.popup = new OverlapPopup(this);

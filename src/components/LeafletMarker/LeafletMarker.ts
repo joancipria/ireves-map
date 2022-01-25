@@ -3,12 +3,13 @@ import CONFIG from "@/config";
 import { Marker, LatLng, LatLngExpression, DivIcon } from "leaflet";
 import './LeafletMarker.css';
 import { leafletMap } from "@/main";
+import { MapEntity } from "@/core/MapEntity"
 
 export class LeafletMarker extends Marker {
 
     added: boolean;
 
-    constructor(entity: string, position: LatLng | LatLngExpression, draggable: boolean, customClass?: string, addToMap?: boolean) {
+    constructor(entity: MapEntity, position: LatLng | LatLngExpression, draggable: boolean, customClass?: string, addToMap?: boolean) {
 
         const icon = new DivIcon({
             html: `<img class="marker ${customClass}" src="${require(`@/assets/markers/${entity.toLowerCase()}_marker.png`)}">`,
