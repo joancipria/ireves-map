@@ -1,7 +1,7 @@
 <template>
   <nav class="navbar is-transparent">
     <div class="navbar-brand">
-      <a class="navbar-item" href="https://bulma.io">
+      <a class="navbar-item">
         <img
           src="../assets/ireves-logo.png"
           alt="Bulma: a modern CSS framework based on Flexbox"
@@ -100,5 +100,9 @@ export default class NavBar extends Vue {
 <style scoped lang="scss">
 nav {
   height: 6vh;
+}
+a.navbar-item,
+.navbar-link {
+  cursor: default;
 }
 </style>
