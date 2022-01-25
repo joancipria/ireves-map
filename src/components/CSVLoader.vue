@@ -39,6 +39,7 @@ import * as Papa from "papaparse";
 import Vehicle from "@/core/Vehicle";
 import Base from "@/core/Base";
 import { vehicles, i18n } from "@/main";
+import { VehicleType } from "@/core/VehicleProperties";
 
 @Options({
   components: {},
@@ -106,11 +107,11 @@ export default class CSVLoader extends Vue {
           // Clean data
           if (
             row &&
-            row.Base &&
             row.Base != "" &&
             row.x != "" &&
             row.y != "" &&
-            row.Nombre != ""
+            row.Nombre != "" &&
+            (row.Tipo == VehicleType.SAMU || row.Tipo == VehicleType.SVB)
           ) {
             // Create vehicle
             const vehicle = new Vehicle(
@@ -118,7 +119,7 @@ export default class CSVLoader extends Vue {
               row.Nombre,
               row.x,
               row.y,
-              row.Tipo,
+              VehicleType[row.Tipo],
               row.horario
             );
 
