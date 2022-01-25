@@ -37,6 +37,7 @@ export default class LeafletMap extends Vue {
       zoomControl: true,
       minZoom: 2,
       layers: [baseLayers["Base"]],
+      attributionControl: false,
     });
     this.map.zoomControl.setPosition("topleft");
     this.map.setView([39, -0.6], 10);
