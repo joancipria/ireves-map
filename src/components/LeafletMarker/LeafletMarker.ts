@@ -11,7 +11,7 @@ export class LeafletMarker extends Marker {
     constructor(entity: string, position: LatLng | LatLngExpression, draggable: boolean, customClass?: string, addToMap?: boolean) {
 
         const icon = new DivIcon({
-            html: `<img class="marker ${customClass}" src="${require(`@/assets/${entity.toLowerCase()}_marker.png`)}">`,
+            html: `<img class="marker ${customClass}" src="${require(`@/assets/markers/${entity.toLowerCase()}_marker.png`)}">`,
             iconSize: [CONFIG.MARKER_SIZER, CONFIG.MARKER_SIZER],
             className: '',
         });
