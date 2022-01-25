@@ -27,7 +27,7 @@
           </div>
         </div>
         <br />
-        <p>No data? <a @click="loadCSV(null, true)">Try the demo</a></p>
+        <p>{{noData}} <a @click="loadCSV(null, true)">{{tryDemo}}</a></p>
       </div>
     </div>
   </div>
@@ -47,6 +47,8 @@ import { vehicles, i18n } from "@/main";
       inputText: i18n.BROWSE_FILE,
       welcomeMessage: i18n.WELCOME_MESSAGE,
       welcomeInstructions: i18n.WELCOME_INSTRUCTIONS,
+      noData: i18n.NO_DATA,
+      tryDemo: i18n.TRY_DEMO,
     };
   },
   computed: {},
