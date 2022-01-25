@@ -1,10 +1,10 @@
 <template>
-  <div v-if="base" :class="{ open: base && showDetails }" class="box details">
+  <div :class="{ open: base && showDetails }" class="box details">
     <header class="modal-card-head">
       <p class="modal-card-title">{{i18n.BASE_DETAILS}}</p>
       <button @click="hide" class="delete" aria-label="close"></button>
     </header>
-    <div class="content mt-5">
+    <div v-if="base"  class="content mt-5">
       <div class="columns">
         <div class="colum">
           <img src="@/assets/base.svg" alt="" />
