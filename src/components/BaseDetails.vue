@@ -40,7 +40,7 @@
               <div class="list-item-image">
                 <figure class="image is-64x64">
                   <img
-                    v-if="vehicle.type == 'SAMU'"
+                    v-if="vehicle.type == VehicleType.SAMU"
                     class="is-rounded"
                     src="@/assets/samu.png"
                   />
@@ -83,6 +83,8 @@ import { Options, Vue } from "vue-class-component";
 import Base from "@/core/Base";
 import Vehicle from "@/core/Vehicle";
 import { i18n } from "@/main";
+import { VehicleType } from "@/core/VehicleProperties";
+
 
 @Options({
   props: {
@@ -91,6 +93,7 @@ import { i18n } from "@/main";
   data() {
     return {
       i18n: i18n,
+      VehicleType: VehicleType
     };
   },
 })

@@ -2,6 +2,7 @@ import { LeafletMarker } from "@/components/LeafletMarker/LeafletMarker";
 import { LatLng } from "leaflet";
 import Vehicle from "./Vehicle";
 import { MapEntity } from "@/core/MapEntity"
+import { VehicleType } from "@/core/VehicleProperties"
 
 export default class Base {
     name: string;
@@ -28,8 +29,8 @@ export default class Base {
     }
 
     showIsochrone(vehicleIndex: number = 0) {
-        const samu = this.vehicles.find(vehicle => vehicle.type == 'SAMU');
-        const svb = this.vehicles.find(vehicle => vehicle.type == 'SVB');
+        const samu = this.vehicles.find(vehicle => vehicle.type == VehicleType.SAMU);
+        const svb = this.vehicles.find(vehicle => vehicle.type == VehicleType.SVB);
 
         if (samu) {
             samu.onClick();
