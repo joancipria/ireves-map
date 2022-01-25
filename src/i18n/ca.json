@@ -1,0 +1,13 @@
+{
+    "WELCOME_MESSAGE": "Benvingut a iReves Map",
+    "WELCOME_INSTRUCTIONS": "Selecciona un fitxer CSV per començar",
+    "BROWSE_FILE": "Seleccionar fitxer",
+    "FILE_EXTENSION_ERROR": "Tipus de fitxer no suportat. Les dades a carregar deuen estar en un fitxer CSV.",
+    "FILE_PARSE_ERROR": "Error en carregar les dades. Format del fitxer no vàlid.",
+    "LOADING": "Carregant",
+    "NOT_AVAILABLE_ERROR": "No disponible",
+    "NAME": "Nom",
+    "DESCRIPTION": "Descripció",
+    "AVAILABILITY": "Disponibilitat",
+    "COVERED_POPULATION": "Població coberta"
+}

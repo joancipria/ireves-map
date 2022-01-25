@@ -1,0 +1,13 @@
+{
+    "WELCOME_MESSAGE": "Welcome to iReves Map",
+    "WELCOME_INSTRUCTIONS": "Upload a CSV file to start",
+    "BROWSE_FILE": "Browse file",
+    "FILE_EXTENSION_ERROR": "File type not supported. Data must be in a CSV file.",
+    "FILE_PARSE_ERROR": "Error when loading data. Invalid file format.",
+    "LOADING": "Loading",
+    "NOT_AVAILABLE_ERROR": "Not available",
+    "NAME": "Name",
+    "DESCRIPTION": "Description",
+    "AVAILABILITY": "Availability",
+    "COVERED_POPULATION": "Covered population"
+}
