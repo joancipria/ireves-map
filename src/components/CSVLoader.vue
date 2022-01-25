@@ -3,8 +3,8 @@
     <div class="modal-background"></div>
     <div class="modal-content">
       <div class="box">
-        <h1 class="title">{{ welcomeMessage }}</h1>
-        <h2 class="subtitle">{{ welcomeInstructions }}</h2>
+        <h1 class="title">{{ i18n.WELCOME_MESSAGE }}</h1>
+        <h2 class="subtitle">{{ i18n.WELCOME_INSTRUCTIONS }}</h2>
         <div class="drag-area">
           <div class="file is-centered">
             <label v-if="!loading" class="file-label">
@@ -18,7 +18,7 @@
                 <span class="file-icon">
                   <i class="fas fa-upload"></i>
                 </span>
-                <span class="file-label">{{ inputText }}</span>
+                <span class="file-label">{{ i18n.BROWSE_FILE }}</span>
               </span>
             </label>
             <progress v-else class="progress is-small is-primary" max="100">
@@ -27,7 +27,7 @@
           </div>
         </div>
         <br />
-        <p>{{noData}} <a @click="loadCSV(null, true)">{{tryDemo}}</a></p>
+        <p>{{i18n.NO_DATA}} <a @click="loadCSV(null, true)">{{i18n.TRY_DEMO}}</a></p>
       </div>
     </div>
   </div>
@@ -44,11 +44,7 @@ import { vehicles, i18n } from "@/main";
   components: {},
   data() {
     return {
-      inputText: i18n.BROWSE_FILE,
-      welcomeMessage: i18n.WELCOME_MESSAGE,
-      welcomeInstructions: i18n.WELCOME_INSTRUCTIONS,
-      noData: i18n.NO_DATA,
-      tryDemo: i18n.TRY_DEMO,
+      i18n: i18n,
     };
   },
   computed: {},
