@@ -33,10 +33,10 @@ export default class Base {
         const svb = this.vehicles.find(vehicle => vehicle.type == VehicleType.SVB);
 
         if (samu) {
-            samu.onClick();
+            samu.onClick(false);
         }
         if (svb) {
-            svb.onClick();
+            svb.onClick(false);
         }
 
     }

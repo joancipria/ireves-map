@@ -105,17 +105,17 @@ export default class Vehicle {
     }
 
     // TODO: Rename function
-    async onClick() {
+    async onClick(checkOverlap: boolean = true) {
         // Check if isochroneLayer has been generated
         if (this.isochroneLayer) {
             this.getPopulation(); // Then get population
         } else {
-            await this.updateIsochrone()
+            await this.updateIsochrone(checkOverlap)
             this.getPopulation();
         }
     }
 
-    async updateIsochrone() {
+    async updateIsochrone(checkOverlap: boolean = true) {
         // Hide isochroneLayer
         this.toggleIsochroneLayer(false);
 
@@ -143,8 +143,11 @@ export default class Vehicle {
             this.toggleIsochroneLayer(true);
         }
 
-        // Check overlaps
-        this.checkOverlap();
+
+        if (checkOverlap) {
+            // Check overlaps
+            this.checkOverlap();
+        }
     }
 
     updatePosition(coord: LatLng) {
