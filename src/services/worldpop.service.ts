@@ -1,9 +1,10 @@
 import HttpClient from "./httpclient.service";
+import config from "@/config";
 
 class WorldPopService extends HttpClient {
 
     constructor() {
-        super('http://127.0.0.1:5000');
+        super(config.SERVER_URL);
     }
 
     getPopulation(polygon: unknown) {

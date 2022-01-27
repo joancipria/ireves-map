@@ -1,9 +1,10 @@
 import  Vehicle from "../core/Vehicle";
 import  HttpClient from "./httpclient.service";
+import config from "@/config";
 
 class OpenRouteService extends HttpClient {
     constructor() {
-        super('http://127.0.0.1:5000');
+        super(config.SERVER_URL);
     }
 
     getVehicleIsochron(vehicle: Vehicle) {
