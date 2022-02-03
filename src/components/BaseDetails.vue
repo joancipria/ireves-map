@@ -1,5 +1,5 @@
 <template>
-  <div :class="{ open: base && showDetails }" class="box details">
+  <div :class="{ open: base && visibility }" class="box details">
     <header class="modal-card-head">
       <p class="modal-card-title">{{i18n.BASE_DETAILS}}</p>
       <button @click="hide" class="delete" aria-label="close"></button>
@@ -98,15 +98,15 @@ import { VehicleType } from "@/core/VehicleProperties";
   },
 })
 export default class BaseDetails extends Vue {
-  showDetails: boolean = false;
+  visibility: boolean = false;
   base!: Base;
 
   show() {
-    this.showDetails = true;
+    this.visibility = true;
   }
 
   hide() {
-    this.showDetails = false;
+    this.visibility = false;
   }
 
   extractVehicle(vehicle: Vehicle) {

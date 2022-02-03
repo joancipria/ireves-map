@@ -1,5 +1,5 @@
 <template>
-  <div class="modal" :class="{ 'is-active': modalActive }">
+  <div class="modal" :class="{ 'is-active': visibility }">
     <div class="modal-background"></div>
     <div class="modal-card">
       <header class="modal-card-head">
@@ -62,14 +62,14 @@ import { VehicleType } from "@/core/VehicleProperties";
   computed: {},
 })
 export default class Settings extends Vue {
-  modalActive: boolean = false;
+  visibility: boolean = false;
 
   show() {
-    this.modalActive = true;
+    this.visibility = true;
   }
 
   hide() {
-    this.modalActive = false;
+    this.visibility = false;
   }
 }
 </script>
