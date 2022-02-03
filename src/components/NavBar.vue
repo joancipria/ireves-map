@@ -22,7 +22,9 @@
         <div class="navbar-item has-dropdown is-hoverable">
           <a class="navbar-link"> {{ i18n.DATA }} </a>
           <div class="navbar-dropdown">
-            <a class="navbar-item"> {{ i18n.LOAD_DATA }} </a>
+            <a @click="showDataLoader" class="navbar-item">
+              {{ i18n.LOAD_DATA }}
+            </a>
             <a class="navbar-item" href="#">{{ i18n.EXPORT_CSV }} </a>
             <!-- <a
               class="navbar-item"
@@ -64,7 +66,7 @@
         <div class="navbar-item">
           <div class="field is-grouped">
             <p class="control">
-              <button @click="showSettings()" class="button">
+              <button @click="showSettings" class="button">
                 <span class="icon">
                   <i class="fas fa-cog"></i>
                 </span>
@@ -92,6 +94,10 @@ import { i18n } from "@/main";
 export default class NavBar extends Vue {
   showSettings() {
     this.$emit("showSettings");
+  }
+
+  showDataLoader() {
+    this.$emit("showDataLoader");
   }
 }
 </script>

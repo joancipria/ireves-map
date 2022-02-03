@@ -1,6 +1,9 @@
 <template>
-  <NavBar @show-settings="showSettings"></NavBar>
-  <CSVLoader @base-selected="onBaseSelected"></CSVLoader>
+  <NavBar
+    @show-data-loader="showDataLoader"
+    @show-settings="showSettings"
+  ></NavBar>
+  <FileLoader ref="fileLoader" @base-selected="onBaseSelected"></FileLoader>
   <Settings ref="settings"></Settings>
   <BaseDetails ref="baseDetails" :base="selectedBase"></BaseDetails>
   <Leaflet-map></Leaflet-map>
@@ -9,7 +12,7 @@
 <script lang="ts">
 import { Options, Vue } from "vue-class-component";
 import LeafletMap from "@/components/LeafletMap.vue"; // @ is an alias to /src
-import CSVLoader from "@/components/CSVLoader.vue";
+import FileLoader from "@/components/FileLoader.vue";
 import BaseDetails from "@/components/BaseDetails.vue";
 import NavBar from "@/components/NavBar.vue";
 import Settings from "@/components/Settings.vue";
@@ -18,7 +21,7 @@ import Base from "@/core/Base";
 @Options({
   components: {
     LeafletMap,
-    CSVLoader,
+    FileLoader,
     BaseDetails,
     NavBar,
     Settings,
@@ -30,6 +33,7 @@ export default class App extends Vue {
   declare $refs: {
     baseDetails: BaseDetails;
     settings: Settings;
+    fileLoader: FileLoader;
   };
 
   onBaseSelected(base: Base) {
@@ -39,6 +43,10 @@ export default class App extends Vue {
 
   showSettings() {
     this.$refs.settings.show();
+  }
+
+  showDataLoader() {
+    this.$refs.fileLoader.show();
   }
 }
 </script>
