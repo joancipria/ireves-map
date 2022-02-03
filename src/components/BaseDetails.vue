@@ -1,10 +1,10 @@
 <template>
   <div :class="{ open: base && visibility }" class="box details">
     <header class="modal-card-head">
-      <p class="modal-card-title">{{i18n.BASE_DETAILS}}</p>
+      <p class="modal-card-title">{{ i18n.BASE_DETAILS }}</p>
       <button @click="hide" class="delete" aria-label="close"></button>
     </header>
-    <div v-if="base"  class="content mt-5">
+    <div v-if="base" class="content mt-5">
       <div class="columns">
         <div class="colum">
           <img src="@/assets/base.svg" alt="" />
@@ -30,7 +30,7 @@
       <div class="columns">
         <div class="column">
           <br />
-          <h1 class="title is-5">{{i18n.AVAILABLE_AMBULANCES}}</h1>
+          <h1 class="title is-5">{{ i18n.AVAILABLE_AMBULANCES }}</h1>
           <div class="list has-visible-pointer-controls">
             <div
               v-for="vehicle of base.vehicles"
@@ -66,7 +66,7 @@
                     <span class="icon is-small">
                       <i class="fas fa-sign-out-alt"></i>
                     </span>
-                    <span>{{i18n.EXTRACT}}</span>
+                    <span>{{ i18n.EXTRACT }}</span>
                   </button>
                 </div>
               </div>
@@ -85,7 +85,6 @@ import Vehicle from "@/core/Vehicle";
 import { i18n } from "@/main";
 import { VehicleType } from "@/core/VehicleProperties";
 
-
 @Options({
   props: {
     base: Base,
@@ -93,7 +92,7 @@ import { VehicleType } from "@/core/VehicleProperties";
   data() {
     return {
       i18n: i18n,
-      VehicleType: VehicleType
+      VehicleType: VehicleType,
     };
   },
 })
@@ -142,5 +141,45 @@ export default class BaseDetails extends Vue {
 }
 .tag {
   margin-right: 2px;
+}
+
+/* Extra small devices (phones, 600px and down) */
+@media only screen and (max-width: 600px) {
+  .details {
+    right: -100%;
+    width: 100%;
+  }
+}
+
+/* Small devices (portrait tablets and large phones, 600px and up) */
+@media only screen and (min-width: 600px) {
+  .details {
+    right: -60%;
+    width: 60%;
+  }
+}
+
+/* Medium devices (landscape tablets, 768px and up) */
+@media only screen and (min-width: 768px) {
+  .details {
+    right: -50%;
+    width: 50%;
+  }
+}
+
+/* Large devices (laptops/desktops, 992px and up) */
+@media only screen and (min-width: 992px) {
+  .details {
+    right: -40%;
+    width: 40%;
+  }
+}
+
+/* Large devices (laptops/desktops, 1100px and up) */
+@media only screen and (min-width: 1100px) {
+  .details {
+    right: -30%;
+    width: 30%;
+  }
 }
 </style>
