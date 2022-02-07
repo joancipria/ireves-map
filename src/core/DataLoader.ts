@@ -1,5 +1,5 @@
 import Base from "@/core/Base";
-import { vehicles, i18n } from "@/main";
+import { vehicles, i18n, bases, reset } from "@/main";
 import { VehicleType } from "@/core/VehicleProperties";
 import Vehicle from "@/core/Vehicle";
 import * as Papa from "papaparse";
@@ -41,6 +41,7 @@ export default class DataLoader {
                         resolve({ error: i18n.FILE_PARSE_ERROR });
                     }
 
+                    reset();
                     this.createEntities(res.data);
                     resolve(res.data);
                 },
@@ -52,7 +53,7 @@ export default class DataLoader {
     private createEntities(data: any) {
         // For each, create new Vehicle
         let id = 0;
-        const bases: Base[] = [];
+
         data.forEach((row: any) => {
             // Clean data
             if (

@@ -1,9 +1,10 @@
 import { createApp } from 'vue'
 import App from './App.vue'
-import Vehicle from './core/Vehicle';
+import Vehicle from '@/core/Vehicle';
+import Base from '@/core/Base';
 import './registerServiceWorker'
 import router from './router'
-import { EventEmitter} from 'events';
+import { EventEmitter } from 'events';
 
 // Bulma 
 import 'bulma/css/bulma.css'
@@ -16,7 +17,8 @@ library.add(faAmbulance, faLayerGroup, faBicycle, faCar, faUpload, faHospitalSym
 dom.watch();
 
 // Global variables
-export const vehicles: Vehicle[] = [];
+export let bases: Base[] = [];
+export let vehicles: Vehicle[] = [];
 export const vehicleOverlaps: any[][] = [];
 export const leafletMap: any = { map: null };
 
@@ -32,3 +34,21 @@ try {
 export const i18n = localeFile;
 
 createApp(App).use(router).mount('#app')
+
+
+export const reset = () => {
+    // Remove base markers
+    bases.forEach((base: Base) => {
+        base.marker.remove();
+    });
+
+    // Remove vehicles markers
+    vehicles.forEach((vehicle: Vehicle) => {
+        vehicle.marker.remove();
+    })
+
+    // Clear data
+    bases = [];
+    vehicles = [];
+
+}
