@@ -3,7 +3,7 @@
     @show-data-loader="showDataLoader"
     @show-settings="showSettings"
   ></NavBar>
-  <FileLoader ref="fileLoader" @base-selected="onBaseSelected"></FileLoader>
+  <FileLoader :mode="fileLoaderMode" ref="fileLoader" @base-selected="onBaseSelected"></FileLoader>
   <Settings ref="settings"></Settings>
   <BaseDetails ref="baseDetails" :base="selectedBase"></BaseDetails>
   <Leaflet-map></Leaflet-map>
@@ -29,6 +29,7 @@ import Base from "@/core/Base";
 })
 export default class App extends Vue {
   selectedBase: Base = null;
+  fileLoaderMode: boolean = true;
 
   declare $refs: {
     baseDetails: BaseDetails;
@@ -46,6 +47,7 @@ export default class App extends Vue {
   }
 
   showDataLoader() {
+    this.fileLoaderMode = false;
     this.$refs.fileLoader.show();
   }
 }
