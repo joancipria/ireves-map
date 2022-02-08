@@ -1,6 +1,6 @@
 import Base from "@/core/Base";
 import { vehicles, i18n, bases, reset } from "@/main";
-import { VehicleType } from "@/core/VehicleProperties";
+import { VehicleAvailability, VehicleType } from "@/core/VehicleProperties";
 import Vehicle from "@/core/Vehicle";
 import * as Papa from "papaparse";
 
@@ -71,7 +71,7 @@ export default class DataLoader {
                     row.x,
                     row.y,
                     VehicleType[row.Tipo],
-                    row.horario
+                    VehicleAvailability[row.horario]
                 );
 
                 // Check if base already exists
