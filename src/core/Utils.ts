@@ -1,6 +1,6 @@
 // Import Turf.js
 import * as turf from '@turf/turf'
-import { Feature, FeatureCollection } from '@turf/turf';
+import { Feature, FeatureCollection, MultiPolygon, Polygon } from '@turf/turf';
 
 class Utils {
 
@@ -11,9 +11,16 @@ class Utils {
         });
     }
 
-    // TODO: tipar
-    polyIntersect(polyA: any, polyB: any) {
+    polyIntersect(polyA: Feature<Polygon | MultiPolygon>, polyB: Feature<Polygon | MultiPolygon>) {
         return turf.intersect(polyA, polyB);
+    }
+
+    union(polyA: Feature<Polygon | MultiPolygon>, polyB: Feature<Polygon | MultiPolygon>) {
+        return turf.union(polyA, polyB)
+    }
+
+    difference(polyA: Feature<Polygon | MultiPolygon>, polyB: Feature<Polygon | MultiPolygon>) {
+        return turf.difference(polyA, polyB)
     }
 
     /**
@@ -22,7 +29,7 @@ class Utils {
      * @param {Feature} polyA 
      * @returns interseccion
      */
-    checkOverlap(polyA: Feature, polyB: Feature) {
+    checkOverlap(polyA: Feature<Polygon | MultiPolygon>, polyB: Feature<Polygon | MultiPolygon>) {
         if (!polyA || !polyB) return;
         return this.polyIntersect(polyA, polyB);
     }
