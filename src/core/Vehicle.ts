@@ -162,15 +162,11 @@ export default class Vehicle {
         if (!this.isochroneLayer) return;
 
         if (!visibility) {
-            if (this.isochroneLayer) {
-                this.targetLayer.removeLayer(this.isochroneLayer)
-            }
+            this.targetLayer.removeLayer(this.isochroneLayer)
             return;
         }
 
-        if (this.isochroneLayer) {
-            this.isochroneLayer.addTo(this.targetLayer);
-        }
+        this.isochroneLayer.addTo(this.targetLayer);
     }
 
     async getPopulation() {
