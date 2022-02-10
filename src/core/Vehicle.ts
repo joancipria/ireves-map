@@ -231,14 +231,30 @@ export default class Vehicle {
         globalOverlap.overlap.hide();
 
 
-        // Clip global overlap by this poly 
+        // Check if current isochrone overlaps with globalOverlap
         const clip = utils.difference(globalOverlap.feature, this.polygon);
 
         if (clip) {
-            globalOverlap.feature = clip;
-            const newOverlap = new Overlap(clip);
+
+            // Join all overlaps except this
+            let allOverlaps = utils.emptyPolygon;
+            for (let i = 0; i < vehicleOverlaps.length; i++) {
+                if (!(vehicleOverlaps[i] && (vehicleOverlaps[i][0] == this || vehicleOverlaps[i][1] == this))) {
+                    allOverlaps = utils.union(allOverlaps, vehicleOverlaps[i][2].feature);
+                }
+            }
+
+            // Diff between allOverlaps and current isochrone
+            const toRemove = utils.difference(this.polygon, allOverlaps);
+
+            // Clip globalOverlap by toRemove
+            const overlapClip = utils.difference(globalOverlap.feature, toRemove);
+
+            // Update overlap
+            globalOverlap.feature = overlapClip;
+            const newOverlap = new Overlap(overlapClip);
             globalOverlap.overlap = newOverlap;
-            newOverlap.show();
+            globalOverlap.overlap.show();
         }
 
         // Check if there's any active overlap
