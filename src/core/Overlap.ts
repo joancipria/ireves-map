@@ -11,11 +11,13 @@ export class Overlap {
 
     population: number;
     polygons: Feature[];
+    feature: Feature;
     overlapLayer: GeoJSON;
     marker: LeafletMarker;
     popup: OverlapPopup
 
     constructor(feature: Feature) {
+        this.feature = feature;
         this.population = null;
 
         // Overlap can be composed of several polygons
