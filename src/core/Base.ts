@@ -3,6 +3,7 @@ import { LatLng } from "leaflet";
 import Vehicle from "./Vehicle";
 import { MapEntity } from "@/core/MapEntity"
 import { VehicleType } from "@/core/VehicleProperties"
+import { layers } from "@/main";
 
 export default class Base {
     name: string;
@@ -15,7 +16,7 @@ export default class Base {
         this.name = name;
         this.position = new LatLng(lat, lng);
         this.address = address;
-        this.marker = new LeafletMarker(MapEntity.BASE, this.position, false, '', true);
+        this.marker = new LeafletMarker(MapEntity.BASE, this.position, false, '', true, layers.bases);
     }
 
     extractVehicle(vehicleToExtract: Vehicle) {
@@ -33,10 +34,10 @@ export default class Base {
         const svb = this.vehicles.find(vehicle => vehicle.type == VehicleType.SVB);
 
         if (samu) {
-            samu.onClick(false);
+            samu.activate();
         }
         if (svb) {
-            svb.onClick(false);
+            svb.activate();
         }
 
     }
