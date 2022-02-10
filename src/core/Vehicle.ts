@@ -74,7 +74,7 @@ export default class Vehicle {
         this.marker.on('click', this.activate.bind(this));
 
         // On time controller change
-        eventEmitter.on('timeChange', this.onTimeChange);
+        eventEmitter.on('timeChange', this.onTimeChange.bind(this));
     }
 
     async activate() {
@@ -129,13 +129,15 @@ export default class Vehicle {
             // Update time
             this.time = time;
 
-            // Deactivate vehicle
-            this.deactivate();
+            // If active, update isochrone
+            if (this.active) {
+                // Deactivate vehicle
+                this.deactivate();
 
-            // Update isochrone if is active
-            this.activate();
+                // Update isochrone if is active
+                this.activate();
+            }
         }
-
     }
 
     async generateIsochrone() {
@@ -156,6 +158,7 @@ export default class Vehicle {
                 }
             });
         }
+        return data;
     }
 
     toggleIsochrone(visibility = false) {
