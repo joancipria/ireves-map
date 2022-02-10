@@ -4,6 +4,8 @@ import { Feature, FeatureCollection, MultiPolygon, Polygon } from '@turf/turf';
 
 class Utils {
 
+    emptyPolygon: Feature <(Polygon|MultiPolygon)> = turf.polygon([], { });
+
     simplifyPoly(poly: FeatureCollection, isochroneTime: number) {
         return turf.simplify(poly, {
             tolerance: this.calcTolerance(isochroneTime),
