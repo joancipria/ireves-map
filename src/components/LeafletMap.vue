@@ -4,8 +4,8 @@
 
 <script lang="ts">
 import { Options, Vue } from "vue-class-component";
-import { Map, TileLayer } from "leaflet";
-import { leafletMap } from "@/main";
+import { Control, LayerGroup, Map, TileLayer } from "leaflet";
+import { leafletMap, layers } from "@/main";
 
 import "leaflet/dist/leaflet.css";
 
@@ -23,22 +23,43 @@ export default class LeafletMap extends Vue {
   map!: Map;
 
   mounted() {
-    let baseLayers = {
-      Base: new TileLayer(
-        "https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png",
-        {
-          attribution:
-            '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors',
-        }
+    const baseLayers = {
+      Openstreet: new TileLayer(
+        "https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
+      ),
+      Grayscale: new TileLayer(
+        "https://api.mapbox.com/styles/v1/{id}/tiles/{z}/{x}/{y}?access_token=pk.eyJ1IjoibWFwYm94IiwiYSI6ImNpejY4NXVycTA2emYycXBndHRqcmZ3N3gifQ.rJcFIG214AriISLbB6B5aw",
+        { id: "mapbox/light-v9" }
+      ),
+      Streets: new TileLayer(
+        "https://api.mapbox.com/styles/v1/{id}/tiles/{z}/{x}/{y}?access_token=pk.eyJ1IjoibWFwYm94IiwiYSI6ImNpejY4NXVycTA2emYycXBndHRqcmZ3N3gifQ.rJcFIG214AriISLbB6B5aw",
+        { id: "mapbox/streets-v11" }
       ),
     };
 
     this.map = new Map("map", {
       zoomControl: true,
       minZoom: 2,
-      layers: [baseLayers["Base"]],
+      layers: [
+        baseLayers.Openstreet,
+        layers.availability.allDay,
+        layers.availability.halfDay,
+        layers.availability.halfDayNight,
+        layers.bases,
+      ],
       attributionControl: false,
     });
+
+    let overlayMaps = {
+      "12H": layers.availability.halfDay,
+      "12H (Nocturnas)": layers.availability.halfDayNight,
+      "24H": layers.availability.allDay,
+    };
+
+    const layersControl = new Control.Layers(baseLayers, overlayMaps, {
+      position: "topleft",
+    }).addTo(this.map);
+
     this.map.zoomControl.setPosition("bottomleft");
     this.map.setView([39, -0.6], 10);
     leafletMap.map = this.map;
