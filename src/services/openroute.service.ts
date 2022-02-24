@@ -7,7 +7,7 @@ class OpenRouteService extends HttpClient {
         super(config.SERVER_URL);
     }
 
-    getVehicleIsochron(vehicle: Vehicle) {
+    getVehicleIsochrone(vehicle: Vehicle) {
         const data = { lat: vehicle.position.lat, lng: vehicle.position.lng, time: vehicle.time }
         return super.get('/isochrones', data);
     }

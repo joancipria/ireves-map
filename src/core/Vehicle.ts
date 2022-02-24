@@ -142,7 +142,7 @@ export default class Vehicle {
 
     async generateIsochrone() {
         // Get new isochrone
-        const data = await openRoute.getVehicleIsochron(this);
+        const data = await openRoute.getVehicleIsochrone(this);
 
         if (data.error) {
             console.error(data.error);
