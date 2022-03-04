@@ -22,11 +22,17 @@
     "CATALAN": "Catalan",
     "DATA": "Data",
     "LOAD_DATA": "Load new data",
-    "EXPORT": "Export data",
+    "EXPORT": "Export",
+    "EXPORT_DATA": "Export data",
     "ABOUT": "About",
     "BASE_DETAILS": "Base details",
     "AVAILABLE_AMBULANCES": "Available ambulances",
     "EXTRACT": "Extract",
     "ISOCHRONE_NETWORK_ERROR": "The isochron could not be obtained",
-    "ISOCHRONE_OUT_OF_SPAIN_ERROR": "It is not possible to calculate isochrones outside Spain"
+    "ISOCHRONE_OUT_OF_SPAIN_ERROR": "It is not possible to calculate isochrones outside Spain",
+    "FROM": "from",
+    "FILE_NAME": "File name",
+    "FORMAT": "Format",
+    "POPULATION": "Population",
+    "BASES_INTERSECTION": "Intersection of all bases"
 }

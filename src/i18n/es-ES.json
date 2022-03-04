@@ -22,11 +22,17 @@
     "CATALAN": "Valenciano / Catalán",
     "DATA": "Datos",
     "LOAD_DATA": "Cargar nuevos datos",
-    "EXPORT": "Exportar datos",
+    "EXPORT": "Exportar",
+    "EXPORT_DATA": "Exportar datos",
     "ABOUT": "Acerca de",
     "BASE_DETAILS": "Detalles de la base",
     "AVAILABLE_AMBULANCES": "Ambulancias disponibles",
     "EXTRACT": "Extraer",
     "ISOCHRONE_NETWORK_ERROR": "No se pudo calcular la isócrona",
-    "ISOCHRONE_OUT_OF_SPAIN_ERROR": "No es posible calcular isócronas fuera de España"
+    "ISOCHRONE_OUT_OF_SPAIN_ERROR": "No es posible calcular isócronas fuera de España",
+    "FROM": "de",
+    "FILE_NAME": "Nombre del archivo",
+    "FORMAT": "Formato",
+    "POPULATION": "Población",
+    "BASES_INTERSECTION": "Intersección de todas las bases"
 }
