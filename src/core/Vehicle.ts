@@ -4,7 +4,7 @@ import { Feature, MultiPolygon, Polygon } from "@turf/turf";
 import { LeafletMarker } from "@/components/LeafletMarker/LeafletMarker";
 import { openRoute } from "@/services/openroute.service";
 import { worldPop } from "@/services/worldpop.service";
-import { vehicles, vehicleOverlaps, eventEmitter, layers, globalOverlap } from "@/main";
+import { vehicles, vehicleOverlaps, eventEmitter, layers, globalOverlap, i18n } from "@/main";
 import { utils } from "./Utils";
 import { VehicleType, VehicleTime, VehicleColor, VehicleAvailability } from "@/core/VehicleProperties";
 import { MapEntity } from "@/core/MapEntity"
@@ -91,16 +91,26 @@ export default class Vehicle {
             this.popup.setLoading();
 
             // Generate (new) isochrone
-            await this.generateIsochrone();
+            const result = await this.getIsochrone();
 
-            // Show isochroneLayer
-            this.toggleIsochrone(true);
+            if (result.error) {
+                if (result.error.code == 3099) {
+                    eventEmitter.emit("notification", i18n.ISOCHRONE_OUT_OF_SPAIN_ERROR);
+                } else {
+                    eventEmitter.emit("notification", i18n.ISOCHRONE_NETWORK_ERROR);
+                }
+                this.popup.closePopup();
+                return;
+            } else {
+                // Show isochroneLayer
+                this.toggleIsochrone(true);
 
-            // Check overlaps
-            this.checkOverlap();
+                // Check overlaps
+                this.checkOverlap();
 
-            // Get pop
-            this.getPopulation();
+                // Get pop
+                this.getPopulation();
+            }
         }
     }
 
@@ -140,13 +150,13 @@ export default class Vehicle {
         }
     }
 
-    async generateIsochrone() {
+    async getIsochrone() {
         // Get new isochrone
         const data = await openRoute.getVehicleIsochrone(this);
 
         if (data.error) {
-            console.error(data.error);
-            return;
+            //console.error(data.error);
+            return data;
         } else {
             // Store Feature polygon (necessary to calc population and overlap)
             this.polygon = data.features[0];
@@ -173,7 +183,9 @@ export default class Vehicle {
     }
 
     async getPopulation() {
-        if (!this.isochroneLayer) return;
+        if (!this.isochroneLayer) {
+            await this.getIsochrone();
+        }
 
         // Get population
         const data = await worldPop.getPopulation(this.polygon.geometry);
@@ -185,6 +197,13 @@ export default class Vehicle {
         }
         this.population = data.total_population;
         this.popup.setStats();
+
+        return this.population;
+    }
+
+    getRawOverlap(targetVehicle: Vehicle) {
+        const overlap = utils.checkOverlap(targetVehicle.polygon, this.polygon);
+        return overlap;
     }
 
     checkOverlap() {
@@ -194,7 +213,7 @@ export default class Vehicle {
             if (vehicle != this && vehicle.polygon) {
 
                 // Check overlap
-                const overlap = utils.checkOverlap(vehicle.polygon, this.polygon);
+                const overlap = this.getRawOverlap(vehicle);
 
                 // If there's overlap
                 if (overlap) {
