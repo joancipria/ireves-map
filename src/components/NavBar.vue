@@ -4,7 +4,7 @@
       <a class="navbar-item">
         <img
           src="../assets/ireves-logo.png"
-          alt="Bulma: a modern CSS framework based on Flexbox"
+          alt="iReves Map"
           width="112"
           height="28"
         />
