@@ -26,5 +26,7 @@
     "ABOUT": "Sobre",
     "BASE_DETAILS": "Detalls de la base",
     "AVAILABLE_AMBULANCES": "Ambulàncies disponibles",
-    "EXTRACT": "Extraure"
+    "EXTRACT": "Extraure",
+    "ISOCHRONE_NETWORK_ERROR": "No s'ha pogut calcular la isòcrona",
+    "ISOCHRONE_OUT_OF_SPAIN_ERROR": "No és possible calcular isòcrones fora d'Espanya"
 }

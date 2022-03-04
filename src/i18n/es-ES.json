@@ -26,5 +26,7 @@
     "ABOUT": "Acerca de",
     "BASE_DETAILS": "Detalles de la base",
     "AVAILABLE_AMBULANCES": "Ambulancias disponibles",
-    "EXTRACT": "Extraer"
+    "EXTRACT": "Extraer",
+    "ISOCHRONE_NETWORK_ERROR": "No se pudo calcular la isócrona",
+    "ISOCHRONE_OUT_OF_SPAIN_ERROR": "No es posible calcular isócronas fuera de España"
 }
