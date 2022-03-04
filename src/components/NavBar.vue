@@ -25,7 +25,7 @@
             <a @click="showDataLoader" class="navbar-item">
               {{ i18n.LOAD_DATA }}
             </a>
-            <a @click="showExport" class="navbar-item" href="#">{{ i18n.EXPORT_CSV }} </a>
+            <a @click="showExport" class="navbar-item" href="#">{{ i18n.EXPORT }} </a>
             <!-- <a
               class="navbar-item"
               href="https://bulma.io/documentation/columns/basics/"
