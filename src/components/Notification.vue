@@ -1,5 +1,8 @@
 <template>
-  <div :class="{ open: visibility }" class="notification is-danger">
+  <div
+    :class="{ open: visibility, close: !visibility }"
+    class="notification is-danger"
+  >
     <button @click="hide" class="delete"></button>
     {{ message }}
   </div>
@@ -47,10 +50,6 @@ export default class Notification extends Vue {
     0 0 0 1px rgba(10, 10, 10, 0.02);
 }
 
-.notification {
-  opacity: 0%;
-  transition: opacity 0.5s;
-}
 .open {
   opacity: 100%;
   transition: opacity 0.5s;
