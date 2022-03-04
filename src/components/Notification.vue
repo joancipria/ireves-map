@@ -51,7 +51,7 @@ export default class Notification extends Vue {
 }
 
 .open {
-  opacity: 100%;
+  opacity: inherit;
   transition: opacity 0.5s;
 }
 .close {
