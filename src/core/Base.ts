@@ -11,6 +11,7 @@ export default class Base {
     address: string;
     vehicles: Vehicle[] = [];
     marker: LeafletMarker;
+    activeVehicles: any;
 
     constructor(name: string, lat: number = 0, lng: number = 0, address: string) {
         this.name = name;
@@ -27,19 +28,41 @@ export default class Base {
         });
         this.vehicles.splice(index, 1); // returns array of removed items
         vehicleToExtract.extract();
+        this.refreshActiveVehicles();
+        this.showIsochrone();
     }
 
-    showIsochrone(vehicleIndex: number = 0) {
+    showIsochrone() {
+        this.refreshActiveVehicles();
+        if (this.activeVehicles.samu) {
+            this.activeVehicles.samu.activate();
+        }
+        if (this.activeVehicles.svb) {
+            this.activeVehicles.svb.activate();
+        }
+    }
+
+    async getPopulation() {
+        this.refreshActiveVehicles();
+        const data = { samu: null, svb: null }
+        if (this.activeVehicles.samu) {
+            data.samu = await this.activeVehicles.samu.getPopulation();
+        }
+        if (this.activeVehicles.svb) {
+            data.svb = await this.activeVehicles.svb.getPopulation();
+        }
+        return data;
+    }
+
+
+    refreshActiveVehicles() {
         const samu = this.vehicles.find(vehicle => vehicle.type == VehicleType.SAMU);
         const svb = this.vehicles.find(vehicle => vehicle.type == VehicleType.SVB);
 
-        if (samu) {
-            samu.activate();
+        this.activeVehicles = {
+            samu: samu,
+            svb: svb
         }
-        if (svb) {
-            svb.activate();
-        }
-
     }
 
 }
