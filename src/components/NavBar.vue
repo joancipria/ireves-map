@@ -25,7 +25,7 @@
             <a @click="showDataLoader" class="navbar-item">
               {{ i18n.LOAD_DATA }}
             </a>
-            <a class="navbar-item" href="#">{{ i18n.EXPORT_CSV }} </a>
+            <a @click="showExport" class="navbar-item" href="#">{{ i18n.EXPORT_CSV }} </a>
             <!-- <a
               class="navbar-item"
               href="https://bulma.io/documentation/columns/basics/"
@@ -59,7 +59,7 @@
             </a> -->
           </div>
         </div>
-        <a class="navbar-item"> {{ i18n.ABOUT }} </a>
+        <!-- <a class="navbar-item"> {{ i18n.ABOUT }} </a> -->
       </div>
 
       <div class="navbar-end">
@@ -94,6 +94,10 @@ import { i18n } from "@/main";
 export default class NavBar extends Vue {
   showSettings() {
     this.$emit("showSettings");
+  }
+
+  showExport() {
+    this.$emit("showExport");
   }
 
   showDataLoader() {
