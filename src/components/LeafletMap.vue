@@ -4,7 +4,7 @@
 
 <script lang="ts">
 import { Options, Vue } from "vue-class-component";
-import { Control, LayerGroup, Map, TileLayer } from "leaflet";
+import { Control, LatLng, LayerGroup, Map, TileLayer } from "leaflet";
 import { leafletMap, layers } from "@/main";
 
 import "leaflet/dist/leaflet.css";
@@ -37,9 +37,14 @@ export default class LeafletMap extends Vue {
       ),
     };
 
+    const bounds: any = [
+      new LatLng(44.638612045930095, -13.782874547541086),
+      new LatLng(33.37482804543294, 11.521634438365721),
+    ];
+
     this.map = new Map("map", {
       zoomControl: true,
-      minZoom: 2,
+      minZoom: 6,
       layers: [
         baseLayers.Openstreet,
         layers.availability.allDay,
@@ -48,6 +53,7 @@ export default class LeafletMap extends Vue {
         layers.bases,
       ],
       attributionControl: false,
+      maxBounds: bounds, // Set the map's geographical boundaries.
     });
 
     let overlayMaps = {
@@ -61,7 +67,8 @@ export default class LeafletMap extends Vue {
     }).addTo(this.map);
 
     this.map.zoomControl.setPosition("bottomleft");
-    this.map.setView([39, -0.6], 10);
+    this.map.setView([39.47482213445976, -0.3747370894871375], 8);
+    this.map.panTo(new LatLng(39.47482213445976, -0.3747370894871375));
     leafletMap.map = this.map;
   }
 }
