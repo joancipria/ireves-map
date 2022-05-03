@@ -99,7 +99,8 @@ export default class Vehicle {
                 } else {
                     eventEmitter.emit("notification", i18n.ISOCHRONE_NETWORK_ERROR);
                 }
-                this.popup.closePopup();
+                this.active = false;
+                this.popup.setError();
                 return;
             } else {
                 // Show isochroneLayer
