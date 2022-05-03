@@ -45,18 +45,19 @@ export default class Notification extends Vue {
   position: absolute;
   top: 7%;
   right: 2%;
-  z-index: 9;
+  z-index: 999;
   box-shadow: 0 0.5em 1em -0.125em rgba(10, 10, 10, 0.1),
     0 0 0 1px rgba(10, 10, 10, 0.02);
 }
 
 .open {
   opacity: inherit;
-  transition: opacity 0.5s;
+  transition: opacity 0.4s;
 }
 .close {
   opacity: 0%;
-  transition: opacity 0.5s;
+  transition: opacity 0.4s;
+  display: none;
 }
 
 @media only screen and (max-width: 600px) {
