@@ -74,9 +74,6 @@ export default class Settings extends Vue {
 }
 </script>
 <style scoped lang="scss">
-.box {
-  height: 50vh;
-}
 .modal-background {
   background-color: rgba(10, 10, 10, 0.6);
 }

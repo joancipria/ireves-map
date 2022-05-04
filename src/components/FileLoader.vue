@@ -130,9 +130,6 @@ export default class FileLoader extends Vue {
 }
 </script>
 <style scoped lang="scss">
-.box {
-  height: 50vh;
-}
 .drag-area {
   padding: 20%;
   border: 2px dashed #dbdbdb;
