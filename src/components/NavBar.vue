@@ -20,7 +20,7 @@
             <a @click="showDataLoader" class="navbar-item">
               {{ i18n.LOAD_DATA }}
             </a>
-            <a @click="showExport" class="navbar-item" href="#">{{ i18n.EXPORT }} </a>
+            <a @click="toggleSidebar('exportPanel')" class="navbar-item" href="#">{{ i18n.EXPORT }} </a>
           </div>
         </div>
 
@@ -68,10 +68,6 @@ import { eventEmitter, i18n } from "@/main";
 export default class NavBar extends Vue {
   showSettings() {
     this.$emit("showSettings");
-  }
-
-  showExport() {
-    this.$emit("showExport");
   }
 
   showDataLoader() {

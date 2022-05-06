@@ -3,7 +3,6 @@
   <NavBar
     @show-data-loader="showDataLoader"
     @show-settings="showSettings"
-    @show-export="showExportPanel"
   ></NavBar>
   <FileLoader :mode="fileLoaderMode" ref="fileLoader" @base-selected="onBaseSelected"></FileLoader>
   <Settings ref="settings"></Settings>
@@ -22,6 +21,7 @@ import ExportPanel from "@/components/ExportPanel.vue";
 import QuerySideBar from "@/components/QuerySideBar.vue"
 import NavBar from "@/components/NavBar.vue";
 import Settings from "@/components/Settings.vue";
+import { eventEmitter } from "@/main";
 import Notification from "@/components/Notification.vue";
 import Base from "@/core/Base";
 
@@ -42,25 +42,17 @@ export default class App extends Vue {
   fileLoaderMode: boolean = true;
 
   declare $refs: {
-    baseDetails: BaseDetails;
     settings: Settings;
     fileLoader: FileLoader;
-    exportPanel: ExportPanel;
   };
 
   onBaseSelected(base: Base) {
     this.selectedBase = base;
-    this.$refs.baseDetails.show();
-    this.$refs.exportPanel.hide();
+    eventEmitter.emit("toggle-sidebar", 'baseDetails')
   }
 
   showSettings() {
     this.$refs.settings.show();
-  }
-
-  showExportPanel (){
-    this.$refs.exportPanel.show();
-    this.$refs.baseDetails.hide();
   }
 
   showDataLoader() {
