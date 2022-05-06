@@ -34,5 +34,7 @@
     "FILE_NAME": "File name",
     "FORMAT": "Format",
     "POPULATION": "Population",
-    "BASES_INTERSECTION": "Intersection of all bases"
+    "BASES_INTERSECTION": "Intersection of all bases",
+    "QUERIES": "Queries",
+    "NEW_QUERY": "New query"
 }
