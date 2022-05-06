@@ -32,7 +32,6 @@ export default class SideBar extends Vue {
 
   mounted() {
     eventEmitter.on('toggle-sidebar', (target) => {
-      console.log(target)
       if (target == this.id) {
         this.show();
       } else {
