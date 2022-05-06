@@ -16,12 +16,13 @@ import { i18n, eventEmitter } from "@/main";
   data() {
     return {
       i18n: i18n,
+      message: ""
     };
   },
 })
 export default class Notification extends Vue {
   visibility: boolean = false;
-  message: string;
+  message!: string;
 
   mounted() {
     eventEmitter.on("notification", this.show);
