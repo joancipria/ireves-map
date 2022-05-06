@@ -36,5 +36,6 @@
     "POPULATION": "Population",
     "BASES_INTERSECTION": "Intersection of all bases",
     "QUERIES": "Queries",
-    "NEW_QUERY": "New query"
+    "NEW_QUERY": "New query",
+    "REGION": "Region"
 }
