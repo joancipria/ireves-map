@@ -7,7 +7,7 @@
         <button @click="hide" class="delete" aria-label="close"></button>
       </header>
       <section class="modal-card-body">
-        <div class="field">
+        <!-- <div class="field">
           <label class="label">{{ i18n.LANGUAGE }}</label>
           <div class="control">
             <div class="select">
@@ -18,7 +18,7 @@
               </select>
             </div>
           </div>
-        </div>
+        </div> -->
         <div class="field mt-5">
           <label class="label">SAMU {{ i18n.ISOCHRONE_TIME }}</label>
           <div class="control">
