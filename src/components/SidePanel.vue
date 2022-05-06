@@ -1,0 +1,113 @@
+<template>
+  <div :class="{ open: visibility }" class="box details">
+    <header class="modal-card-head">
+      <p class="modal-card-title">{{ title }}</p>
+      <button @click="hide" class="delete" aria-label="close"></button>
+    </header>
+    <div class="content mt-5">
+      <Slot>
+
+      </Slot>
+    </div>
+  </div>
+</template>
+
+<script lang="ts">
+import { Options, Vue } from "vue-class-component";
+
+@Options({
+  props: {
+    title: String
+  },
+  data() {
+    return {
+    };
+  },
+})
+export default class SidePanel extends Vue {
+  title!: string
+  visibility: boolean = false;
+  loading: boolean = false;
+
+  show() {
+    this.visibility = true;
+  }
+
+  hide() {
+    this.visibility = false;
+  }
+}
+</script>
+
+<!-- Add "scoped" attribute to limit CSS to this component only -->
+<style scoped lang="scss">
+.details {
+  z-index: 10;
+  position: fixed;
+  right: -30%;
+  height: 100%;
+  width: 30%;
+  -webkit-box-shadow: -3px 0px 5px 0px rgba(0, 0, 0, 0.2);
+  box-shadow: -3px 0px 5px 0px rgba(0, 0, 0, 0.2);
+  transition: all ease-in-out 0.3s;
+
+  header {
+    background: #fff;
+    padding: 10px;
+  }
+}
+
+.open {
+  transform: translate3d(-100%, 0, 0);
+  animation-timing-function: 1s ease-in;
+}
+
+.box {
+  border-top: 1px solid #dbdbdb;
+  border-radius: 0px;
+}
+
+.tag {
+  margin-right: 2px;
+}
+
+/* Extra small devices (phones, 600px and down) */
+@media only screen and (max-width: 600px) {
+  .details {
+    right: -100%;
+    width: 100%;
+  }
+}
+
+/* Small devices (portrait tablets and large phones, 600px and up) */
+@media only screen and (min-width: 600px) {
+  .details {
+    right: -60%;
+    width: 60%;
+  }
+}
+
+/* Medium devices (landscape tablets, 768px and up) */
+@media only screen and (min-width: 768px) {
+  .details {
+    right: -50%;
+    width: 50%;
+  }
+}
+
+/* Large devices (laptops/desktops, 992px and up) */
+@media only screen and (min-width: 992px) {
+  .details {
+    right: -40%;
+    width: 40%;
+  }
+}
+
+/* Large devices (laptops/desktops, 1100px and up) */
+@media only screen and (min-width: 1100px) {
+  .details {
+    right: -30%;
+    width: 30%;
+  }
+}
+</style>
