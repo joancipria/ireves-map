@@ -27,7 +27,7 @@
         <div class="navbar-item has-dropdown is-hoverable">
           <a class="navbar-link"> {{ i18n.QUERIES }} </a>
           <div class="navbar-dropdown">
-            <a @click="toggleSidebar('querySidebar')" class="navbar-item">
+            <a @click="toggleSidebar('newQuery')" class="navbar-item">
               {{ i18n.NEW_QUERY }}
             </a>
             <!-- <a @click="showExport" class="navbar-item" href="#">{{ i18n.SAVED_QUERIES }} </a> -->

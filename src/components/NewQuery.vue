@@ -1,5 +1,5 @@
 <template>
-  <SideBar :id="'querySidebar'" :title="i18n.NEW_QUERY">
+  <SideBar :id="'newQuery'" :title="i18n.NEW_QUERY">
     
   </SideBar>
 </template>
@@ -20,7 +20,7 @@ import SideBar from "@/components/SideBar.vue"
     SideBar
   }
 })
-export default class QuerySideBar extends Vue {
+export default class NewQuery extends Vue {
 
 }
 </script>
