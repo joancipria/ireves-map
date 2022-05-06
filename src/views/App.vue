@@ -9,6 +9,7 @@
   <Settings ref="settings"></Settings>
   <BaseDetails ref="baseDetails" :base="selectedBase"></BaseDetails>
   <ExportPanel ref="exportPanel"></ExportPanel>
+  <QuerySideBar></QuerySideBar>
   <Leaflet-map></Leaflet-map>
 </template>
 
@@ -18,6 +19,7 @@ import LeafletMap from "@/components/LeafletMap.vue"; // @ is an alias to /src
 import FileLoader from "@/components/FileLoader.vue";
 import BaseDetails from "@/components/BaseDetails.vue";
 import ExportPanel from "@/components/ExportPanel.vue";
+import QuerySideBar from "@/components/QuerySideBar.vue"
 import NavBar from "@/components/NavBar.vue";
 import Settings from "@/components/Settings.vue";
 import Notification from "@/components/Notification.vue";
@@ -31,7 +33,8 @@ import Base from "@/core/Base";
     ExportPanel,
     NavBar,
     Settings,
-    Notification
+    Notification,
+    QuerySideBar
   },
 })
 export default class App extends Vue {
