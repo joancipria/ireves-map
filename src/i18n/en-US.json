@@ -37,5 +37,6 @@
     "BASES_INTERSECTION": "Intersection of all bases",
     "QUERIES": "Queries",
     "NEW_QUERY": "New query",
-    "REGION": "Region"
+    "REGION": "Region",
+    "FILTER": "Filter"
 }

@@ -37,5 +37,6 @@
     "BASES_INTERSECTION": "Intersección de todas las bases",
     "QUERIES": "Consultas",
     "NEW_QUERY": "Nueva consulta",
-    "REGION": "Región"
+    "REGION": "Región",
+    "FILTER": "Filtro"
 }
