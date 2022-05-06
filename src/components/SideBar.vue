@@ -5,18 +5,18 @@
       <button @click="hide" class="delete" aria-label="close"></button>
     </header>
     <div class="content mt-5">
-      <Slot>
-
-      </Slot>
+      <slot></slot>
     </div>
   </div>
 </template>
 
 <script lang="ts">
 import { Options, Vue } from "vue-class-component";
+import { eventEmitter } from "@/main";
 
 @Options({
   props: {
+    id: String,
     title: String
   },
   data() {
@@ -24,16 +24,28 @@ import { Options, Vue } from "vue-class-component";
     };
   },
 })
-export default class SidePanel extends Vue {
-  title!: string
+export default class SideBar extends Vue {
+  title!: string;
+  id!: string;
   visibility: boolean = false;
   loading: boolean = false;
 
-  show() {
+  mounted() {
+    eventEmitter.on('toggle-sidebar', (target) => {
+      console.log(target)
+      if (target == this.id) {
+        this.show();
+      } else {
+        this.hide();
+      }
+    });
+  }
+
+  private show() {
     this.visibility = true;
   }
 
-  hide() {
+  private hide() {
     this.visibility = false;
   }
 }
