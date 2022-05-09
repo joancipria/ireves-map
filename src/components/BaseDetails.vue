@@ -73,7 +73,7 @@ import SideBar from "@/components/SideBar.vue"
 
 import Base from "@/core/Base";
 import Vehicle from "@/core/Vehicle";
-import { VehicleType } from "@/core/VehicleProperties";
+import { VehicleType } from "@/core/Vehicle";
 
 @Options({
   props: {

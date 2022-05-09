@@ -47,7 +47,7 @@
 import { Options, Vue } from "vue-class-component";
 import TimeController from "@/components/TimeController.vue";
 import { i18n } from "@/main";
-import { VehicleType } from "@/core/VehicleProperties";
+import { VehicleType } from "@/core/Vehicle";
 
 @Options({
   components: {

@@ -7,9 +7,29 @@ import { worldPop } from "@/services/worldpop.service";
 import { vehicles, vehicleOverlaps, eventEmitter, globalOverlap, i18n } from "@/main";
 import { layers } from "@/components/LeafletMap.vue";
 import { utils } from "./Utils";
-import { VehicleType, VehicleTime, VehicleColor, VehicleAvailability } from "@/core/VehicleProperties";
 import { MapEntity } from "@/core/MapEntity"
 import { VehiclePopup } from "@/components/VehiclePopup/VehiclePopup";
+
+export enum VehicleType {
+    SAMU = 'SAMU',
+    SVB = 'SVB'
+}
+
+export enum VehicleTime {
+    SAMU = 10,
+    SVB = 15
+}
+
+export enum VehicleColor{
+    SAMU = '#e61212',
+    SVB = '#129fe6'
+}
+
+export enum VehicleAvailability {
+    "12H" = '12H',
+    "12H N" = '12H N',
+    "24H" = '24H'
+}
 
 // TODO: Implementar tipo de vehículo (bici, coche etc) y en función de eso, que openroute haga la petición correcta
 export default class Vehicle {
