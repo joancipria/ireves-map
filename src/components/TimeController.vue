@@ -16,7 +16,7 @@
 import { Options, Vue } from "vue-class-component";
 import { eventEmitter } from "@/main";
 import { i18n } from "@/main";
-import { VehicleType, VehicleTime } from "@/core/VehicleProperties";
+import { VehicleType, VehicleTime } from "@/core/Vehicle";
 
 @Options({
   components: {},
