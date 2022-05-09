@@ -38,5 +38,9 @@
     "QUERIES": "Consultas",
     "NEW_QUERY": "Nueva consulta",
     "REGION": "Región",
-    "FILTER": "Filtro"
+    "FILTER": "Filtro",
+    "HOSPITALS": "Hospitales",
+    "HEALTH_CENTERS": "Centros de salud",
+    "OFFICES": "Consultorios",
+    "UNITS": "Unidades"
 }

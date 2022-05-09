@@ -38,5 +38,9 @@
     "QUERIES": "Queries",
     "NEW_QUERY": "New query",
     "REGION": "Region",
-    "FILTER": "Filter"
+    "FILTER": "Filter",
+    "HOSPITALS": "Hospitals",
+    "HEALTH_CENTERS": "Health centers",
+    "OFFICES": "OFFICES",
+    "UNITS": "UNITS"
 }
