@@ -42,5 +42,6 @@
     "HOSPITALS": "Hospitals",
     "HEALTH_CENTERS": "Health centers",
     "OFFICES": "OFFICES",
-    "UNITS": "UNITS"
+    "UNITS": "UNITS",
+    "BASE_MAP": "Base map"
 }

@@ -42,5 +42,6 @@
     "HOSPITALS": "Hospitals",
     "HEALTH_CENTERS": "Centres de salut",
     "OFFICES": "Consultoris",
-    "UNITS": "Unitats"
+    "UNITS": "Unitats",
+    "BASE_MAP": "Mapa base"
 }
