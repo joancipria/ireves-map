@@ -17,7 +17,6 @@ library.add(faAmbulance, faLayerGroup, faBicycle, faCar, faUpload, faHospitalSym
 dom.watch();
 
 // Global variables
-export const leafletMap: any = { map: null };
 export let bases: Base[] = [];
 export let vehicles: Vehicle[] = [];
 

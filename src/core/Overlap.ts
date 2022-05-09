@@ -1,5 +1,5 @@
 import CONFIG from '@/config'
-import { leafletMap } from "@/main";
+import { leafletMap } from "@/components/LeafletMap.vue";
 import { worldPop } from "@/services/worldpop.service";
 import { Feature, center, polygon } from "@turf/turf";
 import { GeoJSON, LatLngExpression } from "leaflet";

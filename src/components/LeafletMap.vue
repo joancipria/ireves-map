@@ -5,7 +5,6 @@
 <script lang="ts">
 import { Options, Vue } from "vue-class-component";
 import { Control, LatLng, Map, TileLayer } from "leaflet";
-import { leafletMap } from "@/main";
 
 import "leaflet/dist/leaflet.css";
 
@@ -83,6 +82,8 @@ export const layers = {
 	} })
 };
 
+// Map
+export const leafletMap: any = { map: null };
 </script>
 <style scoped lang="scss">
 #map {

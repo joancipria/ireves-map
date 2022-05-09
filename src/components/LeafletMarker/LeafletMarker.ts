@@ -2,7 +2,7 @@
 import CONFIG from "@/config";
 import { Marker, LatLng, LatLngExpression, DivIcon, LayerGroup } from "leaflet";
 import './LeafletMarker.css';
-import { leafletMap } from "@/main";
+import { leafletMap } from "@/components/LeafletMap.vue";
 import { MapEntity } from "@/core/MapEntity"
 
 export class LeafletMarker extends Marker {
