@@ -27,11 +27,13 @@ export const globalOverlap: any = { feature: null, overlap: null }
 export const eventEmitter = new EventEmitter();
 
 // Import locale strings
+export let language = navigator.language;
 let localeFile;
 try {
-    localeFile = require('./i18n/' + navigator.language + '.json')
+    localeFile = require('./i18n/' + language + '.json')
 } catch {
     localeFile = require('./i18n/en-US.json');
+    language = "en-US";
 }
 export const i18n = localeFile;
 
@@ -49,7 +51,7 @@ export const reset = () => {
     })
 
     // Reset global overlap
-    if(globalOverlap.overlap){
+    if (globalOverlap.overlap) {
         globalOverlap.overlap.hide();
         globalOverlap.feature = null;
         globalOverlap.overlap = null;
