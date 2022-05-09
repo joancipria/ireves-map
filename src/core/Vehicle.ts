@@ -4,7 +4,8 @@ import { Feature, MultiPolygon, Polygon } from "@turf/turf";
 import { LeafletMarker } from "@/components/LeafletMarker/LeafletMarker";
 import { openRoute } from "@/services/openroute.service";
 import { worldPop } from "@/services/worldpop.service";
-import { vehicles, vehicleOverlaps, eventEmitter, layers, globalOverlap, i18n } from "@/main";
+import { vehicles, vehicleOverlaps, eventEmitter, globalOverlap, i18n } from "@/main";
+import { layers } from "@/components/LeafletMap.vue";
 import { utils } from "./Utils";
 import { VehicleType, VehicleTime, VehicleColor, VehicleAvailability } from "@/core/VehicleProperties";
 import { MapEntity } from "@/core/MapEntity"
@@ -41,17 +42,7 @@ export default class Vehicle {
         this.time = VehicleTime[this.type]
 
         // Set target layer
-        if (this.availability == VehicleAvailability["12H"]) {
-            this.targetLayer = layers.availability.halfDay;
-        }
-
-        if (this.availability == VehicleAvailability["12H N"]) {
-            this.targetLayer = layers.availability.halfDayNight;
-        }
-
-        if (this.availability == VehicleAvailability["24H"]) {
-            this.targetLayer = layers.availability.allDay;
-        }
+        this.targetLayer = layers.vehiclesCluster;
 
         // Set color based on vehicle type
         this.color = VehicleColor[this.type]; // Color azul en hex

@@ -3,7 +3,7 @@ import { LatLng } from "leaflet";
 import Vehicle from "./Vehicle";
 import { MapEntity } from "@/core/MapEntity"
 import { VehicleType } from "@/core/VehicleProperties"
-import { layers } from "@/main";
+import { layers } from "@/components/LeafletMap.vue";
 
 export default class Base {
     name: string;
@@ -17,7 +17,7 @@ export default class Base {
         this.name = name;
         this.position = new LatLng(lat, lng);
         this.address = address;
-        this.marker = new LeafletMarker(MapEntity.BASE, this.position, false, '', true, layers.bases);
+        this.marker = new LeafletMarker(MapEntity.BASE, this.position, false, '', true, layers.basesCluster);
     }
 
     extractVehicle(vehicleToExtract: Vehicle) {

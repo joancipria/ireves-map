@@ -4,3 +4,25 @@
 .overlap-marker {
   width: 30px;
 }
+.base-cluster-marker {
+  flex-direction: column;
+  display: flex;
+  width: 35px !important;
+  border-radius: 30px;
+  background-color: rgba(110, 204, 57, 0.3);
+  height: 35px !important;
+  justify-content: center;
+  align-items: center;
+}
+
+.base-cluster-marker div {
+  flex-direction: column;
+  display: flex;
+  border-radius: 15px;
+  width: 25px !important;
+  height: 25px !important;
+  background-color: rgb(31, 168, 72, 0.6);
+  color: white;
+  justify-content: center;
+  align-items: center;
+}

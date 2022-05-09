@@ -13,7 +13,6 @@ import 'bulma-list/css/bulma-list.css'
 // Font Awesome
 import { library, dom } from "@fortawesome/fontawesome-svg-core";
 import { faAmbulance, faLayerGroup, faBicycle, faCar, faUpload, faHospitalSymbol, faSignOutAlt, faMapMarkerAlt, faUsers, faCog } from "@fortawesome/free-solid-svg-icons";
-import { LayerGroup } from 'leaflet';
 library.add(faAmbulance, faLayerGroup, faBicycle, faCar, faUpload, faHospitalSymbol, faSignOutAlt, faMapMarkerAlt, faUsers, faCog);
 dom.watch();
 
@@ -25,15 +24,7 @@ export let vehicles: Vehicle[] = [];
 export const vehicleOverlaps: any[] = [];
 export const globalOverlap: any = { feature: null, overlap: null }
 
-export const layers = {
-    availability: {
-        allDay: new LayerGroup(),
-        halfDay: new LayerGroup(),
-        halfDayNight: new LayerGroup()
-    },
-    bases: new LayerGroup()
-};
-
+// Global events
 export const eventEmitter = new EventEmitter();
 
 // Import locale strings
@@ -50,7 +41,7 @@ createApp(App).use(router).mount('#app')
 
 export const reset = () => {
     // Remove base markers
-    layers.bases.clearLayers();
+    //layers.basesCluster.clearLayers();
 
     // Remove vehicles markers
     vehicles.forEach((vehicle: Vehicle) => {

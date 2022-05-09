@@ -4,10 +4,14 @@
 
 <script lang="ts">
 import { Options, Vue } from "vue-class-component";
-import { Control, LatLng, LayerGroup, Map, TileLayer } from "leaflet";
-import { leafletMap, layers } from "@/main";
+import { Control, LatLng, Map, TileLayer } from "leaflet";
+import { leafletMap } from "@/main";
 
 import "leaflet/dist/leaflet.css";
+
+// Marker Cluster. See https://github.com/Leaflet/Leaflet.markercluster/issues/874 & https://stackoverflow.com/questions/69477915/leaflet-litelement-l-is-not-defined-in-plugin
+import { LayerGroup, DivIcon } from 'leaflet';
+import { MarkerClusterGroup } from "leaflet.markercluster/src";
 
 @Options({
   components: {},
@@ -43,23 +47,21 @@ export default class LeafletMap extends Vue {
     ];
 
     this.map = new Map("map", {
+      preferCanvas: true,
       zoomControl: true,
       minZoom: 6,
       layers: [
         baseLayers.Openstreet,
-        layers.availability.allDay,
-        layers.availability.halfDay,
-        layers.availability.halfDayNight,
-        layers.bases,
+        layers.vehiclesCluster,
+        layers.basesCluster
       ],
       attributionControl: false,
       maxBounds: bounds, // Set the map's geographical boundaries.
     });
 
     let overlayMaps = {
-      "12H": layers.availability.halfDay,
-      "12H (Nocturnas)": layers.availability.halfDayNight,
-      "24H": layers.availability.allDay,
+      "Bases": layers.basesCluster,
+      "Ambulancias": layers.vehiclesCluster,
     };
 
     const layersControl = new Control.Layers(baseLayers, overlayMaps, {
@@ -72,6 +74,15 @@ export default class LeafletMap extends Vue {
     leafletMap.map = this.map;
   }
 }
+
+// Map layers
+export const layers = {
+    vehiclesCluster: new LayerGroup(),
+    basesCluster: new MarkerClusterGroup({ chunkedLoading: true, 	iconCreateFunction: function(cluster) {
+		return new DivIcon({ html: `<div>${cluster.getChildCount()}</div>`, className: "base-cluster-marker" });
+	} })
+};
+
 </script>
 <style scoped lang="scss">
 #map {
