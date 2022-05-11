@@ -1,51 +1,14 @@
 import { bases } from "@/main";
-import * as Papa from "papaparse";
 
 class DataExport {
 
-    async exportCoveredPopulation() {
-        const basesPop = [];
-
-        for (const baseA of bases) {
-
-            for (const baseB of bases) {
-                if (baseA !== baseB) {
-                    // Get pop of both bases
-                    const baseApop = await baseA.getPopulation();
-                    const baseBpop = await baseB.getPopulation();
-
-
-                    // Calc overlap between both bases
-
-
-                    basesPop.push(
-                        [{
-                            name: baseA.name,
-                            position: baseA.position,
-                            covered_pop: baseApop,
-                        },
-                        {
-                            name: baseB.name,
-                            position: baseB.position,
-                            covered_pop: baseBpop,
-                        },
-                        {
-                            name: "overlap",
-                            covered_pop: null
-                        }
-
-                        ]
-                    );
-                }
-            }
-        }
-
-        this.exportJSON(basesPop);
+    export(fileName: string) {
+        this.exportJSON(bases, fileName);
     }
-
-    private exportJSON(data: any) {
+    private exportJSON(data: any, fileName: string) {
+        console.log(data)
         data = JSON.stringify(data);
-        this.downloadFile(data, "ireves", "json");
+        this.downloadFile(data, fileName, "json");
     }
 
     private exportCSV() {
