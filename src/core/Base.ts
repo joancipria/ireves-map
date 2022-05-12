@@ -2,21 +2,32 @@ import { LeafletMarker } from "@/components/LeafletMarker/LeafletMarker";
 import { LatLng } from "leaflet";
 import Vehicle from "./Vehicle";
 import { MapEntity } from "@/core/MapEntity"
-import { VehicleType } from "@/core/VehicleProperties"
+import { VehicleType } from "@/core/Vehicle"
 import { layers } from "@/components/LeafletMap.vue";
+
+export enum BaseType {
+    HOSPITAL = 'HOSPITAL',
+    HEALTH_CENTER = 'CENTRO',
+    OFFICE = 'CONSULTORIO',
+    UNIT = 'UNIDAD'
+}
 
 export default class Base {
     name: string;
+    type: BaseType
     position: LatLng;
+    region: string;
     address: string;
     vehicles: Vehicle[] = [];
     marker: LeafletMarker;
     activeVehicles: any;
 
-    constructor(name: string, lat: number = 0, lng: number = 0, address: string) {
+    constructor(name: string, type: BaseType, lat: number = 0, lng: number = 0, address: string, region: string) {
         this.name = name;
+        this.type = type;
         this.position = new LatLng(lat, lng);
         this.address = address;
+        this.region = region;
         this.marker = new LeafletMarker(MapEntity.BASE, this.position, false, '', true, layers.basesCluster);
     }
 
