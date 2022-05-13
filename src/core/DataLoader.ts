@@ -1,8 +1,7 @@
-import Base from "@/core/Base";
-import { vehicles, i18n, bases, reset } from "@/main";
-import { VehicleAvailability, VehicleType } from "@/core/VehicleProperties";
+import Base, { BaseType } from "@/core/Base";
+import { i18n, bases, reset } from "@/main";
+import { VehicleAvailability, VehicleType } from "@/core/Vehicle";
 import Vehicle from "@/core/Vehicle";
-import * as Papa from "papaparse";
 
 export default class DataLoader {
     vue: any;
@@ -15,110 +14,81 @@ export default class DataLoader {
         // Check extension (.csv)
         const extension = file.name.split(".").pop();
 
-        if (extension !== "csv") {
+        if (extension !== "json") {
             return { error: i18n.FILE_EXTENSION_ERROR };
         }
 
-        return await this.load(file, true);
+        // Clear current data
+        reset();
+
+        // File reader
+        const reader = new FileReader();
+
+        reader.addEventListener('load', (event) => {
+            // On load, parse string to object and create entities
+            const data = JSON.parse(event.target.result.toString());
+            this.createEntities(data);
+        });
+        reader.readAsText(file);
+
+        return 0;
     }
 
     async loadDemo() {
-        return await this.load("demo_data.csv", true);
-    }
-
-
-    private load(file: File | string, mode: any = false) {
-        // Parse CSV
-        return new Promise((resolve, reject) => {
-            Papa.parse(file, {
-                download: mode,
-                header: true,
-                complete: (res: Papa.ParseResult<Papa.ParseError>,) => {
-                    if (res.errors.length > 0) {
-                        res.errors.forEach((error) => {
-                            console.error(error);
-                        });
-                        resolve({ error: i18n.FILE_PARSE_ERROR });
-                    }
-
-                    reset();
-                    this.createEntities(res.data);
-                    resolve(res.data);
-                },
-            });
-        });
+        // Fetch demo file and create entities
+        const data = await fetch('demo_data.json').then(res => res.json()).then(res => { return res })
+        this.createEntities(data);
+        return 0;
     }
 
 
     private createEntities(data: any) {
         // For each, create new Vehicle
-        let id = 0;
-
-        data.forEach((row: any) => {
+        data.forEach((item: any) => {
             // Clean data
             if (
-                row &&
-                row.Base != "" &&
-                row.x != "" &&
-                row.y != "" &&
-                row.Nombre != "" &&
-                (row.Tipo == VehicleType.SAMU || row.Tipo == VehicleType.SVB)
+                item &&
+                item.name != "" &&
+                item.x != "" &&
+                item.y != "" &&
+                item.region != ""
             ) {
-                // Create vehicle
-                const vehicle = new Vehicle(
-                    id,
-                    row.Nombre,
-                    row.x,
-                    row.y,
-                    VehicleType[row.Tipo],
-                    VehicleAvailability[row.horario]
-                );
+                // Get base type from its name
+                let baseType: BaseType;
+                for (const type of Object.values(BaseType)) {
+                    if (item.name.includes(type)) {
+                        baseType = BaseType[Object.keys(BaseType)[Object.values(BaseType).indexOf(type)]]
+                    }
+                }
 
-                // Check if base already exists
-                const found = bases.some((base) => base.name === row.Base);
+                // Create new base
+                const base = new Base(item.name, baseType, item.x, item.y, item.address, item.region);
+                base.marker.addEventListener("click", () => {
+                    this.vue.$emit("baseSelected", base);
+                    base.showIsochrone();
+                });
 
-                if (found) {
-                    // exists
-                    const index = bases.findIndex((base) => {
-                        if (base.name === row.Base) {
-                            return true;
+                // For each base vehicle 
+                if (item.vehicles.length > 0) {
+                    item.vehicles.forEach(rawVehicle => {
+                        if (rawVehicle.x != "" && rawVehicle.y != "") {
+                            // Create vehicle
+                            const vehicle = new Vehicle(
+                                0,
+                                rawVehicle.name,
+                                rawVehicle.x,
+                                rawVehicle.y,
+                                VehicleType[rawVehicle.type],
+                                VehicleAvailability[rawVehicle.availability]
+                            );
+                            base.vehicles.push(vehicle);
                         }
                     });
-
-                    // same address?
-                    if (bases[index].address === row.Dirección) {
-                        // Yes
-                        bases[index].vehicles.push(vehicle);
-                    } else {
-                        // No, extract vehicle?
-                        vehicle.extract();
-                        // const base = new Base(row.Base, row.x, row.y, row.Dirección);
-                        // base.marker.addEventListener("click", () => {
-                        //   this.$emit("baseSelected", base);
-                        // });
-                        // base.vehicles.push(vehicle);
-                        // bases.push(base);
-                    }
-                } else {
-                    // doesn't exists
-
-                    // Create bew base
-                    const base = new Base(row.Base, row.x, row.y, row.Dirección);
-                    base.marker.addEventListener("click", () => {
-                        this.vue.$emit("baseSelected", base);
-                        base.showIsochrone();
-                    });
-
-                    // Add vehicle to base
-                    base.vehicles.push(vehicle);
-
-                    // Push base
-                    bases.push(base);
                 }
-                // Push vehicle
-                vehicles.push(vehicle);
+
+                // Push base
+                bases.push(base);
             }
-            id++;
         });
     }
 }
