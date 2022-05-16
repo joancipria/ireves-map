@@ -4,7 +4,7 @@ import { Feature, MultiPolygon, Polygon } from "@turf/turf";
 import { LeafletMarker } from "@/components/LeafletMarker/LeafletMarker";
 import { openRoute } from "@/services/openroute.service";
 import { worldPop } from "@/services/worldpop.service";
-import { vehicles, vehicleOverlaps, eventEmitter, globalOverlap, i18n } from "@/main";
+import { vehicleOverlaps, eventEmitter, globalOverlap, i18n, bases } from "@/main";
 import { layers } from "@/components/LeafletMap.vue";
 import { utils } from "./Utils";
 import { MapEntity } from "@/core/MapEntity"
@@ -20,7 +20,7 @@ export enum VehicleTime {
     SVB = 15
 }
 
-export enum VehicleColor{
+export enum VehicleColor {
     SAMU = '#e61212',
     SVB = '#129fe6'
 }
@@ -219,42 +219,44 @@ export default class Vehicle {
     }
 
     checkOverlap() {
-        // Check overlap, compare this vehicle against all others
-        vehicles.forEach(vehicle => {
-            // Discard own vehicle and vehicles without generated isochrone
-            if (vehicle != this && vehicle.polygon) {
+        bases.forEach(base => {
+            // Check overlap, compare this vehicle against all others
+            base.vehicles.forEach(vehicle => {
+                // Discard own vehicle, vehicles without generated isochrone and vehicles from same base
+                if (vehicle != this && vehicle.polygon && !(base.vehicles.includes(this) && base.vehicles.includes(vehicle))) {
 
-                // Check overlap
-                const overlap = this.getRawOverlap(vehicle);
+                    // Check overlap
+                    const overlap = this.getRawOverlap(vehicle);
 
-                // If there's overlap
-                if (overlap) {
-                    console.info("Overlap detected", this, vehicle);
+                    // If there's overlap
+                    if (overlap) {
+                        console.info("Overlap detected", this, vehicle);
 
-                    // Check if there's 1 or more overlap
-                    if (vehicleOverlaps.length >= 1) {
-                        // Hide global overlap
-                        globalOverlap.overlap.hide()
+                        // Check if there's 1 or more overlap
+                        if (vehicleOverlaps.length >= 1) {
+                            // Hide global overlap
+                            globalOverlap.overlap.hide()
 
-                        // Join global overlap with current overlap
-                        globalOverlap.feature = utils.union(overlap, globalOverlap.feature)
-                    } else {
-                        // Set current overlap as global overlap
-                        globalOverlap.feature = overlap;
+                            // Join global overlap with current overlap
+                            globalOverlap.feature = utils.union(overlap, globalOverlap.feature)
+                        } else {
+                            // Set current overlap as global overlap
+                            globalOverlap.feature = overlap;
+                        }
+
+                        // Activate new overlap
+                        const newGlobalOverlap = new Overlap(globalOverlap.feature);
+                        newGlobalOverlap.show();
+                        globalOverlap.overlap = newGlobalOverlap;
+
+                        // Create overlap
+                        const currentOverlap = new Overlap(overlap);
+
+                        // Store both vehicles and overlap 
+                        vehicleOverlaps.push([vehicle, this, currentOverlap]);
                     }
-
-                    // Activate new overlap
-                    const newGlobalOverlap = new Overlap(globalOverlap.feature);
-                    newGlobalOverlap.show();
-                    globalOverlap.overlap = newGlobalOverlap;
-
-                    // Create overlap
-                    const currentOverlap = new Overlap(overlap);
-
-                    // Store both vehicles and overlap 
-                    vehicleOverlaps.push([vehicle, this, currentOverlap]);
                 }
-            }
+            });
         });
     }
 

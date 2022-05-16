@@ -18,7 +18,6 @@ dom.watch();
 
 // Global variables
 export let bases: Base[] = [];
-export let vehicles: Vehicle[] = [];
 
 export const vehicleOverlaps: any[] = [];
 export const globalOverlap: any = { feature: null, overlap: null }
@@ -45,10 +44,12 @@ export const reset = () => {
     //layers.basesCluster.clearLayers();
 
     // Remove vehicles markers
-    vehicles.forEach((vehicle: Vehicle) => {
-        vehicle.toggleIsochrone(false);
-        vehicle.marker.remove();
-    })
+    bases.forEach(base => {
+        base.vehicles.forEach((vehicle: Vehicle) => {
+            vehicle.toggleIsochrone(false);
+            vehicle.marker.remove();
+        })
+    });
 
     // Reset global overlap
     if (globalOverlap.overlap) {
@@ -59,6 +60,4 @@ export const reset = () => {
 
     // Clear data
     bases = [];
-    vehicles = [];
-
 }
