@@ -1,7 +1,8 @@
 import Base, { BaseType } from "@/core/Base";
-import { i18n, bases, reset } from "@/main";
+import { i18n, bases, vehicles, reset } from "@/main";
 import { VehicleAvailability, VehicleType } from "@/core/Vehicle";
 import Vehicle from "@/core/Vehicle";
+import { FileError } from "@/core/Errors"
 
 export default class DataLoader {
     vue: any;
@@ -10,39 +11,97 @@ export default class DataLoader {
         this.vue = vueRef;
     }
 
-    async loadLocalFile(file: File) {
-        // Check extension (.csv)
-        const extension = file.name.split(".").pop();
+    /**
+     * Wrapper for an async file reader. See https://simon-schraeder.de/posts/filereader-async/
+     *
+     * @private
+     * @param {File} file
+     * @return {*}  {Promise<string>}
+     * @memberof DataLoader
+     */
+    private readFileAsync(file: File): Promise<string> {
+        return new Promise((resolve, reject) => {
+            const reader = new FileReader();
 
+            reader.onload = () => {
+                resolve(reader.result as string);
+            };
+
+            reader.onerror = reject;
+
+            //reader.readAsArrayBuffer(file);
+            reader.readAsText(file);
+        })
+    }
+
+
+    /**
+     * Loads a file and creates its entities
+     *
+     * @param {File} file
+     * @return {*}  {(Promise<FileError | void>)}
+     * @memberof DataLoader
+     */
+    async loadLocalFile(file: File): Promise<FileError | void> {
+        // Check extension (.json)
+        const extension = file.name.split(".").pop();
         if (extension !== "json") {
-            return { error: i18n.FILE_EXTENSION_ERROR };
+            return { type: "error", message: i18n.FILE_EXTENSION_ERROR };
         }
 
-        // Clear current data
-        reset();
+        try {
+            // Parse text to object
+            const data = JSON.parse(await this.readFileAsync(file));
 
-        // File reader
-        const reader = new FileReader();
+            // Data validation
+            if (data.bases && data.vehicles) {
+                // If everything is correct, clear current data
+                reset();
 
-        reader.addEventListener('load', (event) => {
-            // On load, parse string to object and create entities
-            const data = JSON.parse(event.target.result.toString());
-            this.createEntities(data);
-        });
-        reader.readAsText(file);
-
-        return 0;
+                // And create entities
+                this.createBases(data.bases);
+                this.createVehicles(data.vehicles);
+            } else {
+                return { type: "error", message: i18n.FILE_PARSE_ERROR };
+            }
+        } catch (error) {
+            return { type: "error", message: i18n.FILE_PARSE_ERROR };
+        }
     }
 
-    async loadDemo() {
-        // Fetch demo file and create entities
+    /**
+     * Loads demo data and creates its entities
+     *
+     * @return {*}  {(Promise<FileError | void>)}
+     * @memberof DataLoader
+     */
+    async loadDemo(): Promise<FileError | void> {
+        // Fetch demo file 
         const data = await fetch('demo_data.json').then(res => res.json()).then(res => { return res })
-        this.createEntities(data);
-        return 0;
+
+        // Create entities
+        this.createBases(data.bases);
+        this.createVehicles(data.vehicles);
     }
 
+    private createVehicles(data: any): void {
+        data.forEach(rawVehicle => {
+            if (rawVehicle.x != "" && rawVehicle.y != "") {
+                // Create vehicle
+                const vehicle = new Vehicle(
+                    0,
+                    rawVehicle.name,
+                    rawVehicle.x,
+                    rawVehicle.y,
+                    VehicleType[rawVehicle.type],
+                    VehicleAvailability[rawVehicle.availability]
+                );
+                vehicles.push(vehicle);
+            }
+        });
 
-    private createEntities(data: any) {
+    }
+    private createBases(data: any): void {
         // For each, create new Vehicle
         data.forEach((item: any) => {
             // Clean data
@@ -69,7 +128,7 @@ export default class DataLoader {
                 });
 
                 // For each base vehicle 
-                if (item.vehicles.length > 0) {
+                if (item.vehicles && item.vehicles.length > 0) {
                     item.vehicles.forEach(rawVehicle => {
                         if (rawVehicle.x != "" && rawVehicle.y != "") {
                             // Create vehicle
