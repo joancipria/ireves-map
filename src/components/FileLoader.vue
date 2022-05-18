@@ -108,10 +108,9 @@ export default class FileLoader extends Vue {
       result = await this.dataLoader.loadLocalFile(file);
     }
 
-    if (result.error) {
+    if (result && result.type == "error") {
       this.loading = false;
-      // TODO: Mensaje de error (implmentar notificaciones?)
-      eventEmitter.emit("notification", result.error);
+      eventEmitter.emit("notification", result.message);
       return;
     }
 
