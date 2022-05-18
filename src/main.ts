@@ -5,6 +5,7 @@ import Base from '@/core/Base';
 import './registerServiceWorker'
 import router from './router'
 import { EventEmitter } from 'events';
+import { layers } from "@/components/LeafletMap.vue"
 
 // Bulma 
 import 'bulma/css/bulma.css'
@@ -18,6 +19,7 @@ dom.watch();
 
 // Global variables
 export let bases: Base[] = [];
+export let vehicles: Vehicle[] = [];
 
 export const vehicleOverlaps: any[] = [];
 export const globalOverlap: any = { feature: null, overlap: null }
@@ -39,9 +41,11 @@ export const i18n = localeFile;
 createApp(App).use(router).mount('#app')
 
 
-export const reset = () => {
-    // Remove base markers
-    //layers.basesCluster.clearLayers();
+export const reset = (): void => {
+    // Remove all markers & overlaps
+    layers.basesCluster.clearLayers();
+    layers.vehiclesCluster.clearLayers();
+    layers.isochrones.clearLayers();
 
     // Remove vehicles markers
     bases.forEach(base => {
@@ -60,4 +64,5 @@ export const reset = () => {
 
     // Clear data
     bases = [];
+    vehicles = [];
 }
