@@ -60,13 +60,22 @@ export const layers = {
     "https://api.mapbox.com/styles/v1/{id}/tiles/{z}/{x}/{y}?access_token=pk.eyJ1IjoibWFwYm94IiwiYSI6ImNpejY4NXVycTA2emYycXBndHRqcmZ3N3gifQ.rJcFIG214AriISLbB6B5aw",
     { id: "mapbox/streets-v11" }
   ),
-  vehiclesCluster: new LayerGroup(),
+  isochrones: new LayerGroup(),
+  vehiclesCluster: new MarkerClusterGroup({
+    chunkedLoading: true,
+    iconCreateFunction: function (cluster) {
+      return new DivIcon({
+        html: `<div>${cluster.getChildCount()}</div>`,
+        className: "vehicle-cluster-marker cluster-marker",
+      });
+    },
+  }),
   basesCluster: new MarkerClusterGroup({
     chunkedLoading: true,
     iconCreateFunction: function (cluster) {
       return new DivIcon({
         html: `<div>${cluster.getChildCount()}</div>`,
-        className: "base-cluster-marker",
+        className: "base-cluster-marker cluster-marker",
       });
     },
   }),
