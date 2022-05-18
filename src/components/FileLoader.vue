@@ -72,7 +72,7 @@
 <script lang="ts">
 import { Options, Vue } from "vue-class-component";
 import DataLoader from "@/core/DataLoader";
-import { i18n } from "@/main";
+import { eventEmitter, i18n } from "@/main";
 
 @Options({
   components: {},
@@ -111,7 +111,7 @@ export default class FileLoader extends Vue {
     if (result.error) {
       this.loading = false;
       // TODO: Mensaje de error (implmentar notificaciones?)
-      alert(result.error);
+      eventEmitter.emit("notification", result.error);
       return;
     }
 
