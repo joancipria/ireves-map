@@ -63,7 +63,8 @@ export const layers = {
   isochrones: new LayerGroup(),
   vehiclesCluster: new MarkerClusterGroup({
     chunkedLoading: true,
-    iconCreateFunction: function (cluster) {
+    showCoverageOnHover: false,
+    iconCreateFunction: (cluster) => {
       return new DivIcon({
         html: `<div>${cluster.getChildCount()}</div>`,
         className: "vehicle-cluster-marker cluster-marker",
@@ -72,7 +73,8 @@ export const layers = {
   }),
   basesCluster: new MarkerClusterGroup({
     chunkedLoading: true,
-    iconCreateFunction: function (cluster) {
+    showCoverageOnHover: false,
+    iconCreateFunction: (cluster) => {
       return new DivIcon({
         html: `<div>${cluster.getChildCount()}</div>`,
         className: "base-cluster-marker cluster-marker",
