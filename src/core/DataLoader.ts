@@ -88,8 +88,9 @@ export default class DataLoader {
         data.forEach(rawVehicle => {
             if (rawVehicle.x != "" && rawVehicle.y != "") {
                 // Create vehicle
+                let id = 0;
                 const vehicle = new Vehicle(
-                    0,
+                    id,
                     rawVehicle.name,
                     rawVehicle.x,
                     rawVehicle.y,
@@ -97,6 +98,7 @@ export default class DataLoader {
                     VehicleAvailability[rawVehicle.availability]
                 );
                 vehicles.push(vehicle);
+                id++;
             }
         });
 
