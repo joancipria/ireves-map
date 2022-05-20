@@ -17,6 +17,8 @@
 }
 
 .cluster-marker div {
+  font-weight: bold;
+  font-size: 14px;
   flex-direction: column;
   display: flex;
   border-radius: 15px;
@@ -35,9 +37,14 @@
 }
 
 .vehicle-cluster-marker {
-  background-color: rgba(255, 0, 0, 0.3);
+  background-color: rgba(255, 57, 57, 0.3);
 }
 .vehicle-cluster-marker div {
-  background-color: rgba(255, 0, 0, 0.6);
+  background-color: rgba(255, 57, 57, 0.6);
   color: white;
+}
+
+.leaflet-tooltip {
+  padding: 0px !important;
+  border-radius: 6px !important;
 }
