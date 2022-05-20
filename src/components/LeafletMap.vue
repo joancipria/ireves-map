@@ -35,6 +35,7 @@ export default class LeafletMap extends Vue {
       preferCanvas: true,
       zoomControl: true,
       minZoom: 6,
+      doubleClickZoom: false,
       layers: [layers.openstreet, layers.vehiclesCluster, layers.basesCluster],
       attributionControl: false,
       maxBounds: bounds, // Set the map's geographical boundaries.
