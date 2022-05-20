@@ -13,8 +13,8 @@ import 'bulma-list/css/bulma-list.css'
 
 // Font Awesome
 import { library, dom } from "@fortawesome/fontawesome-svg-core";
-import { faAmbulance, faLayerGroup, faBicycle, faCar, faUpload, faHospitalSymbol, faSignOutAlt, faMapMarkerAlt, faUsers, faCog } from "@fortawesome/free-solid-svg-icons";
-library.add(faAmbulance, faLayerGroup, faBicycle, faCar, faUpload, faHospitalSymbol, faSignOutAlt, faMapMarkerAlt, faUsers, faCog);
+import { faAmbulance, faLayerGroup, faBicycle, faCar, faUpload, faHospitalSymbol, faSignOutAlt, faMapMarkerAlt, faUsers, faCog, faClock, faTruck } from "@fortawesome/free-solid-svg-icons";
+library.add(faAmbulance, faLayerGroup, faBicycle, faCar, faUpload, faHospitalSymbol, faSignOutAlt, faMapMarkerAlt, faUsers, faCog, faClock, faTruck);
 dom.watch();
 
 // Global variables
