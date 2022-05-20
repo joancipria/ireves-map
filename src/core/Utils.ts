@@ -1,10 +1,11 @@
 // Import Turf.js
 import * as turf from '@turf/turf'
-import { Feature, FeatureCollection, MultiPolygon, Polygon } from '@turf/turf';
+import { Coord, Feature, FeatureCollection, MultiPolygon, Polygon } from '@turf/turf';
+import { LatLng } from 'leaflet';
 
 class Utils {
 
-    emptyPolygon: Feature <(Polygon|MultiPolygon)> = turf.polygon([], { });
+    emptyPolygon: Feature<(Polygon | MultiPolygon)> = turf.polygon([], {});
 
     simplifyPoly(poly: FeatureCollection, isochroneTime: number) {
         return turf.simplify(poly, {
@@ -23,6 +24,24 @@ class Utils {
 
     difference(polyA: Feature<Polygon | MultiPolygon>, polyB: Feature<Polygon | MultiPolygon>) {
         return turf.difference(polyA, polyB)
+    }
+
+    latLngToCoord(coord: LatLng): Coord {
+        return turf.point([coord.lng, coord.lat]);
+    }
+
+    coordToLatLng(coord: Coord): LatLng {
+        return new LatLng(coord[1], coord[0])
+    }
+
+    distance(pointA: LatLng | Coord, pointB: LatLng | Coord): number {
+        if (pointA instanceof LatLng) {
+            pointA = this.latLngToCoord(pointA)
+        }
+        if (pointB instanceof LatLng) {
+            pointB = this.latLngToCoord(pointB)
+        }
+        return turf.distance(pointA, pointB);
     }
 
     /**
