@@ -28,9 +28,12 @@
                 <span class="file-label">{{ i18n.BROWSE_FILE }}</span>
               </span>
             </label>
-            <progress v-else class="progress is-small is-primary" max="100">
-              15%
-            </progress>
+            <div class="loading-box" v-else>
+              <progress class="progress is-small is-primary" max="100">
+                15%
+              </progress>
+              <h5 class="title is-6" style="">{{ i18n.LOADING }}...</h5>
+            </div>
           </div>
         </div>
         <br />
@@ -72,7 +75,7 @@
 <script lang="ts">
 import { Options, Vue } from "vue-class-component";
 import DataLoader from "@/core/DataLoader";
-import { eventEmitter, i18n } from "@/main";
+import { eventEmitter, i18n, vehicles } from "@/main";
 
 @Options({
   components: {},
@@ -108,15 +111,22 @@ export default class FileLoader extends Vue {
       result = await this.dataLoader.loadLocalFile(file);
     }
 
+    // Show possible errors
     if (result && result.type == "error") {
       this.loading = false;
       eventEmitter.emit("notification", result.message);
       return;
     }
 
-    // Hide modal & loading
-    this.hide();
-    this.loading = false;
+    // Check each 200ms if all vehicles have been loaded
+    const checkFinishedLoading = setInterval(() => {
+      if (vehicles[vehicles.length - 1].marker.added) {
+        // Then, hide modal & loading
+        this.hide();
+        this.loading = false;
+        clearInterval(checkFinishedLoading);
+      }
+    }, 200);
   }
 
   show() {
@@ -135,5 +145,9 @@ export default class FileLoader extends Vue {
 }
 .custom-modal-background {
   background-color: rgba(10, 10, 10, 0.6);
+}
+.loading-box {
+  width: 100%;
+  text-align: center;
 }
 </style>
