@@ -35,6 +35,8 @@ export default class LeafletMap extends Vue {
       preferCanvas: true,
       zoomControl: true,
       minZoom: 6,
+      touchZoom: true,
+      tap: true,
       doubleClickZoom: false,
       layers: [layers.openstreet, layers.vehiclesCluster, layers.basesCluster],
       attributionControl: false,
