@@ -29,7 +29,7 @@ export class LeafletMarker extends Marker {
 
         // Add to map if specified
         if (addToMap) {
-            this.addToMap(targetLayer);
+            setTimeout(() => this.addToMap(targetLayer), 0)
         }
     }
 
