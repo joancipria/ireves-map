@@ -126,7 +126,7 @@ export default class DataLoader {
                 const base = new Base(item.name, baseType, item.x, item.y, item.address, item.region);
                 base.marker.addEventListener("click", () => {
                     this.vue.$emit("baseSelected", base);
-                    base.showIsochrone();
+                    //base.showIsochrone();
                 });
 
                 // For each base vehicle 
