@@ -5,6 +5,8 @@ import Base from '@/core/Base';
 import './registerServiceWorker'
 import router from './router'
 import { EventEmitter } from 'events';
+
+// Leaflet layers
 import { layers } from "@/components/LeafletMap.vue"
 
 // Bulma 
