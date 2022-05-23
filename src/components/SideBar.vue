@@ -78,10 +78,6 @@ export default class SideBar extends Vue {
   border-radius: 0px;
 }
 
-.tag {
-  margin-right: 2px;
-}
-
 /* Extra small devices (phones, 600px and down) */
 @media only screen and (max-width: 600px) {
   .details {
