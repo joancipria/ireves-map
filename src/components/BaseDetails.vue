@@ -114,4 +114,7 @@ export default class BaseDetails extends Vue {
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped lang="scss">
+.tag {
+  margin: 3px;
+}
 </style>
