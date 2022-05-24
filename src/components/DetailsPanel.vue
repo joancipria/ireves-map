@@ -24,7 +24,7 @@ import { eventEmitter } from "@/main";
     };
   },
 })
-export default class SideBar extends Vue {
+export default class DetailsPanel extends Vue {
   title!: string;
   id!: string;
   visibility: boolean = false;
@@ -55,9 +55,9 @@ export default class SideBar extends Vue {
 .details {
   z-index: 10;
   position: fixed;
-  right: -30%;
+  left: -20%;
   height: 100%;
-  width: 30%;
+  width: 20%;
   -webkit-box-shadow: -3px 0px 5px 0px rgba(0, 0, 0, 0.2);
   box-shadow: -3px 0px 5px 0px rgba(0, 0, 0, 0.2);
   transition: all ease-in-out 0.3s;
@@ -69,7 +69,7 @@ export default class SideBar extends Vue {
 }
 
 .open {
-  transform: translate3d(-100%, 0, 0);
+  transform: translate3d(100%, 0, 0);
   animation-timing-function: 1s ease-in;
 }
 
@@ -81,7 +81,7 @@ export default class SideBar extends Vue {
 /* Extra small devices (phones, 600px and down) */
 @media only screen and (max-width: 600px) {
   .details {
-    right: -100%;
+    left: -100%;
     width: 100%;
   }
 }
@@ -89,32 +89,32 @@ export default class SideBar extends Vue {
 /* Small devices (portrait tablets and large phones, 600px and up) */
 @media only screen and (min-width: 600px) {
   .details {
-    right: -60%;
-    width: 60%;
+    left: -50%;
+    width: 50%;
   }
 }
 
 /* Medium devices (landscape tablets, 768px and up) */
 @media only screen and (min-width: 768px) {
   .details {
-    right: -50%;
-    width: 50%;
+    left: -40%;
+    width: 40%;
   }
 }
 
 /* Large devices (laptops/desktops, 992px and up) */
 @media only screen and (min-width: 992px) {
   .details {
-    right: -40%;
-    width: 40%;
+    left: -30%;
+    width: 30%;
   }
 }
 
 /* Large devices (laptops/desktops, 1100px and up) */
 @media only screen and (min-width: 1100px) {
   .details {
-    right: -30%;
-    width: 30%;
+    left: -20%;
+    width: 20%;
   }
 }
 </style>

@@ -1,11 +1,11 @@
 <template>
-  <SideBar :id="'baseDetails'" :title="i18n.BASE_DETAILS">
+  <DetailsPanel :id="'baseDetails'" :title="i18n.BASE_DETAILS">
     <div v-if="base" class="content mt-5">
       <div class="columns">
-        <div class="colum">
-          <img src="@/assets/base.svg" alt="" />
-        </div>
         <div class="column">
+          <img class="base-image" src="@/assets/base.svg" alt="" />
+        </div>
+        <div class="column is-two-thirds">
           <div class="column">
             <p>{{ base.name }}</p>
           </div>
@@ -34,7 +34,7 @@
               class="list-item"
             >
               <div class="list-item-image">
-                <figure class="image is-64x64">
+                <figure class="image is-48x48">
                   <img
                     v-if="vehicle.type == VehicleType.SAMU"
                     class="is-rounded"
@@ -47,12 +47,12 @@
               <div class="list-item-content">
                 <div class="list-item-title">{{ vehicle.name }}</div>
                 <div class="list-item-description">
-                  <div class="tag is-rounded">
+                  <!-- <div class="tag is-rounded">
                     <span style="margin-right: 1px" class="icon"
                       ><i class="fas fa-truck"></i
                     ></span>
                     {{ vehicle.type }}
-                  </div>
+                  </div> -->
 
                   <div class="tag is-rounded">
                     <span style="margin-right: 1px" class="icon"
@@ -77,13 +77,13 @@
         </div>
       </div>
     </div>
-  </SideBar>
+  </DetailsPanel>
 </template>
 
 <script lang="ts">
 import { Options, Vue } from "vue-class-component";
 import { i18n } from "@/main";
-import SideBar from "@/components/SideBar.vue";
+import DetailsPanel from "@/components/DetailsPanel.vue";
 
 import Base from "@/core/Base";
 import Vehicle from "@/core/Vehicle";
@@ -100,7 +100,7 @@ import { VehicleType } from "@/core/Vehicle";
     };
   },
   components: {
-    SideBar,
+    DetailsPanel,
   },
 })
 export default class BaseDetails extends Vue {
