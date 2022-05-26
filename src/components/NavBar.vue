@@ -2,7 +2,12 @@
   <nav class="navbar is-transparent">
     <div class="navbar-brand">
       <a class="navbar-item">
-        <img src="../assets/ireves-logo.png" alt="iReves Map" width="112" height="28" />
+        <img
+          src="/img/ireves-logo.png"
+          alt="iReves Map"
+          width="112"
+          height="28"
+        />
       </a>
       <div class="navbar-burger" data-target="navbarExampleTransparentExample">
         <span></span>
@@ -18,9 +23,21 @@
           <a class="navbar-link"> {{ i18n.DATA }} </a>
           <div class="navbar-dropdown">
             <a @click="showDataLoader" class="navbar-item">
+              <span class="icon">
+                <i class="fas fa-upload" aria-hidden="true"></i>
+              </span>
               {{ i18n.LOAD_DATA }}
             </a>
-            <a @click="toggleSidebar('exportPanel')" class="navbar-item" href="#">{{ i18n.EXPORT }} </a>
+            <a
+              @click="toggleSidebar('exportPanel')"
+              class="navbar-item"
+              href="#"
+            >
+              <span class="icon">
+                <i class="fas fa-file-export" aria-hidden="true"></i>
+              </span>
+              {{ i18n.EXPORT }}
+            </a>
           </div>
         </div>
 
@@ -28,6 +45,9 @@
           <a class="navbar-link"> {{ i18n.QUERIES }} </a>
           <div class="navbar-dropdown">
             <a @click="toggleSidebar('newQuery')" class="navbar-item">
+              <span class="icon">
+                <i class="fas fa-search" aria-hidden="true"></i>
+              </span>
               {{ i18n.NEW_QUERY }}
             </a>
             <!-- <a @click="showExport" class="navbar-item" href="#">{{ i18n.SAVED_QUERIES }} </a> -->
@@ -74,8 +94,8 @@ export default class NavBar extends Vue {
     this.$emit("showDataLoader");
   }
 
-  toggleSidebar(target: string){
-    eventEmitter.emit("toggle-sidebar", target)
+  toggleSidebar(target: string) {
+    eventEmitter.emit("toggle-sidebar", target);
   }
 }
 </script>
@@ -88,5 +108,8 @@ nav {
 
 div.navbar-brand .navbar-item {
   cursor: default;
+}
+.navbar-dropdown .icon {
+  margin-right: 0;
 }
 </style>
