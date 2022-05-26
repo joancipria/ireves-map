@@ -31,7 +31,7 @@ export default class DetailsPanel extends Vue {
   loading: boolean = false;
 
   mounted() {
-    eventEmitter.on('toggle-sidebar', (target) => {
+    eventEmitter.on('toggle-details', (target) => {
       if (target == this.id) {
         this.show();
       } else {

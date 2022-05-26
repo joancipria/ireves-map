@@ -35,7 +35,7 @@ export default class SideBar extends Vue {
       if (target == this.id) {
         this.show();
       } else {
-        //this.hide();
+        this.hide();
       }
     });
   }

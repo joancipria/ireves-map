@@ -48,7 +48,7 @@ export default class App extends Vue {
 
   onBaseSelected(base: Base) {
     this.selectedBase = base;
-    eventEmitter.emit("toggle-sidebar", 'baseDetails')
+    eventEmitter.emit("toggle-details", 'baseDetails')
   }
 
   showSettings() {
