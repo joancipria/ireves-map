@@ -64,7 +64,7 @@
               </div>
               <div class="list-item-controls">
                 <div class="buttons is-right">
-                  <button @click="extractVehicle(vehicle)" class="button">
+                  <button @click="extractVehicle(vehicle.id)" class="button">
                     <span class="icon is-small">
                       <i class="fas fa-sign-out-alt"></i>
                     </span>
@@ -106,8 +106,8 @@ import { VehicleType } from "@/core/Vehicle";
 export default class BaseDetails extends Vue {
   base!: Base;
 
-  extractVehicle(vehicle: Vehicle) {
-    this.base.extractVehicle(vehicle);
+  extractVehicle(vehicleID: string) {
+    this.base.extractVehicle(vehicleID);
   }
 }
 </script>
