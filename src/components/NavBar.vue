@@ -7,6 +7,7 @@
           alt="iReves Map"
           width="112"
           height="28"
+          draggable="false"
         />
       </a>
       <div class="navbar-burger" data-target="navbarExampleTransparentExample">
