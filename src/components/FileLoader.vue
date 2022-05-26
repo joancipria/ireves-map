@@ -61,9 +61,12 @@
                 <span class="file-label">{{ i18n.BROWSE_FILE }}</span>
               </span>
             </label>
-            <progress v-else class="progress is-small is-primary" max="100">
-              15%
-            </progress>
+            <div class="loading-box" v-else>
+              <progress class="progress is-small is-primary" max="100">
+                15%
+              </progress>
+              <h5 class="title is-6" style="">{{ i18n.LOADING }}...</h5>
+            </div>
           </div>
         </div>
       </section>
