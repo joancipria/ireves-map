@@ -88,9 +88,8 @@ export default class DataLoader {
         data.forEach(rawVehicle => {
             if (rawVehicle.x != "" && rawVehicle.y != "") {
                 // Create vehicle
-                let id = 0;
                 const vehicle = new Vehicle(
-                    id,
+                    Math.random().toString().slice(2, 10),
                     rawVehicle.name,
                     rawVehicle.x,
                     rawVehicle.y,
@@ -98,7 +97,6 @@ export default class DataLoader {
                     VehicleAvailability[rawVehicle.availability]
                 );
                 vehicles.push(vehicle);
-                id++;
             }
         });
 
@@ -135,7 +133,7 @@ export default class DataLoader {
                         if (rawVehicle.x != "" && rawVehicle.y != "") {
                             // Create vehicle
                             const vehicle = new Vehicle(
-                                0,
+                                Math.random().toString().slice(2, 10),
                                 rawVehicle.name,
                                 rawVehicle.x,
                                 rawVehicle.y,
