@@ -1,46 +1,56 @@
-import { bases } from "@/main";
+import { bases, vehicles } from "@/main";
+import { saveAs } from "file-saver";
 
 class DataExport {
 
-    export(fileName: string) {
-        this.exportJSON(bases, fileName);
+    /**
+     * Exports (downloads) a JSON file with all app data
+     *
+     * @param {string} fileName
+     * @memberof DataExport
+     */
+    export(fileName: string): void {
+
+        if (!fileName) {
+            fileName = "Reves Map data";
+        }
+
+        // Build file structure
+        const data = {
+            bases: bases,
+            vehicles: vehicles
+        }
+
+        // Creat cleaned blob
+        const blob = new Blob([JSON.stringify(data, this.customReplacer())], { type: "text/json;charset=utf-8" });
+
+        // Save file
+        saveAs(blob, `${fileName}.json`);
     }
-    private exportJSON(data: any, fileName: string) {
-        console.log(data)
-        data = JSON.stringify(data);
-        this.downloadFile(data, fileName, "json");
-    }
 
-    private exportCSV() {
-        //const csvData = Papa.unparse(data);
-    }
+    /**
+     * Custom replacer for JSON.stringify(). See https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Errors/Cyclic_object_value
+     *
+     * @memberof DataExport
+     */
+    customReplacer = () => {
+        const seen = new WeakSet();
+        return (key, value) => {
+            // Drop circular objects
+            if (typeof value === "object" && value !== null) {
+                if (seen.has(value)) {
+                    return;
+                }
+                seen.add(value);
+            }
 
-    private downloadFile(data, fileName: string, fileType: string) {
-
-        // Create CSV file object and feed
-        // our csv_data into it
-        const CSVFile = new Blob([data], {
-            type: `text/${fileType}`
-        });
-
-        // Create to temporary link to initiate
-        // download process
-        const temp_link = document.createElement('a');
-
-        // Download csv file
-        temp_link.download = `${fileName}.${fileType}`;
-        const url = window.URL.createObjectURL(CSVFile);
-        temp_link.href = url;
-
-        // This link should not be displayed
-        temp_link.style.display = "none";
-        document.body.appendChild(temp_link);
-
-        // Automatically click the link to
-        // trigger download
-        temp_link.click();
-        document.body.removeChild(temp_link);
-    }
+            // Drop internal properties and all leaflet visual stuff
+            if (key === "marker" || key === "activeVehicles" || key === "active" || key === "time" || key === "isochroneLayer" || key === "polygon" || key === "population" || key === "color" || key === "popup") {
+                return;
+            }
+            return value;
+        };
+    };
 }
 
 export const dataExport = new DataExport();

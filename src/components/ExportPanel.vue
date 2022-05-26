@@ -39,14 +39,6 @@
               </button>
             </div>
           </div>
-
-          <progress
-            v-if="loading"
-            class="progress is-small is-primary"
-            max="100"
-          >
-            15%
-          </progress>
         </div>
       </div>
     </div>
@@ -73,13 +65,10 @@ import { dataExport } from "@/core/DataExport";
   },
 })
 export default class ExportPanel extends Vue {
-  loading: boolean = false;
   fileName!: string;
 
-  async exportData() {
-    this.loading = true;
-    await dataExport.export(this.fileName);
-    this.loading = false;
+  exportData(): void {
+    dataExport.export(this.fileName);
   }
 }
 </script>
