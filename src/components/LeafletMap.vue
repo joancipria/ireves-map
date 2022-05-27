@@ -38,7 +38,13 @@ export default class LeafletMap extends Vue {
       touchZoom: true,
       tap: true,
       doubleClickZoom: false,
-      layers: [layers.openstreet, layers.vehiclesCluster, layers.basesCluster],
+      layers: [
+        layers.openstreet,
+        layers.vehiclesCluster,
+        layers.basesCluster,
+        layers.isochrones,
+        layers.overlaps,
+      ],
       attributionControl: false,
       maxBounds: bounds, // Set the map's geographical boundaries.
     });
@@ -64,6 +70,7 @@ export const layers = {
     { id: "mapbox/streets-v11" }
   ),
   isochrones: new LayerGroup(),
+  overlaps: new LayerGroup(),
   vehiclesCluster: new MarkerClusterGroup({
     chunkedLoading: true,
     showCoverageOnHover: false,

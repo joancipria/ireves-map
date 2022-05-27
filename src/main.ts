@@ -49,6 +49,7 @@ export const reset = (): void => {
     layers.basesCluster.clearLayers();
     layers.vehiclesCluster.clearLayers();
     layers.isochrones.clearLayers();
+    layers.overlaps.clearLayers();
 
     // Clear data
     bases = [];
