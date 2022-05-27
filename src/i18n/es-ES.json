@@ -43,5 +43,6 @@
     "HEALTH_CENTERS": "Centros de salud",
     "OFFICES": "Consultorios",
     "UNITS": "Unidades",
-    "BASE_MAP": "Mapa base"
+    "BASE_MAP": "Mapa base",
+    "REVES_MAP_REPORT": "Informe Reves Map"
 }
