@@ -9,7 +9,7 @@ export class LeafletMarker extends Marker {
 
     added: boolean;
 
-    constructor(entity: MapEntity, position: LatLng | LatLngExpression, draggable: boolean, customClass?: string, addToMap?: boolean, targetLayer?: LayerGroup) {
+    constructor(entity: MapEntity, position: LatLng | LatLngExpression, draggable: boolean, customClass?: string, addToMap?: boolean, targetLayer?: LayerGroup, tooltipText?: string |string[]) {
 
         // Create icon
         const icon = new DivIcon({
@@ -24,6 +24,11 @@ export class LeafletMarker extends Marker {
             draggable: draggable
         });
 
+        // Add tooltip
+        if(tooltipText){
+            this.bindTooltip(`<div class="list"><div class="list-item"><div class="list-item-content"><div class="list-item-title">${tooltipText.toString().replaceAll(',',' - ')}</div></div></div></div>`);
+        }
+        
         // Set initial value
         this.added = false;
 
@@ -36,9 +41,11 @@ export class LeafletMarker extends Marker {
     addToMap(targetLayer?: LayerGroup) {
         if (!this.added) {
             if (targetLayer) {
-                super.addTo(targetLayer)
+                //super.addTo(targetLayer)
+                targetLayer.addLayer(this);
             } else {
-                super.addTo(leafletMap.map);
+                //super.addTo(leafletMap.map);
+                leafletMap.map.addLayer(this);
             }
             this.added = true;
         }
