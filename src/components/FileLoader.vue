@@ -78,7 +78,7 @@
 <script lang="ts">
 import { Options, Vue } from "vue-class-component";
 import DataLoader from "@/core/DataLoader";
-import { eventEmitter, i18n, vehicles } from "@/main";
+import { eventEmitter, i18n, vehicles, bases } from "@/main";
 
 @Options({
   components: {},
@@ -121,15 +121,18 @@ export default class FileLoader extends Vue {
       return;
     }
 
-    // Check each 200ms if all vehicles have been loaded
+    // Check each 200ms if all markers have been loaded
     const checkFinishedLoading = setInterval(() => {
-      if (vehicles[vehicles.length - 1].marker.added) {
+      if (
+        vehicles[vehicles.length - 1].marker.added &&
+        bases[bases.length - 1].marker.added
+      ) {
         // Then, hide modal & loading
         this.hide();
         this.loading = false;
         clearInterval(checkFinishedLoading);
       }
-    }, 200);
+    }, 100);
   }
 
   show() {
