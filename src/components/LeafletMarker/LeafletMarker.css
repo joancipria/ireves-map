@@ -1,11 +1,29 @@
+/* Global marker properties */
 .marker {
   width: 41px;
+}
+
+.increased-marker img {
+  transform: scale(1.5, 1.5);
+  opacity: 1;
+  filter: grayscale(0);
+}
+
+.disabled-marker{
+  opacity: 0.55;
+  filter: grayscale(1);
 }
 
 .overlap-marker {
   width: 30px;
 }
 
+.leaflet-tooltip {
+  padding: 0px !important;
+  border-radius: 6px !important;
+}
+
+/* Clusters */
 .cluster-marker {
   flex-direction: column;
   display: flex;
@@ -44,7 +62,11 @@
   color: white;
 }
 
-.leaflet-tooltip {
-  padding: 0px !important;
-  border-radius: 6px !important;
+/* CSS for drag and drop event hack */
+.leaflet-marker-draggable {
+  z-index: 999999 !important;
+}
+
+.dragging-disabled {
+  pointer-events: none !important;
 }
