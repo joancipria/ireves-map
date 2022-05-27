@@ -31,7 +31,7 @@
                   :value="BaseType.HOSPITAL"
                   @change="filter"
                 />
-                {{i18n.HOSPITALS}}
+                {{ i18n.HOSPITALS }}
               </label>
 
               <label class="checkbox m-2">
@@ -41,7 +41,7 @@
                   :value="BaseType.HEALTH_CENTER"
                   @change="filter"
                 />
-                {{i18n.HEALTH_CENTERS}}
+                {{ i18n.HEALTH_CENTERS }}
               </label>
 
               <label class="checkbox m-2">
@@ -51,7 +51,7 @@
                   :value="BaseType.OFFICE"
                   @change="filter"
                 />
-                {{i18n.OFFICES}}
+                {{ i18n.OFFICES }}
               </label>
 
               <label class="checkbox m-2">
@@ -61,7 +61,7 @@
                   :value="BaseType.UNIT"
                   @change="filter"
                 />
-                {{i18n.UNITS}}
+                {{ i18n.UNITS }}
               </label>
             </div>
           </div>
@@ -72,11 +72,39 @@
               <TimeController :group="VehicleType.SAMU"></TimeController>
             </div>
           </div>
+
           <div class="field">
             <label class="label">SVB {{ i18n.ISOCHRONE_TIME }}</label>
             <div class="control">
               <TimeController :group="VehicleType.SVB"></TimeController>
             </div>
+          </div>
+
+          <div class="field">
+            <div class="control">
+              <button @click="launchQuery" class="button is-success">
+                Ejecutar consulta
+              </button>
+            </div>
+          </div>
+
+          <hr />
+          <div v-if="finished">
+            <b>Población total cubierta:</b>
+            {{ this.totalPopulation.samu + this.totalPopulation.svb }}<br />
+            <b>Población cubierta con SVB:</b> {{ this.totalPopulation.svb
+            }}<br />
+            <b>Población cubierta con SAMU:</b> {{ this.totalPopulation.samu
+            }}<br />
+
+            <br />
+
+            <button @click="generateReport" class="button">
+              <span class="icon">
+                <i class="fas fa-file-download"></i>
+              </span>
+              <span>Generar informe</span>
+            </button>
           </div>
         </div>
       </div>
@@ -93,6 +121,7 @@ import { layers, leafletMap } from "@/components/LeafletMap.vue";
 import TimeController from "@/components/TimeController.vue";
 import { VehicleType } from "@/core/Vehicle";
 import Base, { BaseType } from "@/core/Base";
+import { dataExport } from "@/core/DataExport";
 
 @Options({
   props: {},
@@ -152,11 +181,14 @@ export default class NewQuery extends Vue {
   currentBases: Base[];
   currentTypes!: string[];
   currentRegion!: string;
+  finished: boolean = false;
+  totalPopulation = { samu: 0, svb: 0 };
 
   filter() {
     this.currentBases = [];
 
     layers.basesCluster.clearLayers();
+    //layers.vehiclesCluster.clearLayers();
 
     bases.forEach((base: Base) => {
       if (base.region == this.currentRegion || this.currentRegion == "Global") {
@@ -170,6 +202,34 @@ export default class NewQuery extends Vue {
     if (this.currentBases.length > 0 && this.currentRegion != "Global") {
       leafletMap.map.flyTo(this.currentBases[0].marker.getLatLng(), 11);
     }
+  }
+
+  launchQuery() {
+    this.totalPopulation.samu = 0;
+    this.totalPopulation.svb = 0;
+
+    let counter = 0;
+
+    if (this.currentBases && this.currentBases.length > 0) {
+      this.currentBases.forEach(async (base) => {
+        await base.showIsochrone();
+        const pop = await base.getPopulation();
+        this.totalPopulation.samu += pop.samu;
+        this.totalPopulation.svb += pop.svb;
+        counter++;
+
+        if (counter == this.currentBases.length) {
+          this.finished = true;
+        }
+      });
+    }
+  }
+
+  generateReport(region: string) {
+    dataExport.exportReport(
+      this.currentRegion,
+      this.totalPopulation.samu + this.totalPopulation.svb
+    );
   }
 }
 </script>
