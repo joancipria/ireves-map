@@ -1,11 +1,11 @@
 import { Overlap } from "@/core/Overlap";
-import { LatLng, GeoJSON, LeafletEvent, LayerGroup } from "leaflet";
+import { LatLng, GeoJSON, LeafletEvent } from "leaflet";
 import { Feature, MultiPolygon, Polygon } from "@turf/turf";
 import { LeafletMarker } from "@/components/LeafletMarker/LeafletMarker";
 import { openRoute } from "@/services/openroute.service";
 import { worldPop } from "@/services/worldpop.service";
-import { vehicleOverlaps, eventEmitter, globalOverlap, i18n, bases } from "@/main";
-import { layers } from "@/components/LeafletMap.vue";
+import { vehicleOverlaps, eventEmitter, globalOverlap, i18n, bases, dragging } from "@/main";
+import { layers, leafletMap } from "@/components/LeafletMap.vue";
 import { utils } from "./Utils";
 import { MapEntity } from "@/core/MapEntity"
 import { VehiclePopup } from "@/components/VehiclePopup/VehiclePopup";
@@ -35,7 +35,7 @@ export enum VehicleAvailability {
 export default class Vehicle {
 
     // --- Vehicle ---
-    id: number;
+    id: string;
     name: string;
     position: LatLng;
     availability: VehicleAvailability;
@@ -50,9 +50,8 @@ export default class Vehicle {
     color: string = '#e61212';
     marker: LeafletMarker;
     popup: VehiclePopup;
-    targetLayer: LayerGroup;
 
-    constructor(id: number, name: string, lat: number = 0, lng: number = 0, type: VehicleType, availability: VehicleAvailability = VehicleAvailability["24H"]) {
+    constructor(id: string, name: string, lat: number = 0, lng: number = 0, type: VehicleType, availability: VehicleAvailability = VehicleAvailability["24H"]) {
         // Set basic info
         this.id = id;
         this.name = name;
@@ -61,42 +60,31 @@ export default class Vehicle {
         this.type = type;
         this.time = VehicleTime[this.type]
 
-        // Set target layer
-        this.targetLayer = layers.vehiclesCluster;
-
         // Set color based on vehicle type
-        this.color = VehicleColor[this.type]; // Color azul en hex
+        this.color = VehicleColor[this.type];
 
-        // Marker & Popup
-        this.marker = new LeafletMarker(MapEntity[this.type], this.position, true, '');
+        // Popup (disabled for now)
         this.popup = new VehiclePopup(this);
-        this.marker.bindPopup(this.popup);
+        //this.marker.bindPopup(this.popup);
 
         // --- Events ---
-        // On drag start, clear all vehicle data
-        this.marker.on('dragstart', this.deactivate.bind(this))
-
-        // On drag ends, update  position
-        this.marker.on('dragend', (event: LeafletEvent) => {
-            this.updatePosition(event.target._latlng);
-        })
-
-        // On click
-        this.marker.on('click', this.activate.bind(this));
+        // On click (disabled for now)
+        //this.marker.on('click', this.activate.bind(this));
 
         // On time controller change
         eventEmitter.on('timeChange', this.onTimeChange.bind(this));
+
+        // Create marker
+        this.initMarker();
     }
 
     async activate() {
         if (!this.active) {
-            console.info("Vehicle activated", this);
-
             // Activate vehicle
             this.active = true;
 
             // Hide isochroneLayer
-            this.toggleIsochrone(false);
+            //this.toggleIsochrone(false);
 
             // Show loading in popup
             this.popup.setLoading();
@@ -128,8 +116,6 @@ export default class Vehicle {
 
     deactivate() {
         if (this.active) {
-            console.info("Deactivate vehicle", this);
-
             // Hide isochrone
             this.toggleIsochrone(false);
 
@@ -183,15 +169,14 @@ export default class Vehicle {
         return data;
     }
 
-    toggleIsochrone(visibility = false) {
+    toggleIsochrone(visibility: boolean = false) {
         if (!this.isochroneLayer) return;
 
         if (!visibility) {
-            this.targetLayer.removeLayer(this.isochroneLayer)
+            layers.isochrones.removeLayer(this.isochroneLayer)
             return;
         }
-
-        this.isochroneLayer.addTo(this.targetLayer);
+        layers.isochrones.addLayer(this.isochroneLayer).addTo(leafletMap.map)
     }
 
     async getPopulation() {
@@ -230,8 +215,6 @@ export default class Vehicle {
 
                     // If there's overlap
                     if (overlap) {
-                        console.info("Overlap detected", this, vehicle);
-
                         // Check if there's 1 or more overlap
                         if (vehicleOverlaps.length >= 1) {
                             // Hide global overlap
@@ -261,8 +244,6 @@ export default class Vehicle {
     }
 
     clearOverlaps() {
-        console.log("Overlaps: ", vehicleOverlaps)
-
         // Hide global overlap
         globalOverlap.overlap.hide();
 
@@ -306,14 +287,43 @@ export default class Vehicle {
         }
     }
 
-    updatePosition(coord: LatLng) {
-        this.position.lat = coord.lat;
-        this.position.lng = coord.lng;
-        this.marker.setLatLng(coord);
+    updatePosition(coord: LatLng): void {
+        this.position = coord;
+        //this.marker.setLatLng(coord)
     }
 
-    extract() {
-        this.position.lng = this.position.lng + 0.0025;
-        this.marker.addToMap(this.targetLayer);
+    show(): void {
+        //layers.vehiclesCluster.addLayer(this.marker);
+        this.marker.setLatLng(this.position);
+    }
+
+    hide() {
+        //layers.vehiclesCluster.removeLayer(this.marker);
+        this.marker.setLatLng(new LatLng(0, 0));
+        this.deactivate();
+    }
+
+    initMarker() {
+        // Marker & Popup
+        this.marker = new LeafletMarker(MapEntity[this.type], this.position, true, "", true, layers.vehiclesCluster, [this.name, this.availability]);
+
+        // While dragging, close tooltip 
+        this.marker.on('drag', () => {
+            this.marker.closeTooltip();
+        })
+
+        // On drag start
+        this.marker.on('dragstart', () => {
+            this.deactivate.bind(this)
+            dragging.vehicle = this;
+            this.marker.getElement().classList.add("dragging-disabled")
+        })
+
+        // On drag ends
+        this.marker.on('dragend', (event: LeafletEvent) => {
+            // Update position
+            this.updatePosition(event.target._latlng);
+            this.marker.getElement().classList.remove("dragging-disabled")
+        })
     }
 }
