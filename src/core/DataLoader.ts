@@ -79,6 +79,9 @@ export default class DataLoader {
         // Fetch demo file 
         const data = await fetch('demo_data.json').then(res => res.json()).then(res => { return res })
 
+        // Reset
+        reset();
+
         // Create entities
         this.createBases(data.bases);
         this.createVehicles(data.vehicles);
