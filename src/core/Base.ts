@@ -29,14 +29,11 @@ export default class Base {
         this.address = address;
         this.region = region;
 
-        // Determine initial marker class
-        let markerClass = "";
-        if (vehicles.length <= 0) {
-            markerClass = "disabled-marker";
-        }
-
         // Create marker
-        this.marker = new LeafletMarker(MapEntity.BASE, this.position, false, markerClass, true, layers.basesCluster, this.name);
+        this.marker = new LeafletMarker(MapEntity.BASE, this.position, false, "disabled-marker", true, layers.basesCluster, this.name);
+        this.marker.on('add',()=>{
+            this.updateMarkerStyle(); // Update marker whenAded
+        })
 
         /* Drag and drop vehicles system */
         // On mouse over
@@ -74,7 +71,7 @@ export default class Base {
         vehicles.push(this.vehicles[targetIndex])
         this.vehicles.splice(targetIndex, 1);
 
-        this.updateMarker();
+        this.updateMarkerStyle();
     }
 
     park(vehicle: Vehicle): void {
@@ -83,7 +80,7 @@ export default class Base {
         vehicle.hide();
         this.vehicles.push(vehicle);
 
-        this.updateMarker();
+        this.updateMarkerStyle();
     }
 
     async showIsochrone() {
@@ -125,7 +122,7 @@ export default class Base {
         }
     }
 
-    updateMarker() {
+    updateMarkerStyle() {
         if (this.vehicles.length <= 0) {
             this.toggleBase(false);
         } else {

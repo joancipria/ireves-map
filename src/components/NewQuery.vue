@@ -196,9 +196,7 @@ export default class NewQuery extends Vue {
       if (base.region == this.currentRegion || this.currentRegion == "Global") {
         if (this.currentTypes.includes(base.type)) {
           this.currentBases.push(base);
-          base.marker
-            .asyncAddTo(layers.basesCluster)
-            .then(() => base.updateMarker());
+          base.marker.addTo(layers.basesCluster);
         }
       }
     });
