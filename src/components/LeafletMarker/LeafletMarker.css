@@ -9,7 +9,7 @@
   filter: grayscale(0);
 }
 
-.disabled-marker{
+.disabled-marker img{
   opacity: 0.55;
   filter: grayscale(1);
 }

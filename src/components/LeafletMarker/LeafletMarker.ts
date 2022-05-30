@@ -9,13 +9,13 @@ export class LeafletMarker extends Marker {
 
     added: boolean;
 
-    constructor(entity: MapEntity, position: LatLng | LatLngExpression, draggable: boolean, customClass?: string, addToMap?: boolean, targetLayer?: LayerGroup, tooltipText?: string |string[]) {
+    constructor(entity: MapEntity, position: LatLng | LatLngExpression, draggable: boolean, customClass?: string, addToMap?: boolean, targetLayer?: LayerGroup, tooltipText?: string | string[]) {
 
         // Create icon
         const icon = new DivIcon({
-            html: `<img class="marker ${customClass}" src="${require(`@/assets/markers/${entity.toLowerCase()}_marker.png`)}">`,
+            html: `<img class="marker" src="${require(`@/assets/markers/${entity.toLowerCase()}_marker.png`)}">`,
             iconSize: [CONFIG.MARKER_SIZER, CONFIG.MARKER_SIZER],
-            className: '',
+            className: customClass,
         });
 
         // Create marker
@@ -25,10 +25,10 @@ export class LeafletMarker extends Marker {
         });
 
         // Add tooltip
-        if(tooltipText){
-            this.bindTooltip(`<div class="list"><div class="list-item"><div class="list-item-content"><div class="list-item-title">${tooltipText.toString().replaceAll(',',' - ')}</div></div></div></div>`);
+        if (tooltipText) {
+            this.bindTooltip(`<div class="list"><div class="list-item"><div class="list-item-content"><div class="list-item-title">${tooltipText.toString().replaceAll(',', ' - ')}</div></div></div></div>`);
         }
-        
+
         // Set initial value
         this.added = false;
 
@@ -49,5 +49,26 @@ export class LeafletMarker extends Marker {
             }
             this.added = true;
         }
+    }
+
+    asyncAddTo(targetLayer?: LayerGroup) {
+        return new Promise((resolve, reject) => {
+            if (targetLayer) {
+                //super.addTo(targetLayer)
+                targetLayer.addLayer(this);
+            } else {
+                //super.addTo(leafletMap.map);
+                leafletMap.map.addLayer(this);
+            }
+
+            const resolver = setInterval(() => {
+                if (this.getElement()) {
+                    this.added = true;
+                    clearInterval(resolver);
+                    resolve(this.added);
+                }
+            })
+
+        });
     }
 }
