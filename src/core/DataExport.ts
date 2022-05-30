@@ -83,20 +83,20 @@ class DataExport {
         const page = pdfDoc.addPage();
 
         // Draw reves map logo
-        await this.drawImage(pdfDoc, page, logoArrayBuffer, 0.5, 50, 2)
+        await this.drawImage(pdfDoc, page, logoArrayBuffer, 0.4, 200, 400)
 
         // Draw map image 
-        await this.drawImage(pdfDoc, page, image, 0.5);
+        await this.drawImage(pdfDoc, page, image, 0.5, 75, 0);
 
         /* Draw report data */
         // Title
-        await this.drawText(pdfDoc, page, title, 20, 50, 4);
+        await this.drawText(pdfDoc, page, title, 20, 50, 6);
 
         // Region
-        await this.drawText(pdfDoc, page, `${i18n.REGION}: ${region}`, 14, 50, 8)
+        await this.drawText(pdfDoc, page, `${i18n.REGION}: ${region}`, 14, 50, 10)
 
         // Covered population
-        await this.drawText(pdfDoc, page, `${i18n.COVERED_POPULATION}: ${population}`, 12, 50, 12)
+        await this.drawText(pdfDoc, page, `${i18n.COVERED_POPULATION}: ${population}`, 12, 50, 14)
 
         // Serialize the PDFDocument to bytes (a Uint8Array)
         const pdfBytes = await pdfDoc.save();
@@ -139,8 +139,8 @@ class DataExport {
         const pngImage = await pdfDoc.embedPng(image);
         const pngDims = pngImage.scale(scale);
         page.drawImage(pngImage, {
-            x: x | page.getWidth() / 2 - pngDims.width / 2 + 75,
-            y: y | page.getHeight() / 2 - pngDims.height,
+            x: page.getWidth() / 2 - pngDims.width / 2 + x,
+            y: page.getHeight() / 2 - pngDims.height + y,
             width: pngDims.width,
             height: pngDims.height,
         });
