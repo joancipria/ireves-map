@@ -47,8 +47,7 @@ export default class Base {
             // If user is dragging a vehicle
             if (dragging.vehicle) {
                 // Increase base icon size (animated)
-                this.marker.getElement().classList.add("increased-marker");
-
+                DomUtil.addClass(this.marker.getElement(), "increased-marker");
 
                 // Set vehicle dragend listener
                 dragging.vehicle.marker.on('dragend', () => {
@@ -63,7 +62,7 @@ export default class Base {
         });
 
         this.marker.on('mouseout', () => {
-            this.marker.getElement().classList.remove("increased-marker");
+            DomUtil.removeClass(this.marker.getElement(), "increased-marker");
             dragging.base = false;
         })
     }
