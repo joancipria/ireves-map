@@ -188,13 +188,17 @@ export default class NewQuery extends Vue {
     this.currentBases = [];
 
     layers.basesCluster.clearLayers();
+    layers.isochrones.clearLayers();
+    layers.overlaps.clearLayers();
     //layers.vehiclesCluster.clearLayers();
 
     bases.forEach((base: Base) => {
       if (base.region == this.currentRegion || this.currentRegion == "Global") {
         if (this.currentTypes.includes(base.type)) {
           this.currentBases.push(base);
-          base.marker.addTo(layers.basesCluster);
+          base.marker
+            .asyncAddTo(layers.basesCluster)
+            .then(() => base.updateMarker());
         }
       }
     });
