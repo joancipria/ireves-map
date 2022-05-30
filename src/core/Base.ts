@@ -1,5 +1,5 @@
 import { LeafletMarker } from "@/components/LeafletMarker/LeafletMarker";
-import { LatLng } from "leaflet";
+import { LatLng, DomUtil } from "leaflet";
 import Vehicle from "./Vehicle";
 import { MapEntity } from "@/core/MapEntity"
 import { VehicleType } from "@/core/Vehicle"
@@ -75,9 +75,7 @@ export default class Base {
         vehicles.push(this.vehicles[targetIndex])
         this.vehicles.splice(targetIndex, 1);
 
-        if (this.vehicles.length <= 0) {
-            this.toggleBase(false);
-        }
+        this.updateMarker();
     }
 
     park(vehicle: Vehicle): void {
@@ -86,8 +84,7 @@ export default class Base {
         vehicle.hide();
         this.vehicles.push(vehicle);
 
-        this.toggleBase(true);
-
+        this.updateMarker();
     }
 
     async showIsochrone() {
@@ -120,12 +117,20 @@ export default class Base {
     }
 
     toggleBase(enabled: boolean) {
-        const markerIcon = this.marker.getElement().getElementsByTagName('img')[0];
+        const markerIcon = this.marker.getElement();
 
         if (enabled) {
-            markerIcon.classList.remove("disabled-marker");
+            DomUtil.removeClass(markerIcon, "disabled-marker");
         } else {
-            markerIcon.classList.add("disabled-marker");
+            DomUtil.addClass(markerIcon, "disabled-marker");
+        }
+    }
+
+    updateMarker() {
+        if (this.vehicles.length <= 0) {
+            this.toggleBase(false);
+        } else {
+            this.toggleBase(true);
         }
     }
 
