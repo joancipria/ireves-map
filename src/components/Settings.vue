@@ -3,25 +3,25 @@
     <div class="modal-background"></div>
     <div class="modal-card">
       <header class="modal-card-head">
-        <p class="modal-card-title">{{ i18n.SETTINGS }}</p>
+        <p class="modal-card-title">{{ $t("SETTINGS") }}</p>
         <button @click="hide" class="delete" aria-label="close"></button>
       </header>
       <section class="modal-card-body">
         <div class="field">
-          <label class="label">{{ i18n.LANGUAGE }}</label>
+          <label class="label">{{ $t("LANGUAGE") }}</label>
           <div class="control">
             <div class="select">
               <select @change="setLanguage" v-model="currentLanguage">
-                <option value="es-ES">{{ i18n.SPANISH }}</option>
-                <option value="ca">{{ i18n.CATALAN }}</option>
-                <option value="en-US">{{ i18n.ENGLISH }}</option>
+                <option value="es-ES">{{ $t("SPANISH") }}</option>
+                <option value="ca">{{ $t("CATALAN") }}</option>
+                <option value="en-US">{{ $t("ENGLISH") }}</option>
               </select>
             </div>
           </div>
         </div>
 
         <div class="field">
-          <label class="label">{{ i18n.BASE_MAP }}</label>
+          <label class="label">{{ $t("BASE_MAP") }}</label>
           <div class="control">
             <div class="select">
               <select @change="changeBaseLayer" v-model="currentBaseLayer">
@@ -36,7 +36,7 @@
       <footer class="modal-card-foot">
         <div class="buttons is-right">
           <button @click="hide" class="button is-success">
-            {{ i18n.SAVE_CHANGES }}
+            {{ $t("SAVE_CHANGES") }}
           </button>
         </div>
       </footer>
@@ -47,7 +47,7 @@
 <script lang="ts">
 import { Options, Vue } from "vue-class-component";
 import TimeController from "@/components/TimeController.vue";
-import { i18n, language } from "@/main";
+import { locale } from "@/i18n";
 import { VehicleType } from "@/core/Vehicle";
 import { leafletMap, layers } from "@/components/LeafletMap.vue";
 
@@ -57,10 +57,9 @@ import { leafletMap, layers } from "@/components/LeafletMap.vue";
   },
   data() {
     return {
-      i18n: i18n,
       VehicleType: VehicleType,
       currentBaseLayer: "openstreet",
-      currentLanguage: language,
+      currentLanguage: locale,
     };
   },
   computed: {},
@@ -81,6 +80,8 @@ export default class Settings extends Vue {
 
   changeBaseLayer() {
     leafletMap.map.removeLayer(layers.openstreet);
+    leafletMap.map.removeLayer(layers.grayscale);
+    leafletMap.map.removeLayer(layers.streets);
     leafletMap.map.addLayer(layers[this.currentBaseLayer]);
   }
 

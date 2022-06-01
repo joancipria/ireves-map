@@ -10,12 +10,11 @@
 
 <script lang="ts">
 import { Options, Vue } from "vue-class-component";
-import { i18n, eventEmitter } from "@/main";
+import { eventEmitter } from "@/main";
 
 @Options({
   data() {
     return {
-      i18n: i18n,
       message: ""
     };
   },

@@ -1,5 +1,5 @@
 import { Popup } from "leaflet";
-import { i18n } from "@/main";
+import { i18n } from "@/i18n";
 import { Overlap } from "../../core/Overlap";
 
 export class OverlapPopup extends Popup {

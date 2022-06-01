@@ -1,12 +1,12 @@
 <template>
-  <SideBar :id="'exportPanel'" :title="i18n.EXPORT">
+  <SideBar :id="'exportPanel'" :title="$t('LOAD_DATA')">
     <div class="content mt-5">
       <div class="columns">
         <div class="column">
           <div class="columns">
             <div class="column">
               <div class="field">
-                <label class="label">{{ i18n.FILE_NAME }}</label>
+                <label class="label">{{ $t("FILE_NAME") }}</label>
                 <div class="control">
                   <input
                     v-model="fileName"
@@ -20,7 +20,7 @@
 
             <div class="column">
               <div class="field">
-                <label class="label">{{ i18n.FORMAT }}</label>
+                <label class="label">{{ $t("FORMAT") }}</label>
                 <div class="control">
                   <div class="select">
                     <select>
@@ -35,7 +35,7 @@
           <div class="field is-grouped">
             <div class="control">
               <button @click="exportData" class="button is-success">
-                {{ i18n.EXPORT }}
+                {{ $t("LOAD_DATA") }}
               </button>
             </div>
           </div>
@@ -47,7 +47,6 @@
 
 <script lang="ts">
 import { Options, Vue } from "vue-class-component";
-import { i18n } from "@/main";
 import SideBar from "@/components/SideBar.vue";
 
 import { dataExport } from "@/core/DataExport";
@@ -56,7 +55,6 @@ import { dataExport } from "@/core/DataExport";
   props: {},
   data() {
     return {
-      i18n: i18n,
       fileName: "",
     };
   },

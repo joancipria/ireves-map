@@ -8,14 +8,13 @@
       v-model="time"
       @change="updateTime"
     />
-    <p>{{ time }} {{ minutes }}</p>
+    <p>{{ time }} {{ $t("MINUTES") }}</p>
   </div>
 </template>
 
 <script lang="ts">
 import { Options, Vue } from "vue-class-component";
 import { eventEmitter } from "@/main";
-import { i18n } from "@/main";
 import { VehicleType, VehicleTime } from "@/core/Vehicle";
 
 @Options({
@@ -25,7 +24,6 @@ import { VehicleType, VehicleTime } from "@/core/Vehicle";
   },
   data() {
     return {
-      minutes: i18n.MINUTES,
     };
   },
   computed: {},

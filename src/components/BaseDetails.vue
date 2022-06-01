@@ -1,5 +1,5 @@
 <template>
-  <DetailsPanel :id="'baseDetails'" :title="i18n.BASE_DETAILS">
+  <DetailsPanel :id="'baseDetails'" :title="$t('BASE_DETAILS')">
     <div v-if="base" class="content mt-5">
       <div class="columns">
         <div class="column">
@@ -26,7 +26,7 @@
       <div class="columns">
         <div class="column">
           <br />
-          <h1 class="title is-5">{{ i18n.AVAILABLE_AMBULANCES }}</h1>
+          <h1 class="title is-5">{{ $t("AVAILABLE_AMBULANCES") }}</h1>
           <div class="list has-visible-pointer-controls">
             <div
               v-for="vehicle of base.vehicles"
@@ -68,7 +68,7 @@
                     <span class="icon is-small">
                       <i class="fas fa-sign-out-alt"></i>
                     </span>
-                    <span>{{ i18n.EXTRACT }}</span>
+                    <span>{{ $t("EXTRACT") }}</span>
                   </button>
                 </div>
               </div>
@@ -82,11 +82,9 @@
 
 <script lang="ts">
 import { Options, Vue } from "vue-class-component";
-import { i18n } from "@/main";
 import DetailsPanel from "@/components/DetailsPanel.vue";
 
 import Base from "@/core/Base";
-import Vehicle from "@/core/Vehicle";
 import { VehicleType } from "@/core/Vehicle";
 
 @Options({
@@ -95,7 +93,6 @@ import { VehicleType } from "@/core/Vehicle";
   },
   data() {
     return {
-      i18n: i18n,
       VehicleType: VehicleType,
     };
   },

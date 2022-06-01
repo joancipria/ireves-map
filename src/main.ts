@@ -5,6 +5,7 @@ import Base from '@/core/Base';
 import './registerServiceWorker'
 import router from './router'
 import { EventEmitter } from 'events';
+import { vuei18n } from './i18n';
 
 // Leaflet layers
 import { layers } from "@/components/LeafletMap.vue"
@@ -30,21 +31,9 @@ export let globalOverlap: any = { feature: null, overlap: null }
 // Global events
 export const eventEmitter = new EventEmitter();
 
-// Import locale strings
-export let language = navigator.language;
-let localeFile;
-try {
-    localeFile = require('./i18n/' + language + '.json')
-} catch {
-    localeFile = require('./i18n/en-US.json');
-    language = "en-US";
-}
-export const i18n = localeFile;
+createApp(App).use(router).use(vuei18n).mount('#app')
 
-createApp(App).use(router).mount('#app')
-
-
-export const reset = (): void => {
+export function reset(): void {
     // Remove all markers & overlaps
     layers.basesCluster.clearLayers();
     layers.vehiclesCluster.clearLayers();

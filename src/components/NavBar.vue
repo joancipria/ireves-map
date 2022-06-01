@@ -21,13 +21,13 @@
       <div class="navbar-start">
         <!-- <a class="navbar-item" href="https://bulma.io/"> Home </a> -->
         <div class="navbar-item has-dropdown is-hoverable">
-          <a class="navbar-link"> {{ i18n.DATA }} </a>
+          <a class="navbar-link"> {{ $t("DATA") }} </a>
           <div class="navbar-dropdown">
             <a @click="showDataLoader" class="navbar-item">
               <span class="icon">
                 <i class="fas fa-upload" aria-hidden="true"></i>
               </span>
-              {{ i18n.LOAD_DATA }}
+              {{ $t("LOAD_DATA") }}
             </a>
             <a
               @click="toggleSidebar('exportPanel')"
@@ -37,24 +37,24 @@
               <span class="icon">
                 <i class="fas fa-file-export" aria-hidden="true"></i>
               </span>
-              {{ i18n.EXPORT }}
+              {{ $t("LOAD_DATA") }}
             </a>
           </div>
         </div>
 
         <div class="navbar-item has-dropdown is-hoverable">
-          <a class="navbar-link"> {{ i18n.QUERIES }} </a>
+          <a class="navbar-link"> {{ $t("QUERIES") }} </a>
           <div class="navbar-dropdown">
             <a @click="toggleSidebar('newQuery')" class="navbar-item">
               <span class="icon">
                 <i class="fas fa-search" aria-hidden="true"></i>
               </span>
-              {{ i18n.NEW_QUERY }}
+              {{ $t("NEW_QUERY") }}
             </a>
             <!-- <a @click="showExport" class="navbar-item" href="#">{{ i18n.SAVED_QUERIES }} </a> -->
           </div>
         </div>
-        <!-- <a class="navbar-item"> {{ i18n.ABOUT }} </a> -->
+        <!-- <a class="navbar-item"> {{ $t("ABOUT") }} </a> -->
       </div>
 
       <div class="navbar-end">
@@ -65,7 +65,7 @@
                 <span class="icon">
                   <i class="fas fa-cog"></i>
                 </span>
-                <span>{{ i18n.SETTINGS }}</span>
+                <span>{{ $t("SETTINGS") }}</span>
               </button>
             </p>
           </div>
@@ -77,12 +77,11 @@
 
 <script lang="ts">
 import { Options, Vue } from "vue-class-component";
-import { eventEmitter, i18n } from "@/main";
+import { eventEmitter} from "@/main";
 
 @Options({
   data() {
     return {
-      i18n: i18n,
     };
   },
 })

@@ -1,7 +1,8 @@
-import { bases, vehicles, language, i18n } from "@/main";
+import { bases, vehicles } from "@/main";
 import { saveAs } from "file-saver";
 import domtoimage from "dom-to-image-more";
 import { PDFDocument, PDFPage, StandardFonts } from "pdf-lib";
+import { i18n, locale } from "@/i18n"
 
 class DataExport {
 
@@ -62,7 +63,7 @@ class DataExport {
         const logoArrayBuffer = await logo.arrayBuffer();
 
         // Current date using locale format
-        const date = new Date().toLocaleDateString(language);
+        const date = new Date().toLocaleDateString(locale);
 
         // Report title
         const title = `${i18n.REVES_MAP_REPORT} - ${date}`;

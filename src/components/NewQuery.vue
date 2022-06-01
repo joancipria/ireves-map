@@ -1,10 +1,10 @@
 <template>
-  <SideBar :id="'newQuery'" :title="i18n.NEW_QUERY">
+  <SideBar :id="'newQuery'" :title="$t('NEW_QUERY')">
     <div class="content mt-5">
       <div class="columns">
         <div class="column">
           <div class="field">
-            <label class="label">{{ i18n.REGION }}</label>
+            <label class="label">{{ $t("REGION") }}</label>
             <div class="control">
               <div class="select">
                 <select @change="filter" v-model="currentRegion">
@@ -22,7 +22,7 @@
           </div>
 
           <div class="field">
-            <label class="label">{{ i18n.FILTER }}</label>
+            <label class="label">{{ $t("FILTER") }}</label>
             <div class="control">
               <label class="checkbox m-2">
                 <input
@@ -31,7 +31,7 @@
                   :value="BaseType.HOSPITAL"
                   @change="filter"
                 />
-                {{ i18n.HOSPITALS }}
+                {{ $t("HOSPITALS") }}
               </label>
 
               <label class="checkbox m-2">
@@ -41,7 +41,7 @@
                   :value="BaseType.HEALTH_CENTER"
                   @change="filter"
                 />
-                {{ i18n.HEALTH_CENTERS }}
+                {{ $t("HEALTH_CENTERS") }}
               </label>
 
               <label class="checkbox m-2">
@@ -51,7 +51,7 @@
                   :value="BaseType.OFFICE"
                   @change="filter"
                 />
-                {{ i18n.OFFICES }}
+                {{ $t("OFFICES") }}
               </label>
 
               <label class="checkbox m-2">
@@ -61,20 +61,20 @@
                   :value="BaseType.UNIT"
                   @change="filter"
                 />
-                {{ i18n.UNITS }}
+                {{ $t("UNITS") }}
               </label>
             </div>
           </div>
 
           <div class="field">
-            <label class="label">SAMU {{ i18n.ISOCHRONE_TIME }}</label>
+            <label class="label">SAMU {{ $t("ISOCHRONE_TIME") }}</label>
             <div class="control">
               <TimeController :group="VehicleType.SAMU"></TimeController>
             </div>
           </div>
 
           <div class="field">
-            <label class="label">SVB {{ i18n.ISOCHRONE_TIME }}</label>
+            <label class="label">SVB {{ $t("ISOCHRONE_TIME") }}</label>
             <div class="control">
               <TimeController :group="VehicleType.SVB"></TimeController>
             </div>
@@ -83,19 +83,19 @@
           <div class="field">
             <div class="control">
               <button @click="launchQuery" class="button is-success">
-                Ejecutar consulta
+                {{ $t("LAUNCH_QUERY") }}
               </button>
             </div>
           </div>
 
           <hr />
           <div v-if="finished">
-            <b>Población total cubierta:</b>
+            <b>{{ $t("COVERED_POPULATION") }}:</b>
             {{ this.totalPopulation.samu + this.totalPopulation.svb }}<br />
-            <b>Población cubierta con SVB:</b> {{ this.totalPopulation.svb
-            }}<br />
-            <b>Población cubierta con SAMU:</b> {{ this.totalPopulation.samu
-            }}<br />
+            <b>{{ $t("COVERED_POPULATION") }} SVB:</b>
+            {{ this.totalPopulation.svb }}<br />
+            <b>{{ $t("COVERED_POPULATION") }} SAMU:</b>
+            {{ this.totalPopulation.samu }}<br />
 
             <br />
 
@@ -103,7 +103,7 @@
               <span class="icon">
                 <i class="fas fa-file-download"></i>
               </span>
-              <span>Generar informe</span>
+              <span> {{ $t("GENERATE_REPORT") }} </span>
             </button>
           </div>
         </div>
@@ -114,7 +114,7 @@
 
 <script lang="ts">
 import { Options, Vue } from "vue-class-component";
-import { i18n, bases } from "@/main";
+import { bases } from "@/main";
 import SideBar from "@/components/SideBar.vue";
 import { layers, leafletMap } from "@/components/LeafletMap.vue";
 
@@ -127,7 +127,6 @@ import { dataExport } from "@/core/DataExport";
   props: {},
   data() {
     return {
-      i18n: i18n,
       VehicleType: VehicleType,
       BaseType: BaseType,
       regions: String[""],

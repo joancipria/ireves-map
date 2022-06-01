@@ -6,12 +6,12 @@
     ></div>
     <div :class="{ 'modal-content': mode, 'modal-card': mode == false }">
       <header v-if="!mode" class="modal-card-head">
-        <p class="modal-card-title">{{ i18n.LOAD_DATA }}</p>
+        <p class="modal-card-title">{{ $t("LOAD_DATA") }}</p>
         <button @click="hide" class="delete" aria-label="close"></button>
       </header>
       <div v-if="mode" :class="{ box: mode }">
-        <h1 class="title">{{ i18n.WELCOME_MESSAGE }}</h1>
-        <h2 class="subtitle">{{ i18n.WELCOME_INSTRUCTIONS }}</h2>
+        <h1 class="title">{{ $t("WELCOME_MESSAGE") }}</h1>
+        <h2 class="subtitle">{{ $t("WELCOME_INSTRUCTIONS") }}</h2>
         <div class="drag-area">
           <div class="file is-centered">
             <label v-if="!loading" class="file-label">
@@ -25,26 +25,26 @@
                 <span class="file-icon">
                   <i class="fas fa-upload"></i>
                 </span>
-                <span class="file-label">{{ i18n.BROWSE_FILE }}</span>
+                <span class="file-label">{{ $t("BROWSE_FILE") }}</span>
               </span>
             </label>
             <div class="loading-box" v-else>
               <progress class="progress is-small is-primary" max="100">
                 15%
               </progress>
-              <h5 class="title is-6" style="">{{ i18n.LOADING }}...</h5>
+              <h5 class="title is-6" style="">{{ $t("LOADING") }}...</h5>
             </div>
           </div>
         </div>
         <br />
         <p>
-          {{ i18n.NO_DATA }}
-          <a @click="load">{{ i18n.TRY_DEMO }}</a>
+          {{ $t("NO_DATA") }}
+          <a @click="load">{{ $t("TRY_DEMO") }}</a>
         </p>
       </div>
 
       <section v-if="!mode" class="modal-card-body">
-        <h2 class="subtitle">{{ i18n.WELCOME_INSTRUCTIONS }}</h2>
+        <h2 class="subtitle">{{ $t("WELCOME_INSTRUCTIONS") }}</h2>
         <div class="drag-area">
           <div class="file is-centered">
             <label v-if="!loading" class="file-label">
@@ -58,14 +58,14 @@
                 <span class="file-icon">
                   <i class="fas fa-upload"></i>
                 </span>
-                <span class="file-label">{{ i18n.BROWSE_FILE }}</span>
+                <span class="file-label">{{ $t("BROWSE_FILE") }}</span>
               </span>
             </label>
             <div class="loading-box" v-else>
               <progress class="progress is-small is-primary" max="100">
                 15%
               </progress>
-              <h5 class="title is-6" style="">{{ i18n.LOADING }}...</h5>
+              <h5 class="title is-6" style="">{{ $t("LOADING") }}...</h5>
             </div>
           </div>
         </div>
@@ -78,7 +78,7 @@
 <script lang="ts">
 import { Options, Vue } from "vue-class-component";
 import DataLoader from "@/core/DataLoader";
-import { eventEmitter, i18n, vehicles, bases } from "@/main";
+import { eventEmitter, vehicles, bases } from "@/main";
 
 @Options({
   components: {},
@@ -87,7 +87,6 @@ import { eventEmitter, i18n, vehicles, bases } from "@/main";
   },
   data() {
     return {
-      i18n: i18n,
     };
   },
   computed: {},

@@ -1,8 +1,9 @@
 import Base, { BaseType } from "@/core/Base";
-import { i18n, bases, vehicles, reset } from "@/main";
+import { bases, vehicles, reset } from "@/main";
 import { VehicleAvailability, VehicleType } from "@/core/Vehicle";
 import Vehicle from "@/core/Vehicle";
 import { FileError } from "@/core/Errors"
+import { i18n } from "@/i18n"
 
 // Read demo data file
 import demoData from "@/demo_data.json";

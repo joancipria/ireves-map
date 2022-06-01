@@ -4,11 +4,12 @@ import { Feature, MultiPolygon, Polygon } from "@turf/turf";
 import { LeafletMarker } from "@/components/LeafletMarker/LeafletMarker";
 import { openRoute } from "@/services/openroute.service";
 import { worldPop } from "@/services/worldpop.service";
-import { vehicleOverlaps, eventEmitter, globalOverlap, i18n, bases, dragging } from "@/main";
+import { vehicleOverlaps, eventEmitter, globalOverlap, bases, dragging } from "@/main";
 import { layers, leafletMap } from "@/components/LeafletMap.vue";
 import { utils } from "./Utils";
 import { MapEntity } from "@/core/MapEntity"
 import { VehiclePopup } from "@/components/VehiclePopup/VehiclePopup";
+import {i18n} from "@/i18n"
 
 export enum VehicleType {
     SAMU = 'SAMU',

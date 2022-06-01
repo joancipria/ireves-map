@@ -1,6 +1,6 @@
 import { Popup } from "leaflet";
 import Vehicle from "@/core/Vehicle";
-import { i18n } from "@/main";
+import { i18n } from "@/i18n";
 
 export class VehiclePopup extends Popup {
     vehicle: Vehicle;
