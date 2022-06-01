@@ -3,10 +3,12 @@ import { createI18n } from "vue-i18n";
 // Import language files
 import es from "./es-ES.json"
 import en from "./en-US.json"
+import ca from "./ca.json"
 
 const messages = {
     en: en,
-    es: es
+    es: es,
+    ca: ca
 }
 
 // Create Vuei18n instance
