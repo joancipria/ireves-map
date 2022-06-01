@@ -4,6 +4,14 @@ import { VehicleAvailability, VehicleType } from "@/core/Vehicle";
 import Vehicle from "@/core/Vehicle";
 import { FileError } from "@/core/Errors"
 
+import demoData from "@/demo_data.json";
+export type JSONData = typeof demoData;
+export type JSONVehicle = typeof demoData.vehicles[0];
+export type JSONVehicles = typeof demoData.vehicles;
+export type JSONBase = typeof demoData.bases[0];
+export type JSONBases = typeof demoData.bases;
+
+
 export default class DataLoader {
     vue: any;
 
@@ -51,7 +59,7 @@ export default class DataLoader {
 
         try {
             // Parse text to object
-            const data = JSON.parse(await this.readFileAsync(file));
+            const data = JSON.parse(await this.readFileAsync(file)) as JSONData;
 
             // Data validation
             if (data.bases && data.vehicles) {
@@ -65,6 +73,7 @@ export default class DataLoader {
                 return { type: "error", message: i18n.FILE_PARSE_ERROR };
             }
         } catch (error) {
+            console.error(error)
             return { type: "error", message: i18n.FILE_PARSE_ERROR };
         }
     }
@@ -76,75 +85,58 @@ export default class DataLoader {
      * @memberof DataLoader
      */
     async loadDemo(): Promise<FileError | void> {
-        // Fetch demo file 
-        const data = await fetch('demo_data.json').then(res => res.json()).then(res => { return res })
 
         // Reset
         reset();
 
         // Create entities
-        this.createBases(data.bases);
-        this.createVehicles(data.vehicles);
+        this.createBases(demoData.bases);
+        this.createVehicles(demoData.vehicles);
     }
 
-    private createVehicles(data: any): void {
+    private createVehicles(data: JSONVehicles): void {
         data.forEach(rawVehicle => {
-            if (rawVehicle.x != "" && rawVehicle.y != "") {
-                // Create vehicle
-                const vehicle = new Vehicle(
-                    Math.random().toString().slice(2, 10),
-                    rawVehicle.name,
-                    rawVehicle.x,
-                    rawVehicle.y,
-                    VehicleType[rawVehicle.type],
-                    VehicleAvailability[rawVehicle.availability]
-                );
-                vehicles.push(vehicle);
-            }
+            const vehicle = this.createVehicle(rawVehicle);
+            vehicles.push(vehicle);
         });
 
     }
-    private createBases(data: any): void {
+
+    private createBases(data: JSONBases): void {
         // For each, create new Vehicle
-        data.forEach((item: any) => {
+        data.forEach((rawBase: JSONBase) => {
+            if(!rawBase.position){
+                return;
+            }
             // Clean data
             if (
-                item &&
-                item.name != "" &&
-                item.x != "" &&
-                item.y != "" &&
-                item.region != ""
+                rawBase &&
+                rawBase.name != "" &&
+                rawBase.position &&
+                rawBase.position.lat &&
+                rawBase.position.lng &&
+                rawBase.region != ""
             ) {
                 // Get base type from its name
                 let baseType: BaseType;
                 for (const type of Object.values(BaseType)) {
-                    if (item.name.includes(type)) {
+                    if (rawBase.name.includes(type)) {
                         baseType = BaseType[Object.keys(BaseType)[Object.values(BaseType).indexOf(type)]]
                     }
                 }
 
                 // Create new base
-                const base = new Base(item.name, baseType, item.x, item.y, item.address, item.region);
+                const base = new Base(rawBase.name, baseType, rawBase.position.lat, rawBase.position.lng, rawBase.address, rawBase.region);
                 base.marker.addEventListener("click", () => {
                     this.vue.$emit("baseSelected", base);
                     //base.showIsochrone();
                 });
 
                 // For each base vehicle 
-                if (item.vehicles && item.vehicles.length > 0) {
-                    item.vehicles.forEach(rawVehicle => {
-                        if (rawVehicle.x != "" && rawVehicle.y != "") {
-                            // Create vehicle
-                            const vehicle = new Vehicle(
-                                Math.random().toString().slice(2, 10),
-                                rawVehicle.name,
-                                rawVehicle.x,
-                                rawVehicle.y,
-                                VehicleType[rawVehicle.type],
-                                VehicleAvailability[rawVehicle.availability]
-                            );
-                            base.vehicles.push(vehicle);
-                        }
+                if (rawBase.vehicles && rawBase.vehicles.length > 0) {
+                    rawBase.vehicles.forEach(rawVehicle => {
+                        const vehicle = this.createVehicle(rawVehicle);
+                        base.vehicles.push(vehicle);
                     });
                 }
 
@@ -152,5 +144,20 @@ export default class DataLoader {
                 bases.push(base);
             }
         });
+    }
+
+    private createVehicle(rawVehicle: JSONVehicle): Vehicle {
+        if (rawVehicle && rawVehicle.position.lat && rawVehicle.position.lng) {
+            // Create vehicle
+            const vehicle = new Vehicle(
+                Math.random().toString().slice(2, 10),
+                rawVehicle.name,
+                rawVehicle.position.lat,
+                rawVehicle.position.lng,
+                VehicleType[rawVehicle.type],
+                VehicleAvailability[rawVehicle.availability]
+            );
+            return vehicle;
+        }
     }
 }
