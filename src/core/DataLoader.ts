@@ -4,12 +4,13 @@ import { VehicleAvailability, VehicleType } from "@/core/Vehicle";
 import Vehicle from "@/core/Vehicle";
 import { FileError } from "@/core/Errors"
 
+// Read demo data file
 import demoData from "@/demo_data.json";
+
+// Create types from JSON demo data
 export type JSONData = typeof demoData;
 export type JSONVehicle = typeof demoData.vehicles[0];
-export type JSONVehicles = typeof demoData.vehicles;
 export type JSONBase = typeof demoData.bases[0];
-export type JSONBases = typeof demoData.bases;
 
 
 export default class DataLoader {
@@ -94,18 +95,34 @@ export default class DataLoader {
         this.createVehicles(demoData.vehicles);
     }
 
-    private createVehicles(data: JSONVehicles): void {
+    /**
+     * Creates vehicles given an JSONVehicle array
+     *
+     * @private
+     * @param {JSONVehicles} data
+     * @memberof DataLoader
+     */
+    private createVehicles(data: JSONVehicle[]): void {
         data.forEach(rawVehicle => {
             const vehicle = this.createVehicle(rawVehicle);
-            vehicles.push(vehicle);
-        });
 
+            if (vehicle) {
+                vehicles.push(vehicle);
+            }
+        });
     }
 
-    private createBases(data: JSONBases): void {
+    /**
+     * Creates bases given an JSONBase array
+     *
+     * @private
+     * @param {JSONBase[]} data
+     * @memberof DataLoader
+     */
+    private createBases(data: JSONBase[]): void {
         // For each, create new Vehicle
         data.forEach((rawBase: JSONBase) => {
-            if(!rawBase.position){
+            if (!rawBase.position) {
                 return;
             }
             // Clean data
@@ -146,6 +163,15 @@ export default class DataLoader {
         });
     }
 
+
+    /**
+     * Creates a Vehicle from a JSONVehicle
+     *
+     * @private
+     * @param {JSONVehicle} rawVehicle
+     * @return {*}  {Vehicle}
+     * @memberof DataLoader
+     */
     private createVehicle(rawVehicle: JSONVehicle): Vehicle {
         if (rawVehicle && rawVehicle.position.lat && rawVehicle.position.lng) {
             // Create vehicle
@@ -159,5 +185,6 @@ export default class DataLoader {
             );
             return vehicle;
         }
+        return;
     }
 }
