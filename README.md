@@ -1,6 +1,6 @@
 <h1 align="center">
     <br>
-    <img src="./public/img/ireves-logo.png" alt="Akira">
+    <img src="./public/img/ireves-logo.png" alt="Reves Map">
 </h1>
 
 Reves Map forma parte de [iReves](http://ireves.webs.upv.es/), una herramienta inteligente de ayuda a la toma de decisiones para la innovación en la Reubicación de Vehículos de Emergencias Sanitarias. Reves Map tiene como finalidad ayudar a visualizar fácilmente el impacto que las decisiones pueden tener sobre la cantidad de población que estaría cubierta ante una emergencia. Este repositorio contiene el código fuente del cliente web. Puedes acceder al repositorio del servidor desde [aquí](https://github.com/joancipria/ireves-map-server).
@@ -17,7 +17,7 @@ npm install
 npm run serve
 ```
 
-# 🛠️ Compilar para producción
+## 🛠️ Compilar para producción
 ```
 npm run build
 ```
