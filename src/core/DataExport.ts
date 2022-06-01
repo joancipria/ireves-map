@@ -47,7 +47,7 @@ class DataExport {
             }
 
             // Drop internal properties and all leaflet visual stuff
-            if (key === "marker" || key === "activeVehicles" || key === "active" || key === "time" || key === "isochroneLayer" || key === "polygon" || key === "population" || key === "color" || key === "popup") {
+            if (key === "marker" || key === "activeVehicles" || key === "active" || key === "time" || key === "isochroneLayer" || key === "polygon" || key === "population" || key === "color" || key === "popup" || key === "id") {
                 return;
             }
             return value;
