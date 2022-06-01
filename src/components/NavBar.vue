@@ -3,7 +3,7 @@
     <div class="navbar-brand">
       <a class="navbar-item">
         <img
-          src="/img/ireves-logo.png"
+          src="/img/reves-map-logo.png"
           alt="iReves Map"
           width="112"
           height="28"
