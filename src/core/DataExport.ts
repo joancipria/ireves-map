@@ -83,7 +83,7 @@ class DataExport {
         const page = pdfDoc.addPage();
 
         // Draw reves map logo
-        await this.drawImage(pdfDoc, page, logoArrayBuffer, 0.4, 200, 400)
+        await this.drawImage(pdfDoc, page, logoArrayBuffer, 0.4, 230, 400)
 
         // Draw map image 
         await this.drawImage(pdfDoc, page, image, 0.5, 75, 0);
