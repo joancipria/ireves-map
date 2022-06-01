@@ -17,11 +17,10 @@ import { eventEmitter } from "@/main";
 @Options({
   props: {
     id: String,
-    title: String
+    title: String,
   },
   data() {
-    return {
-    };
+    return {};
   },
 })
 export default class DetailsPanel extends Vue {
@@ -31,7 +30,7 @@ export default class DetailsPanel extends Vue {
   loading: boolean = false;
 
   mounted() {
-    eventEmitter.on('toggle-details', (target) => {
+    eventEmitter.on("toggle-details", (target) => {
       if (target == this.id) {
         this.show();
       } else {
@@ -58,8 +57,6 @@ export default class DetailsPanel extends Vue {
   left: -20%;
   height: 100%;
   width: 20%;
-  -webkit-box-shadow: -3px 0px 5px 0px rgba(0, 0, 0, 0.2);
-  box-shadow: -3px 0px 5px 0px rgba(0, 0, 0, 0.2);
   transition: all ease-in-out 0.3s;
 
   header {
@@ -71,6 +68,8 @@ export default class DetailsPanel extends Vue {
 .open {
   transform: translate3d(100%, 0, 0);
   animation-timing-function: 1s ease-in;
+  -webkit-box-shadow: -3px 0px 5px 0px rgba(0, 0, 0, 0.2);
+  box-shadow: -3px 0px 5px 0px rgba(0, 0, 0, 0.2);
 }
 
 .box {

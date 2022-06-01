@@ -10,8 +10,10 @@
 html,
 body {
   height: 100%;
+  overflow: hidden !important;
 }
 #app{
   height: 100%;
+  overflow: hidden;
 }
 </style>
