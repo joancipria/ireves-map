@@ -10,7 +10,7 @@ const messages = {
 }
 
 // Create Vuei18n instance
-export const i18nn = createI18n({
+export const vuei18n = createI18n({
     locale: 'es', // set locale
     fallbackLocale: 'en', // set fallback locale
     messages, // set locale messages
@@ -23,5 +23,9 @@ export const i18nn = createI18n({
  * @param {string} locale
  */
 export function changeLocale(locale: string): void {
-    i18nn.global.locale = locale;
+    vuei18n.global.locale = locale;
 }
+
+export const availableLocales = vuei18n.global.availableLocales;
+export const i18n = vuei18n.global.messages[vuei18n.global.locale];
+export const locale = vuei18n.global.locale;
