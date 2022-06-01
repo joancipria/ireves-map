@@ -12,9 +12,9 @@
           <div class="control">
             <div class="select">
               <select @change="setLanguage" v-model="currentLanguage">
-                <option value="es-ES">{{ $t("SPANISH") }}</option>
+                <option value="es">{{ $t("SPANISH") }}</option>
                 <option value="ca">{{ $t("CATALAN") }}</option>
-                <option value="en-US">{{ $t("ENGLISH") }}</option>
+                <option value="en">{{ $t("ENGLISH") }}</option>
               </select>
             </div>
           </div>
@@ -50,6 +50,7 @@ import TimeController from "@/components/TimeController.vue";
 import { locale } from "@/i18n";
 import { VehicleType } from "@/core/Vehicle";
 import { leafletMap, layers } from "@/components/LeafletMap.vue";
+import { changeLocale } from "@/i18n";
 
 @Options({
   components: {
@@ -86,7 +87,7 @@ export default class Settings extends Vue {
   }
 
   setLanguage() {
-    //
+    changeLocale(this.currentLanguage);
   }
 }
 </script>
