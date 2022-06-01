@@ -36,16 +36,7 @@ class DataExport {
      * @memberof DataExport
      */
     customReplacer = () => {
-        const seen = new WeakSet();
         return (key, value) => {
-            // Drop circular objects
-            if (typeof value === "object" && value !== null) {
-                if (seen.has(value)) {
-                    return;
-                }
-                seen.add(value);
-            }
-
             // Drop internal properties and all leaflet visual stuff
             if (key === "marker" || key === "activeVehicles" || key === "active" || key === "time" || key === "isochroneLayer" || key === "polygon" || key === "population" || key === "color" || key === "popup" || key === "id") {
                 return;
