@@ -12,7 +12,7 @@
                     v-model="fileName"
                     class="input"
                     type="text"
-                    placeholder="File name"
+                    :placeholder="$t('FILE_NAME')"
                   />
                 </div>
               </div>
@@ -35,7 +35,7 @@
           <div class="field is-grouped">
             <div class="control">
               <button @click="exportData" class="button is-success">
-                {{ $t("LOAD_DATA") }}
+                {{ $t("EXPORT") }}
               </button>
             </div>
           </div>
