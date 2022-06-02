@@ -5,6 +5,8 @@ import Base from '@/core/Base';
 import './registerServiceWorker'
 import router from './router'
 import { EventEmitter } from 'events';
+
+// Vue-i18n translation plugin
 import { vuei18n } from './i18n';
 
 // Leaflet layers
