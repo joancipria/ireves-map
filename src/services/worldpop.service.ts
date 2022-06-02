@@ -1,7 +1,7 @@
 import HttpClient from "./httpclient.service";
 import config from "@/config";
 
-class WorldPopService extends HttpClient {
+class PopulationService extends HttpClient {
 
     constructor() {
         super(config.SERVER_URL);
@@ -13,4 +13,4 @@ class WorldPopService extends HttpClient {
     }
 }
 
-export const worldPop = new WorldPopService();
+export const popService = new PopulationService();

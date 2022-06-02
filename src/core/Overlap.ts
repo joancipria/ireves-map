@@ -1,6 +1,6 @@
 import CONFIG from '@/config'
 import { layers, leafletMap } from "@/components/LeafletMap.vue";
-import { worldPop } from "@/services/worldpop.service";
+import { popService } from "@/services/worldpop.service";
 import { Feature, center, polygon } from "@turf/turf";
 import { GeoJSON, LatLngExpression } from "leaflet";
 import { LeafletMarker } from "@/components/LeafletMarker/LeafletMarker";
@@ -73,7 +73,7 @@ export class Overlap {
             index += 1;
         }
 
-        const data = await worldPop.getPopulation(this.polygons[index].geometry);
+        const data = await popService.getPopulation(this.polygons[index].geometry);
 
         // TODO: Reutilizar mensaje error
         if (data.error) {

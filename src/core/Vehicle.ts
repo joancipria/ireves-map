@@ -3,7 +3,7 @@ import { LatLng, GeoJSON, LeafletEvent } from "leaflet";
 import { Feature, MultiPolygon, Polygon } from "@turf/turf";
 import { LeafletMarker } from "@/components/LeafletMarker/LeafletMarker";
 import { openRoute } from "@/services/openroute.service";
-import { worldPop } from "@/services/worldpop.service";
+import { popService } from "@/services/worldpop.service";
 import { vehicleOverlaps, eventEmitter, globalOverlap, bases, dragging } from "@/main";
 import { layers, leafletMap } from "@/components/LeafletMap.vue";
 import { utils } from "./Utils";
@@ -186,7 +186,7 @@ export default class Vehicle {
         }
 
         // Get population
-        const data = await worldPop.getPopulation(this.polygon.geometry);
+        const data = await popService.getPopulation(this.polygon.geometry);
 
         if (data.error) {
             console.error(data.error);
