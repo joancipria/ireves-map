@@ -37,7 +37,7 @@
               <span class="icon">
                 <i class="fas fa-file-export" aria-hidden="true"></i>
               </span>
-              {{ $t("LOAD_DATA") }}
+              {{ $t("EXPORT") }}
             </a>
           </div>
         </div>
