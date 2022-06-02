@@ -16,16 +16,16 @@ export class VehiclePopup extends Popup {
         <table class="table">
             <tbody>
                 <tr>
-                <th scope="row">${i18n.NAME}:</th>
+                <th scope="row">${i18n("NAME")}:</th>
                 <td>${this.vehicle.name}</td>
                 </tr>
                 <tr>
-                <th scope="row">${i18n.AVAILABILITY}:</th>
+                <th scope="row">${i18n("AVAILABILITY")}:</th>
                 <td>${this.vehicle.availability}</td>
                 </tr>
                 <tr>
-                <th scope="row">${i18n.COVERED_POPULATION}:</th>
-                <td>${this.vehicle.population || i18n.NOT_AVAILABLE_ERROR}</td>
+                <th scope="row">${i18n("COVERED_POPULATION")}:</th>
+                <td>${this.vehicle.population || i18n("NOT_AVAILABLE_ERROR")}</td>
                 </tr>
             </tbody>
         </table>    
@@ -37,16 +37,16 @@ export class VehiclePopup extends Popup {
         <table class="table">
             <tbody>
                 <tr>
-                <th scope="row">${i18n.NAME}:</th>
+                <th scope="row">${i18n("NAME")}:</th>
                 <td>${this.vehicle.name}</td>
                 </tr>
                 <tr>
-                <th scope="row">${i18n.AVAILABILITY}:</th>
+                <th scope="row">${i18n("AVAILABILITY")}:</th>
                 <td>${this.vehicle.availability}</td>
                 </tr>
                 <tr>
-                <th scope="row">${i18n.COVERED_POPULATION}:</th>
-                <td>${i18n.LOADING} ...</td>
+                <th scope="row">${i18n("COVERED_POPULATION")}:</th>
+                <td>${i18n("LOADING")} ...</td>
                 </tr>
             </tbody>
         </table>    
@@ -58,16 +58,16 @@ export class VehiclePopup extends Popup {
         <table class="table">
             <tbody>
                 <tr>
-                <th scope="row">${i18n.NAME}:</th>
+                <th scope="row">${i18n("NAME")}:</th>
                 <td>${this.vehicle.name}</td>
                 </tr>
                 <tr>
-                <th scope="row">${i18n.AVAILABILITY}:</th>
+                <th scope="row">${i18n("AVAILABILITY")}:</th>
                 <td>${this.vehicle.availability}</td>
                 </tr>
                 <tr>
-                <th scope="row">${i18n.COVERED_POPULATION}:</th>
-                <td>${i18n.NOT_AVAILABLE_ERROR}</td>
+                <th scope="row">${i18n("COVERED_POPULATION")}:</th>
+                <td>${i18n("NOT_AVAILABLE_ERROR")}</td>
                 </tr>
             </tbody>
         </table>    

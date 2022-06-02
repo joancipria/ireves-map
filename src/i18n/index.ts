@@ -29,5 +29,5 @@ export function changeLocale(locale: string): void {
 }
 
 export const availableLocales = vuei18n.global.availableLocales;
-export const i18n = vuei18n.global.messages[vuei18n.global.locale];
+export const i18n = vuei18n.global.t;
 export const locale = vuei18n.global.locale;

@@ -56,7 +56,7 @@ export default class DataLoader {
         // Check extension (.json)
         const extension = file.name.split(".").pop();
         if (extension !== "json") {
-            return { type: "error", message: i18n.FILE_EXTENSION_ERROR };
+            return { type: "error", message: i18n("FILE_EXTENSION_ERROR") };
         }
 
         try {
@@ -72,11 +72,11 @@ export default class DataLoader {
                 this.createBases(data.bases);
                 this.createVehicles(data.vehicles);
             } else {
-                return { type: "error", message: i18n.FILE_PARSE_ERROR };
+                return { type: "error", message: i18n("FILE_PARSE_ERROR") };
             }
         } catch (error) {
             console.error(error)
-            return { type: "error", message: i18n.FILE_PARSE_ERROR };
+            return { type: "error", message: i18n("FILE_PARSE_ERROR") };
         }
     }
 

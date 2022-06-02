@@ -51,7 +51,7 @@
               </span>
               {{ $t("NEW_QUERY") }}
             </a>
-            <!-- <a @click="showExport" class="navbar-item" href="#">{{ i18n.SAVED_QUERIES }} </a> -->
+            <!-- <a @click="showExport" class="navbar-item" href="#">{{ $t("SAVED_QUERIES") }} </a> -->
           </div>
         </div>
         <!-- <a class="navbar-item"> {{ $t("ABOUT") }} </a> -->

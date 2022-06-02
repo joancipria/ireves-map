@@ -16,8 +16,8 @@ export class OverlapPopup extends Popup {
         <table class="table">
             <tbody>
                 <tr>
-                <th scope="row">${i18n.COVERED_POPULATION}:</th>
-                <td>${this.overlap.population || i18n.NOT_AVAILABLE_ERROR}</td>
+                <th scope="row">${i18n("COVERED_POPULATION")}:</th>
+                <td>${this.overlap.population || i18n("NOT_AVAILABLE_ERROR")}</td>
                 </tr>
             </tbody>
         </table>    
@@ -29,8 +29,8 @@ export class OverlapPopup extends Popup {
         <table class="table">
             <tbody>
                 <tr>
-                <th scope="row">${i18n.COVERED_POPULATION}:</th>
-                <td>${i18n.LOADING}</td>
+                <th scope="row">${i18n("COVERED_POPULATION")}:</th>
+                <td>${i18n("LOADING")}</td>
                 </tr>
             </tbody>
         </table>    

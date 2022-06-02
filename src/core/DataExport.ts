@@ -66,7 +66,7 @@ class DataExport {
         const date = new Date().toLocaleDateString(locale);
 
         // Report title
-        const title = `${i18n.REVES_MAP_REPORT} - ${date}`;
+        const title = `${i18n("REVES_MAP_REPORT")} - ${date}`;
 
         // Create a new PDFDocument
         const pdfDoc = await PDFDocument.create();
@@ -85,10 +85,10 @@ class DataExport {
         await this.drawText(pdfDoc, page, title, 20, 50, 6);
 
         // Region
-        await this.drawText(pdfDoc, page, `${i18n.REGION}: ${region}`, 14, 50, 10)
+        await this.drawText(pdfDoc, page, `${i18n("REGION")}: ${region}`, 14, 50, 10)
 
         // Covered population
-        await this.drawText(pdfDoc, page, `${i18n.COVERED_POPULATION}: ${population}`, 12, 50, 14)
+        await this.drawText(pdfDoc, page, `${i18n("COVERED_POPULATION")}: ${population}`, 12, 50, 14)
 
         // Serialize the PDFDocument to bytes (a Uint8Array)
         const pdfBytes = await pdfDoc.save();
