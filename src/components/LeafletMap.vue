@@ -4,12 +4,13 @@
 
 <script lang="ts">
 import { Options, Vue } from "vue-class-component";
-import { LatLng, Map, TileLayer } from "leaflet";
+import { settings } from "@/core/Settings";
 
+// Leaflet
 import "leaflet/dist/leaflet.css";
+import { LayerGroup, DivIcon, LatLng, Map, TileLayer } from "leaflet";
 
 // Marker Cluster. See https://github.com/Leaflet/Leaflet.markercluster/issues/874 & https://stackoverflow.com/questions/69477915/leaflet-litelement-l-is-not-defined-in-plugin
-import { LayerGroup, DivIcon } from "leaflet";
 import { MarkerClusterGroup } from "leaflet.markercluster/src";
 
 @Options({
@@ -39,7 +40,7 @@ export default class LeafletMap extends Vue {
       tap: true,
       doubleClickZoom: false,
       layers: [
-        layers.openstreet,
+        layers[settings.baseMap] || layers.openstreet,
         layers.vehiclesCluster,
         layers.basesCluster,
         layers.isochrones,

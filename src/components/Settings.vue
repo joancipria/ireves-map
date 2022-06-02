@@ -11,7 +11,7 @@
           <label class="label">{{ $t("LANGUAGE") }}</label>
           <div class="control">
             <div class="select">
-              <select @change="setLanguage" v-model="currentLanguage">
+              <select @change="setLanguage" v-model="currentLocale">
                 <option value="es">{{ $t("SPANISH") }}</option>
                 <option value="ca">{{ $t("CATALAN") }}</option>
                 <option value="en">{{ $t("ENGLISH") }}</option>
@@ -47,10 +47,10 @@
 <script lang="ts">
 import { Options, Vue } from "vue-class-component";
 import TimeController from "@/components/TimeController.vue";
-import { locale } from "@/i18n";
+import { locale, changeLocale } from "@/i18n";
 import { VehicleType } from "@/core/Vehicle";
 import { leafletMap, layers } from "@/components/LeafletMap.vue";
-import { changeLocale } from "@/i18n";
+import { settings } from "@/core/Settings";
 
 @Options({
   components: {
@@ -59,8 +59,8 @@ import { changeLocale } from "@/i18n";
   data() {
     return {
       VehicleType: VehicleType,
-      currentBaseLayer: "openstreet",
-      currentLanguage: locale,
+      currentBaseLayer: settings.baseMap || "openstreet",
+      currentLocale: locale,
     };
   },
   computed: {},
@@ -69,7 +69,7 @@ export default class Settings extends Vue {
   visibility: boolean = false;
 
   currentBaseLayer!: string;
-  currentLanguage!: string;
+  currentLocale!: string;
 
   show() {
     this.visibility = true;
@@ -77,6 +77,7 @@ export default class Settings extends Vue {
 
   hide() {
     this.visibility = false;
+    settings.saveSettings(this.currentLocale, this.currentBaseLayer);
   }
 
   changeBaseLayer() {
@@ -87,7 +88,7 @@ export default class Settings extends Vue {
   }
 
   setLanguage() {
-    changeLocale(this.currentLanguage);
+    changeLocale(this.currentLocale);
   }
 }
 </script>

@@ -1,4 +1,5 @@
 import { createI18n } from "vue-i18n";
+import { settings } from "@/core/Settings";
 
 // Import language files
 import es from "./es-ES.json"
@@ -13,7 +14,7 @@ const messages = {
 
 // Create Vuei18n instance
 export const vuei18n = createI18n({
-    locale: 'es', // set locale
+    locale: settings.locale || 'es', // Set locale from settings. Use spanish by default
     fallbackLocale: 'en', // set fallback locale
     messages, // set locale messages
 });
