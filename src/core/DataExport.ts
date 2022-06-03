@@ -54,7 +54,7 @@ class DataExport {
      * @return {*}  {Promise<void>}
      * @memberof DataExport
      */
-    async exportReport(region: string, population: any): Promise<void> {
+    async exportReport(region: string, population: number): Promise<void> {
         // Generate map image
         const image = await this.takeMapSnapshot();
 
@@ -115,7 +115,7 @@ class DataExport {
 
     private async drawText(pdfDoc: PDFDocument, page: PDFPage, text: string, fontSize: number = 12, x: number, y: number) {
         const timesRomanFont = await pdfDoc.embedFont(StandardFonts.TimesRoman);
-        const { width, height } = page.getSize();
+        const height = page.getSize().height;
         page.drawText(
             text,
             {

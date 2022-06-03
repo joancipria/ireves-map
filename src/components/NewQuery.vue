@@ -226,7 +226,7 @@ export default class NewQuery extends Vue {
     }
   }
 
-  generateReport(region: string) {
+  generateReport() {
     dataExport.exportReport(
       this.currentRegion,
       this.totalPopulation.samu + this.totalPopulation.svb

@@ -25,10 +25,10 @@ dom.watch();
 // Global variables
 export let bases: Base[] = [];
 export let vehicles: Vehicle[] = [];
-export let dragging: any = { vehicle: null, base: false };
+export let dragging = { vehicle: null, base: null };
 
-export let vehicleOverlaps: any[] = [];
-export let globalOverlap: any = { feature: null, overlap: null }
+export let vehicleOverlaps = [];
+export let globalOverlap = { feature: null, overlap: null }
 
 // Global events
 export const eventEmitter = new EventEmitter();
@@ -46,6 +46,6 @@ export function reset(): void {
     bases = [];
     vehicles = [];
     vehicleOverlaps = [];
-    globalOverlap = [];
+    globalOverlap = { feature: null, overlap: null }
     dragging = { vehicle: null, base: false }
 }

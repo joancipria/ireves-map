@@ -52,7 +52,7 @@ export class LeafletMarker extends Marker {
     }
 
     asyncAddTo(targetLayer?: LayerGroup) {
-        return new Promise((resolve, reject) => {
+        return new Promise((resolve) => {
             if (targetLayer) {
                 //super.addTo(targetLayer)
                 targetLayer.addLayer(this);

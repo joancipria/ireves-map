@@ -107,7 +107,7 @@ export default class FileLoader extends Vue {
       result = await this.dataLoader.loadDemo();
     } else {
       // Get file
-      const file = (event.target! as HTMLInputElement).files![0];
+      const file = (event.target as HTMLInputElement).files[0];
 
       // Load file
       result = await this.dataLoader.loadLocalFile(file);

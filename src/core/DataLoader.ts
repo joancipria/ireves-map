@@ -7,6 +7,7 @@ import { i18n } from "@/i18n"
 
 // Read demo data file
 import demoData from "@/demo_data.json";
+import { Vue } from "vue-class-component";
 
 // Create types from JSON demo data
 export type JSONData = typeof demoData;
@@ -15,7 +16,7 @@ export type JSONBase = typeof demoData.bases[0];
 
 
 export default class DataLoader {
-    vue: any;
+    vue: Vue;
 
     constructor(vueRef) {
         this.vue = vueRef;
