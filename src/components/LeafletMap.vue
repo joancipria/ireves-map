@@ -8,10 +8,20 @@ import { settings } from "@/core/Settings";
 
 // Leaflet
 import "leaflet/dist/leaflet.css";
-import { LayerGroup, DivIcon, LatLng, Map, TileLayer } from "leaflet";
+import {
+  LayerGroup,
+  DivIcon,
+  LatLng,
+  Map,
+  TileLayer,
+  LatLngBounds,
+} from "leaflet";
 
 // Marker Cluster. See https://github.com/Leaflet/Leaflet.markercluster/issues/874 & https://stackoverflow.com/questions/69477915/leaflet-litelement-l-is-not-defined-in-plugin
 import { MarkerClusterGroup } from "leaflet.markercluster/src";
+
+// Leaflet Map
+export let map: Map;
 
 @Options({
   components: {},
@@ -24,15 +34,14 @@ import { MarkerClusterGroup } from "leaflet.markercluster/src";
   computed: {},
 })
 export default class LeafletMap extends Vue {
-  map!: Map;
-
   mounted() {
-    const bounds: any = [
+    // Map bounds
+    const bounds = new LatLngBounds(
       new LatLng(44.638612045930095, -13.782874547541086),
-      new LatLng(33.37482804543294, 11.521634438365721),
-    ];
+      new LatLng(33.37482804543294, 11.521634438365721)
+    );
 
-    this.map = new Map("map", {
+    map = new Map("map", {
       preferCanvas: true,
       zoomControl: true,
       minZoom: 6,
@@ -50,10 +59,14 @@ export default class LeafletMap extends Vue {
       maxBounds: bounds, // Set the map's geographical boundaries.
     });
 
-    this.map.zoomControl.setPosition("bottomleft");
-    this.map.setView([39.47482213445976, -0.3747370894871375], 8);
-    this.map.panTo(new LatLng(39.47482213445976, -0.3747370894871375));
-    leafletMap.map = this.map;
+    // Add zoom control
+    map.zoomControl.setPosition("bottomleft");
+
+    // Set view in CV
+    const initialPosition = new LatLng(39.47482213445976, -0.3747370894871375);
+    map.setView(initialPosition, 8);
+    map.panTo(initialPosition);
+    //leafletMap.map = this.map;
   }
 }
 
@@ -93,9 +106,6 @@ export const layers = {
     },
   }),
 };
-
-// Map
-export const leafletMap: any = { map: null };
 </script>
 <style scoped lang="scss">
 #map {

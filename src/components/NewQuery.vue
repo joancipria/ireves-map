@@ -116,7 +116,7 @@
 import { Options, Vue } from "vue-class-component";
 import { bases } from "@/main";
 import SideBar from "@/components/SideBar.vue";
-import { layers, leafletMap } from "@/components/LeafletMap.vue";
+import { layers, map } from "@/components/LeafletMap.vue";
 
 import TimeController from "@/components/TimeController.vue";
 import { VehicleType } from "@/core/Vehicle";
@@ -201,7 +201,7 @@ export default class NewQuery extends Vue {
     });
 
     if (this.currentBases.length > 0 && this.currentRegion != "Global") {
-      leafletMap.map.flyTo(this.currentBases[0].marker.getLatLng(), 11);
+      map.flyTo(this.currentBases[0].marker.getLatLng(), 11);
     }
   }
 

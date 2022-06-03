@@ -5,7 +5,7 @@ import { LeafletMarker } from "@/components/LeafletMarker/LeafletMarker";
 import { openRoute } from "@/services/openroute.service";
 import { popService } from "@/services/worldpop.service";
 import { vehicleOverlaps, eventEmitter, globalOverlap, bases, dragging } from "@/main";
-import { layers, leafletMap } from "@/components/LeafletMap.vue";
+import { layers, map } from "@/components/LeafletMap.vue";
 import { utils } from "./Utils";
 import { MapEntity } from "@/core/MapEntity"
 import { VehiclePopup } from "@/components/VehiclePopup/VehiclePopup";
@@ -177,7 +177,7 @@ export default class Vehicle {
             layers.isochrones.removeLayer(this.isochroneLayer)
             return;
         }
-        layers.isochrones.addLayer(this.isochroneLayer).addTo(leafletMap.map)
+        layers.isochrones.addLayer(this.isochroneLayer).addTo(map)
     }
 
     async getPopulation() {

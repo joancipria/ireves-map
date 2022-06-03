@@ -49,7 +49,7 @@ import { Options, Vue } from "vue-class-component";
 import TimeController from "@/components/TimeController.vue";
 import { locale, changeLocale } from "@/i18n";
 import { VehicleType } from "@/core/Vehicle";
-import { leafletMap, layers } from "@/components/LeafletMap.vue";
+import { map, layers } from "@/components/LeafletMap.vue";
 import { settings } from "@/core/Settings";
 
 @Options({
@@ -81,10 +81,10 @@ export default class Settings extends Vue {
   }
 
   changeBaseLayer() {
-    leafletMap.map.removeLayer(layers.openstreet);
-    leafletMap.map.removeLayer(layers.grayscale);
-    leafletMap.map.removeLayer(layers.streets);
-    leafletMap.map.addLayer(layers[this.currentBaseLayer]);
+    map.removeLayer(layers.openstreet);
+    map.removeLayer(layers.grayscale);
+    map.removeLayer(layers.streets);
+    map.addLayer(layers[this.currentBaseLayer]);
   }
 
   setLanguage() {

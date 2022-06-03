@@ -1,5 +1,5 @@
 import CONFIG from '@/config'
-import { layers, leafletMap } from "@/components/LeafletMap.vue";
+import { layers, map } from "@/components/LeafletMap.vue";
 import { popService } from "@/services/worldpop.service";
 import { Feature, center, polygon } from "@turf/turf";
 import { GeoJSON, LatLngExpression } from "leaflet";
@@ -96,14 +96,14 @@ export class Overlap {
 
 
     hide() {
-        if (leafletMap.map.hasLayer(this.overlapLayer)) {
-            leafletMap.map.removeLayer(this.overlapLayer);
-            leafletMap.map.removeLayer(this.marker);
+        if (map.hasLayer(this.overlapLayer)) {
+            map.removeLayer(this.overlapLayer);
+            map.removeLayer(this.marker);
         }
     }
 
     show() {
-        if (!leafletMap.map.hasLayer(this.overlapLayer)) {
+        if (!map.hasLayer(this.overlapLayer)) {
             this.overlapLayer.addTo(layers.overlaps);
             this.marker.addTo(layers.overlaps);
         }
