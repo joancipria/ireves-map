@@ -1,6 +1,6 @@
 /* Global marker properties */
 .marker {
-  width: 41px;
+  width: 41px !important;
 }
 
 .increased-marker img {
@@ -15,7 +15,7 @@
 }
 
 .overlap-marker  img{
-  width: 30px;
+  width: 30px !important;
 }
 
 .leaflet-tooltip {
