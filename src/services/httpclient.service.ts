@@ -7,7 +7,7 @@ export default class HttpClient {
         this.serverURL = serverURL;
     }
 
-    async get(path: string, params: any) {
+    async get(path: string, params?: any) {
 
         // Build URL
         const url: URL = new URL(this.serverURL);
