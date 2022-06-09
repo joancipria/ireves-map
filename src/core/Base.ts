@@ -31,7 +31,7 @@ export default class Base {
 
         // Create marker
         this.marker = new LeafletMarker(MapEntity.BASE, this.position, false, "disabled-marker", true, layers.basesCluster, this.name);
-        this.marker.on('add',()=>{
+        this.marker.on('add', () => {
             this.updateMarkerStyle(); // Update marker whenAded
         })
 
@@ -80,7 +80,8 @@ export default class Base {
         vehicle.hide();
         this.vehicles.push(vehicle);
 
-        this.updateMarkerStyle();
+        const targetIndex = vehicles.findIndex(targetVehicle => targetVehicle.id == vehicle.id);
+        vehicles.splice(targetIndex, 1);
     }
 
     async showIsochrone() {
