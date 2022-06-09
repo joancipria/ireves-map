@@ -1,6 +1,6 @@
 import CONFIG from '@/config'
 import { layers, map } from "@/components/LeafletMap.vue";
-import { popService } from "@/services/worldpop.service";
+import { popService } from "@/services/population.service";
 import { Feature, center, polygon } from "@turf/turf";
 import { GeoJSON, LatLngExpression } from "leaflet";
 import { LeafletMarker } from "@/components/LeafletMarker/LeafletMarker";

@@ -3,7 +3,7 @@ import { LatLng, GeoJSON, LeafletEvent } from "leaflet";
 import { Feature, MultiPolygon, Polygon } from "@turf/turf";
 import { LeafletMarker } from "@/components/LeafletMarker/LeafletMarker";
 import { openRoute } from "@/services/openroute.service";
-import { popService } from "@/services/worldpop.service";
+import { popService } from "@/services/population.service";
 import { vehicleOverlaps, eventEmitter, globalOverlap, bases, dragging } from "@/main";
 import { layers, map } from "@/components/LeafletMap.vue";
 import { utils } from "./Utils";
