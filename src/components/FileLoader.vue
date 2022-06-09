@@ -77,7 +77,7 @@
 
 <script lang="ts">
 import { Options, Vue } from "vue-class-component";
-import DataLoader from "@/core/DataLoader";
+import { DataLoader } from "@/core/DataLoader";
 import { eventEmitter, vehicles, bases } from "@/main";
 
 @Options({
@@ -86,8 +86,7 @@ import { eventEmitter, vehicles, bases } from "@/main";
     mode: Boolean,
   },
   data() {
-    return {
-    };
+    return {};
   },
   computed: {},
 })
