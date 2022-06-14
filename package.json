@@ -13,7 +13,6 @@
     "@fortawesome/free-solid-svg-icons": "^5.15.4",
     "@turf/turf": "^6.5.0",
     "bulma": "^0.9.3",
-    "bulma-list": "^1.1.4",
     "core-js": "^3.6.5",
     "dom-to-image-more": "^2.10.1",
     "file-saver": "^2.0.5",
