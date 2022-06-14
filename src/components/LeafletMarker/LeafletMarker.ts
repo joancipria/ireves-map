@@ -26,7 +26,7 @@ export class LeafletMarker extends Marker {
 
         // Add tooltip
         if (tooltipText) {
-            this.bindTooltip(`<div class="list"><div class="list-item"><div class="list-item-content"><div class="list-item-title">${tooltipText.toString().replaceAll(',', ' - ')}</div></div></div></div>`);
+            this.bindTooltip(`${tooltipText.toString().replaceAll(',', ' - ')}`);
         }
 
         // Set initial value
