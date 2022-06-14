@@ -1,11 +1,12 @@
 {
   "name": "ireves-map",
-  "version": "0.1.0",
+  "version": "1.0.0",
   "private": true,
   "scripts": {
     "serve": "vue-cli-service serve",
     "build": "vue-cli-service build",
-    "lint": "vue-cli-service lint"
+    "lint": "vue-cli-service lint",
+    "deploy": "git pull && npm run build && cp -r dist/* /var/www/html"
   },
   "dependencies": {
     "@fortawesome/fontawesome-svg-core": "^1.2.36",
