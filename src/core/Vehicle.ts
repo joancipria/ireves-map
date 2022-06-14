@@ -9,7 +9,7 @@ import { layers, map } from "@/components/LeafletMap.vue";
 import { utils } from "./Utils";
 import { MapEntity } from "@/core/MapEntity"
 import { VehiclePopup } from "@/components/VehiclePopup/VehiclePopup";
-import {i18n} from "@/i18n"
+import { i18n } from "@/i18n"
 
 export enum VehicleType {
     SAMU = 'SAMU',
@@ -183,6 +183,10 @@ export default class Vehicle {
     async getPopulation() {
         if (!this.isochroneLayer) {
             await this.getIsochrone();
+        }
+
+        if (!this.polygon) {
+            return;
         }
 
         // Get population
