@@ -26,7 +26,7 @@
     "BASE_DETAILS": "Base details",
     "AVAILABLE_AMBULANCES": "Available ambulances",
     "EXTRACT": "Extract",
-    "ISOCHRONE_NETWORK_ERROR": "The isochron could not be obtained",
+    "ISOCHRONE_NETWORK_ERROR": "The isochrone could not be obtained. Error when connecting to server",
     "ISOCHRONE_OUT_OF_SPAIN_ERROR": "It is not possible to calculate isochrones outside Spain",
     "FILE_NAME": "File name",
     "FORMAT": "Format",
@@ -41,5 +41,6 @@
     "BASE_MAP": "Base map",
     "REVES_MAP_REPORT": "Reves Map Report",
     "LAUNCH_QUERY": "Launch query",
-    "GENERATE_REPORT": "Generate report"
+    "GENERATE_REPORT": "Generate report",
+    "MODEL_NETWORK_ERROR": "The model could not be obtained. Error when connecting to server"
 }

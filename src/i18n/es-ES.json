@@ -26,7 +26,7 @@
     "BASE_DETAILS": "Detalles de la base",
     "AVAILABLE_AMBULANCES": "Ambulancias disponibles",
     "EXTRACT": "Extraer",
-    "ISOCHRONE_NETWORK_ERROR": "No se pudo calcular la isócrona",
+    "ISOCHRONE_NETWORK_ERROR": "No se pudo calcular la isócrona. Error al conectar con el servidor",
     "ISOCHRONE_OUT_OF_SPAIN_ERROR": "No es posible calcular isócronas fuera de España",
     "FILE_NAME": "Nombre del archivo",
     "FORMAT": "Formato",
@@ -41,5 +41,6 @@
     "BASE_MAP": "Mapa base",
     "REVES_MAP_REPORT": "Informe Reves Map",
     "LAUNCH_QUERY": "Ejecutar consulta",
-    "GENERATE_REPORT": "Generar informe"
+    "GENERATE_REPORT": "Generar informe",
+    "MODEL_NETWORK_ERROR": "No se pudo obtener el modelo. Error al conectar con el servidor"    
 }

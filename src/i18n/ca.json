@@ -26,7 +26,7 @@
     "BASE_DETAILS": "Detalls de la base",
     "AVAILABLE_AMBULANCES": "Ambulàncies disponibles",
     "EXTRACT": "Extraure",
-    "ISOCHRONE_NETWORK_ERROR": "No s'ha pogut calcular la isòcrona",
+    "ISOCHRONE_NETWORK_ERROR": "No s'ha pogut calcular la isòcrona. Error en connectar-se amb el servidor",
     "ISOCHRONE_OUT_OF_SPAIN_ERROR": "No és possible calcular isòcrones fora d'Espanya",
     "FILE_NAME": "Nom del fitxer",
     "FORMAT": "Format",
@@ -41,5 +41,6 @@
     "BASE_MAP": "Mapa base",
     "REVES_MAP_REPORT": "Informe Reves Map",
     "LAUNCH_QUERY": "Executar consulta",
-    "GENERATE_REPORT": "Generar informe"
+    "GENERATE_REPORT": "Generar informe",
+    "MODEL_NETWORK_ERROR": "No s'ha pogut obtindre el model. Error en connectar-se amb el servidor"
 }
