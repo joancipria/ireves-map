@@ -14,7 +14,6 @@ import { layers } from "@/components/LeafletMap.vue"
 
 // Bulma 
 import 'bulma/css/bulma.css'
-import 'bulma-list/css/bulma-list.css'
 
 // Font Awesome
 import { library, dom } from "@fortawesome/fontawesome-svg-core";
