@@ -1,5 +1,5 @@
 <template>
-  <nav class="navbar is-transparent">
+  <nav class="navbar is-white">
     <div class="navbar-brand">
       <a class="navbar-item">
         <img
@@ -10,14 +10,14 @@
           draggable="false"
         />
       </a>
-      <div class="navbar-burger" data-target="navbarExampleTransparentExample">
+      <div class="navbar-burger" data-target="navbar">
         <span></span>
         <span></span>
         <span></span>
       </div>
     </div>
 
-    <div id="navbarExampleTransparentExample" class="navbar-menu">
+    <div id="navbar" class="navbar-menu">
       <div class="navbar-start">
         <!-- <a class="navbar-item" href="https://bulma.io/"> Home </a> -->
         <div class="navbar-item has-dropdown is-hoverable">
