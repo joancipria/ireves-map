@@ -96,6 +96,12 @@ export default class FileLoader extends Vue {
   dataLoader: DataLoader = new DataLoader(this);
 
   async load(event: Event) {
+
+    // Avoid loading multiple times
+    if (this.loading) {
+      return;
+    }
+
     // Show loading
     this.loading = true;
 
