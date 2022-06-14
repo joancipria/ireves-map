@@ -27,13 +27,12 @@
         <div class="column">
           <br />
           <h1 class="title is-5">{{ $t("AVAILABLE_AMBULANCES") }}</h1>
-          <div class="list has-visible-pointer-controls">
-            <div
-              v-for="vehicle of base.vehicles"
-              :key="vehicle.id"
-              class="list-item"
-            >
-              <div class="list-item-image">
+          <div
+            v-for="vehicle of base.vehicles"
+            :key="vehicle.id"
+          >
+            <div class="columns">
+              <div class="column">
                 <figure class="image is-48x48">
                   <img
                     v-if="vehicle.type == VehicleType.SAMU"
@@ -43,34 +42,22 @@
                   <img v-else class="is-rounded" src="@/assets/svb.png" />
                 </figure>
               </div>
-
-              <div class="list-item-content">
-                <div class="list-item-title">{{ vehicle.name }}</div>
-                <div class="list-item-description">
-                  <!-- <div class="tag is-rounded">
-                    <span style="margin-right: 1px" class="icon"
-                      ><i class="fas fa-truck"></i
-                    ></span>
-                    {{ vehicle.type }}
-                  </div> -->
-
-                  <div class="tag is-rounded">
-                    <span style="margin-right: 1px" class="icon"
-                      ><i class="fas fa-clock"></i
-                    ></span>
-                    {{ vehicle.availability }}
-                  </div>
+              <div class="column">
+                {{ vehicle.name }}
+                <div class="tag is-rounded">
+                  <span style="margin-right: 1px" class="icon"
+                    ><i class="fas fa-clock"></i
+                  ></span>
+                  {{ vehicle.availability }}
                 </div>
               </div>
-              <div class="list-item-controls">
-                <div class="buttons is-right">
-                  <button @click="extractVehicle(vehicle.id)" class="button">
-                    <span class="icon is-small">
-                      <i class="fas fa-sign-out-alt"></i>
-                    </span>
-                    <span>{{ $t("EXTRACT") }}</span>
-                  </button>
-                </div>
+              <div class="column">
+                <button @click="extractVehicle(vehicle.id)" class="button">
+                  <span class="icon is-small">
+                    <i class="fas fa-sign-out-alt"></i>
+                  </span>
+                  <span>{{ $t("EXTRACT") }}</span>
+                </button>
               </div>
             </div>
           </div>
