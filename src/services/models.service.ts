@@ -7,7 +7,7 @@ class ModelsService extends HttpClient {
         super(config.SERVER_URL);
     }
 
-    getStaticModel(model: string) {
+    getStaticModel(model?: string) {
         return super.get('/model/static', model);
     }
 }
