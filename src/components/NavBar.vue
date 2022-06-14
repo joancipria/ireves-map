@@ -77,12 +77,11 @@
 
 <script lang="ts">
 import { Options, Vue } from "vue-class-component";
-import { eventEmitter} from "@/main";
+import { eventEmitter } from "@/main";
 
 @Options({
   data() {
-    return {
-    };
+    return {};
   },
 })
 export default class NavBar extends Vue {
@@ -111,5 +110,12 @@ div.navbar-brand .navbar-item {
 }
 .navbar-dropdown .icon {
   margin-right: 0;
+}
+.navbar-link:hover,
+.navbar-link.is-active {
+  color: initial;
+}
+.navbar-link:not(.is-arrowless)::after {
+  border-color: #363636;
 }
 </style>
