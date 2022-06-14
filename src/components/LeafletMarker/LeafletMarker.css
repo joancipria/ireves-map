@@ -19,8 +19,9 @@
 }
 
 .leaflet-tooltip {
-  padding: 0px !important;
   border-radius: 6px !important;
+  color:#363636 !important;
+  font-weight:600 !important;
 }
 
 /* Clusters */
