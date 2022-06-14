@@ -6,34 +6,16 @@ export class OverlapPopup extends Popup {
     overlap: Overlap;
 
     constructor(overlap: Overlap) {
-        super();
+        super({ closeButton: false });
         this.overlap = overlap;
         this.setLoading();
     }
 
     setStats() {
-        super.setContent(`
-        <table class="table">
-            <tbody>
-                <tr>
-                <th scope="row">${i18n("COVERED_POPULATION")}:</th>
-                <td>${this.overlap.population || i18n("NOT_AVAILABLE_ERROR")}</td>
-                </tr>
-            </tbody>
-        </table>    
-        `);
+        super.setContent(`<b>${i18n("COVERED_POPULATION")}:</b> ${this.overlap.population || i18n("NOT_AVAILABLE_ERROR")}`);
     }
 
     setLoading() {
-        super.setContent(`
-        <table class="table">
-            <tbody>
-                <tr>
-                <th scope="row">${i18n("COVERED_POPULATION")}:</th>
-                <td>${i18n("LOADING")}</td>
-                </tr>
-            </tbody>
-        </table>    
-        `);
+        super.setContent(`<b>${i18n("COVERED_POPULATION")}:</b> ${i18n("LOADING")}`);
     }
 }
