@@ -4,7 +4,11 @@
     @show-data-loader="showDataLoader"
     @show-settings="showSettings"
   ></NavBar>
-  <FileLoader :mode="fileLoaderMode" ref="fileLoader" @base-selected="onBaseSelected"></FileLoader>
+  <FileLoader
+    :mode="fileLoaderMode"
+    ref="fileLoader"
+    @base-selected="onBaseSelected"
+  ></FileLoader>
   <Settings ref="settings"></Settings>
   <BaseDetails ref="baseDetails" :base="selectedBase"></BaseDetails>
   <ExportPanel ref="exportPanel"></ExportPanel>
@@ -18,7 +22,7 @@ import LeafletMap from "@/components/LeafletMap.vue"; // @ is an alias to /src
 import FileLoader from "@/components/FileLoader.vue";
 import BaseDetails from "@/components/BaseDetails.vue";
 import ExportPanel from "@/components/ExportPanel.vue";
-import NewQuery from "@/components/NewQuery.vue"
+import NewQuery from "@/components/NewQuery.vue";
 import NavBar from "@/components/NavBar.vue";
 import Settings from "@/components/Settings.vue";
 import { eventEmitter } from "@/main";
@@ -34,7 +38,7 @@ import Base from "@/core/Base";
     NavBar,
     Settings,
     Notification,
-    NewQuery
+    NewQuery,
   },
 })
 export default class App extends Vue {
@@ -48,7 +52,7 @@ export default class App extends Vue {
 
   onBaseSelected(base: Base) {
     this.selectedBase = base;
-    eventEmitter.emit("toggle-details", 'baseDetails')
+    eventEmitter.emit("toggle-details", "baseDetails");
   }
 
   showSettings() {
