@@ -1,7 +1,7 @@
 <template>
   <nav class="navbar is-white">
     <div class="navbar-brand">
-      <a class="navbar-item">
+      <a class="navbar-item brand">
         <img
           src="/img/reves-map-logo.png"
           alt="iReves Map"
@@ -77,12 +77,11 @@
 
 <script lang="ts">
 import { Options, Vue } from "vue-class-component";
-import { eventEmitter} from "@/main";
+import { eventEmitter } from "@/main";
 
 @Options({
   data() {
-    return {
-    };
+    return {};
   },
 })
 export default class NavBar extends Vue {
@@ -108,6 +107,14 @@ nav {
 
 div.navbar-brand .navbar-item {
   cursor: default;
+}
+.navbar.is-white .navbar-brand > a.navbar-item:focus,
+.navbar.is-white .navbar-brand > a.navbar-item:hover,
+.navbar.is-white .navbar-brand > a.navbar-item.is-active,
+.navbar.is-white .navbar-brand .navbar-link:focus,
+.navbar.is-white .navbar-brand .navbar-link:hover,
+.navbar.is-white .navbar-brand .navbar-link.is-active {
+  background-color: initial !important;
 }
 .navbar-dropdown .icon {
   margin-right: 0;
