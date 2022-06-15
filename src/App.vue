@@ -12,8 +12,11 @@ body {
   height: 100%;
   overflow: hidden !important;
 }
-#app{
+#app {
   height: 100%;
   overflow: hidden;
+}
+.select:not(.is-multiple):not(.is-loading)::after {
+  border-color: #0a0a0a !important;
 }
 </style>
