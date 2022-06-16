@@ -8,6 +8,7 @@ import { MapEntity } from "@/core/MapEntity"
 export class LeafletMarker extends Marker {
 
     added: boolean;
+    loaded: boolean;
 
     constructor(entity: MapEntity, position: LatLng | LatLngExpression, draggable: boolean, customClass?: string, addToMap?: boolean, targetLayer?: LayerGroup, tooltipText?: string | string[]) {
 
@@ -31,11 +32,22 @@ export class LeafletMarker extends Marker {
 
         // Set initial value
         this.added = false;
+        this.loaded = false;
 
         // Add to map if specified
         if (addToMap) {
             setTimeout(() => this.addToMap(targetLayer), 0)
         }
+
+        // Update added on add/remove events
+        this.on('add', () => {
+            this.added = true;
+            console.log("added")
+        })
+
+        this.on('remove', () => {
+            this.added = false;
+        })
     }
 
     addToMap(targetLayer?: LayerGroup) {
@@ -47,11 +59,11 @@ export class LeafletMarker extends Marker {
                 //super.addTo(map);
                 map.addLayer(this);
             }
-            this.added = true;
+            this.loaded = true;
         }
     }
 
-    asyncAddTo(targetLayer?: LayerGroup) {
+    /*asyncAddTo(targetLayer?: LayerGroup) {
         return new Promise((resolve) => {
             if (targetLayer) {
                 //super.addTo(targetLayer)
@@ -70,5 +82,5 @@ export class LeafletMarker extends Marker {
             })
 
         });
-    }
+    }*/
 }

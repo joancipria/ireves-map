@@ -128,8 +128,8 @@ export default class FileLoader extends Vue {
     // Check each 200ms if all markers have been loaded
     const checkFinishedLoading = setInterval(() => {
       if (
-        vehicles[vehicles.length - 1].marker.added &&
-        bases[bases.length - 1].marker.added
+        vehicles[vehicles.length - 1].marker.loaded &&
+        bases[bases.length - 1].marker.loaded
       ) {
         // Then, hide modal & loading
         this.hide();
