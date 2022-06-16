@@ -32,7 +32,7 @@ export default class Base {
         // Create marker
         this.marker = new LeafletMarker(MapEntity.BASE, this.position, false, "disabled-marker", true, layers.basesCluster, this.name);
         this.marker.on('add', () => {
-            this.updateMarkerStyle(); // Update marker whenAded
+            this.updateMarkerStyle(); // Update marker when added
         })
 
         /* Drag and drop vehicles system */
@@ -82,6 +82,7 @@ export default class Base {
 
         const targetIndex = vehicles.findIndex(targetVehicle => targetVehicle.id == vehicle.id);
         vehicles.splice(targetIndex, 1);
+        this.updateMarkerStyle();
     }
 
     async showIsochrone() {
@@ -124,10 +125,12 @@ export default class Base {
     }
 
     updateMarkerStyle() {
-        if (this.vehicles.length <= 0) {
-            this.toggleBase(false);
-        } else {
-            this.toggleBase(true);
+        if (this.marker.added) {
+            if (this.vehicles.length <= 0) {
+                this.toggleBase(false);
+            } else {
+                this.toggleBase(true);
+            }
         }
     }
 
