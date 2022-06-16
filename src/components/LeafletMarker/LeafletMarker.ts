@@ -42,7 +42,6 @@ export class LeafletMarker extends Marker {
         // Update added on add/remove events
         this.on('add', () => {
             this.added = true;
-            console.log("added")
         })
 
         this.on('remove', () => {
