@@ -29,7 +29,6 @@ export default class Notification extends Vue {
   }
 
   show(message: string, type: string) {
-    console.log(message, type);
     this.message = message;
     this.type = type;
     this.visibility = true;
