@@ -1,7 +1,7 @@
 <template>
   <div
-    :class="{ open: visibility, close: !visibility }"
-    class="notification is-danger"
+    :class="[{ open: visibility, close: !visibility }, type]"
+    class="notification"
   >
     <button @click="hide" class="delete"></button>
     {{ message }}
@@ -15,20 +15,23 @@ import { eventEmitter } from "@/main";
 @Options({
   data() {
     return {
-      message: ""
+      message: "",
     };
   },
 })
 export default class Notification extends Vue {
   visibility: boolean = false;
   message!: string;
+  type: string = "is-danger";
 
   mounted() {
     eventEmitter.on("notification", this.show);
   }
 
-  show(message: string) {
+  show(message: string, type: string) {
+    console.log(message, type);
     this.message = message;
+    this.type = type;
     this.visibility = true;
   }
 

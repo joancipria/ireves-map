@@ -121,7 +121,7 @@ export default class FileLoader extends Vue {
     // Show possible errors
     if (result && result.type == "error") {
       this.loading = false;
-      eventEmitter.emit("notification", result.message);
+      eventEmitter.emit("notification", result.message, "is-danger");
       return;
     }
 

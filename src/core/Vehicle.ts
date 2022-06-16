@@ -95,9 +95,9 @@ export default class Vehicle {
 
             if (result.error) {
                 if (result.error.code == 3099) {
-                    eventEmitter.emit("notification", i18n("ISOCHRONE_OUT_OF_SPAIN_ERROR"));
+                    eventEmitter.emit("notification", i18n("ISOCHRONE_OUT_OF_SPAIN_ERROR"), "is-danger");
                 } else {
-                    eventEmitter.emit("notification", i18n("ISOCHRONE_NETWORK_ERROR"));
+                    eventEmitter.emit("notification", i18n("ISOCHRONE_NETWORK_ERROR"), "is-danger");
                 }
                 this.active = false;
                 this.popup.setError();
@@ -110,7 +110,7 @@ export default class Vehicle {
                 this.checkOverlap();
 
                 // Get pop
-                this.getPopulation();
+                //this.getPopulation();
             }
         }
     }
