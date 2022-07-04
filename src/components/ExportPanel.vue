@@ -1,5 +1,5 @@
 <template>
-  <SideBar :id="'exportPanel'" :title="$t('LOAD_DATA')">
+  <SideBar :id="'exportPanel'" :title="$t('EXPORT')">
     <div class="content mt-5">
       <div class="columns">
         <div class="column">
