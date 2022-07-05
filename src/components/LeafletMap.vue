@@ -54,6 +54,7 @@ export default class LeafletMap extends Vue {
         layers.basesCluster,
         layers.isochrones,
         layers.overlaps,
+        layers.bounds,
       ],
       attributionControl: false,
       maxBounds: bounds, // Set the map's geographical boundaries.
@@ -85,6 +86,7 @@ export const layers = {
   ),
   isochrones: new LayerGroup(),
   overlaps: new LayerGroup(),
+  bounds: new LayerGroup(),
   vehiclesCluster: new MarkerClusterGroup({
     chunkedLoading: true,
     showCoverageOnHover: false,
