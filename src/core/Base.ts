@@ -17,12 +17,12 @@ export default class Base {
     name: string;
     type: BaseType
     position: LatLng;
-    region: string;
+    region: number;
     address: string;
     vehicles: Vehicle[] = [];
     marker: LeafletMarker;
 
-    constructor(name: string, type: BaseType, lat: number = 0, lng: number = 0, address: string, region: string) {
+    constructor(name: string, type: BaseType, lat: number = 0, lng: number = 0, address: string, region: number) {
         this.name = name;
         this.type = type;
         this.position = new LatLng(lat, lng);
