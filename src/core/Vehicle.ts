@@ -17,7 +17,7 @@ export enum VehicleType {
 }
 
 export enum VehicleTime {
-    SAMU = 10,
+    SAMU = 12,
     SVB = 15
 }
 
@@ -204,7 +204,7 @@ export default class Vehicle {
     }
 
     getRawOverlap(targetVehicle: Vehicle) {
-        const overlap = utils.checkOverlap(targetVehicle.polygon, this.polygon);
+        const overlap = utils.intersect(targetVehicle.polygon, this.polygon);
         return overlap;
     }
 
