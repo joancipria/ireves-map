@@ -1,9 +1,10 @@
 import Base, { BaseType } from "@/core/Base";
-import { bases, vehicles, reset } from "@/main";
+import { bases, vehicles, reset, eventEmitter } from "@/main";
 import { VehicleAvailability, VehicleType } from "@/core/Vehicle";
 import Vehicle from "@/core/Vehicle";
 import { FileError } from "@/core/Errors"
 import { i18n } from "@/i18n"
+import { modelsService } from "@/services/models.service"
 
 // Read demo data file
 import demoData from "@/demo_data.json";
@@ -15,7 +16,7 @@ export type JSONVehicle = typeof demoData.vehicles[0];
 export type JSONBase = typeof demoData.bases[0];
 
 
-export default class DataLoader {
+export class DataLoader {
     vue: Vue;
 
     constructor(vueRef) {
@@ -134,7 +135,7 @@ export default class DataLoader {
                 rawBase.position &&
                 rawBase.position.lat &&
                 rawBase.position.lng &&
-                rawBase.region != ""
+                rawBase.region
             ) {
                 // Get base type from its name
                 let baseType: BaseType;
@@ -189,4 +190,46 @@ export default class DataLoader {
         }
         return;
     }
+}
+
+export async function loadModel() {
+    // Get static model
+    const model = await modelsService.getStaticModel();
+
+    if (model.error) {
+        eventEmitter.emit("notification", i18n("MODEL_NETWORK_ERROR"), "is-danger");
+        return;
+    }
+
+    // Filter model by SVB and SAMU
+    const svbs = vehicles.filter(svb => svb.type == VehicleType.SVB);
+    const samus = vehicles.filter(samu => samu.type == VehicleType.SAMU);
+    let counterSVBS = 0;
+    let counterSAMUS = 0;
+    
+
+    // Park vehicles
+    model.svb.forEach(svb => {
+        if (svb.value == 1) {
+            bases.forEach(base => {
+                if (base.name == svb.base) {
+                    base.park(svbs[counterSVBS]);
+                    counterSVBS++;
+                }
+            })
+        }
+    })
+
+    model.samu.forEach(samu => {
+        if (samu.value == 1) {
+            bases.forEach(base => {
+                if (base.name == samu.base) {
+                    base.park(samus[counterSAMUS]);
+                    counterSAMUS++;
+                }
+            })
+        }
+    })
+
+    eventEmitter.emit("notification", "Model loaded", "is-success");
 }
