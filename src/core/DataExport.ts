@@ -88,7 +88,7 @@ class DataExport {
         await this.drawText(pdfDoc, page, `${i18n("REGION")}: ${region}`, 14, 50, 10)
 
         // Covered population
-        await this.drawText(pdfDoc, page, `${i18n("COVERED_POPULATION")}: ${population}`, 12, 50, 14)
+        await this.drawText(pdfDoc, page, `${i18n("COVERED_POPULATION")}: ${population}%`, 12, 50, 14)
 
         // Serialize the PDFDocument to bytes (a Uint8Array)
         const pdfBytes = await pdfDoc.save();
