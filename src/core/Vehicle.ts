@@ -88,7 +88,7 @@ export default class Vehicle {
             //this.toggleIsochrone(false);
 
             // Show loading in popup
-            this.popup.setLoading();
+            //this.popup.setLoading();
 
             // Generate (new) isochrone
             const result = await this.getIsochrone();
@@ -104,10 +104,10 @@ export default class Vehicle {
                 return;
             } else {
                 // Show isochroneLayer
-                this.toggleIsochrone(true);
+                //this.toggleIsochrone(true);
 
                 // Check overlaps
-                this.checkOverlap();
+                //this.checkOverlap();
 
                 // Get pop
                 //this.getPopulation();
