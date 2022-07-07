@@ -6,7 +6,7 @@ import { LatLng } from 'leaflet';
 class Utils {
 
     percentage(partialValue: number, totalValue: number, decimals: number) {
-        return parseFloat(((100 * partialValue) / totalValue).toFixed(decimals));
+        return parseFloat(((100 * partialValue) / totalValue).toFixed(decimals)) || 0;
     }
 
     emptyPolygon: Feature<(Polygon | MultiPolygon)> = turf.polygon([], {});
