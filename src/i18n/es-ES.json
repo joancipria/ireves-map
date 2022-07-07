@@ -42,5 +42,7 @@
     "REVES_MAP_REPORT": "Informe Reves Map",
     "LAUNCH_QUERY": "Ejecutar consulta",
     "GENERATE_REPORT": "Generar informe",
-    "MODEL_NETWORK_ERROR": "No se pudo obtener el modelo. Error al conectar con el servidor"    
+    "MODEL_NETWORK_ERROR": "No se pudo obtener el modelo. Error al conectar con el servidor",
+    "GENERIC_NETWORK_ERROR": "Error al conectar con el servidor. La mayoría de las funcionalidades de iReves Map podrían no funcionar correctamente",
+    "BOUNDS_NETWORK_ERROR": "No se pudo obtener los límites geográficos seleccionados. Error al conectar con el servidor"
 }
