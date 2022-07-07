@@ -1,11 +1,12 @@
 import { utils } from "./Utils";
 import { regionsService } from "@/services/regions.service";
-import { bases } from "@/main"
+import { bases, eventEmitter } from "@/main"
 import Base from "@/core/Base";
 import { map, layers } from "@/components/LeafletMap.vue";
 import { GeoJSON, LatLng } from "leaflet";
 import { VehicleColor, VehicleType } from "./Vehicle";
 import { popService } from "@/services/population.service";
+import { i18n } from "@/i18n"
 
 class Query {
 
@@ -53,7 +54,15 @@ class Query {
     }
 
     private async fetchRegions() {
-        this.regions = await regionsService.getAllRegions();
+        const regions = await regionsService.getAllRegions();
+
+        if (regions.error) {
+            eventEmitter.emit("notification", i18n("GENERIC_NETWORK_ERROR"), "is-danger");
+            this.fetchRegions();
+            return;
+        } else {
+            this.regions = regions;
+        }
     }
 
     async filter(region: number, typeFilter: string[]) {
@@ -61,6 +70,12 @@ class Query {
         // Get & show region bounds
         if (region != 0) {
             const bounds = await this.getBounds(region);
+
+            if(bounds.error){
+                eventEmitter.emit("notification", i18n("BOUNDS_NETWORK_ERROR"), "is-danger");
+                return;
+            }
+
             this.showBounds(bounds);
         }
 
