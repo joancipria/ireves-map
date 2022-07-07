@@ -81,8 +81,6 @@ class Query {
 
         // Clear map
         layers.basesCluster.clearLayers();
-        layers.isochrones.clearLayers();
-        layers.overlaps.clearLayers();
         //layers.vehiclesCluster.clearLayers();
 
         // For each base
@@ -98,6 +96,10 @@ class Query {
     }
 
     async query() {
+        // Clear map
+        layers.isochrones.clearLayers();
+        layers.overlaps.clearLayers();
+
         let samuIsochrone = utils.emptyPolygon;
         let svbIsochrone = utils.emptyPolygon;
 
