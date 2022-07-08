@@ -62,18 +62,10 @@ export class Overlap {
         });
     }
 
-    async getPopulation(index: number = 0, estimacion: number = 0) {
-        if (index >= this.polygons.length || isNaN(estimacion) || this.population) {
-            return;
-        }
-
+    async getPopulation() {
         this.popup.setLoading();
 
-        if (!this.polygons[index]) {
-            index += 1;
-        }
-
-        const data = await popService.getPopulation(this.polygons[index].geometry);
+        const data = await popService.getPopulation(this.feature.geometry);
 
         // TODO: Reutilizar mensaje error
         if (data.error) {
@@ -82,16 +74,10 @@ export class Overlap {
             return;
         }
 
-        // TODO: Esta parte del código para qué es?
+        this.population = data.total_population;
+        this.popup.setStats();
 
-        estimacion += data.total_population;
-
-        if (index === this.polygons.length - 1) {
-            this.population = Math.floor(estimacion);
-            this.popup.setStats();
-            return;
-        }
-        this.getPopulation(index + 1, estimacion);
+        return data.total_population;
     }
 
 
