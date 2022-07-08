@@ -71,7 +71,7 @@ class Query {
         if (region != 0) {
             const bounds = await this.getBounds(region);
 
-            if(bounds.error){
+            if (bounds.error) {
                 eventEmitter.emit("notification", i18n("BOUNDS_NETWORK_ERROR"), "is-danger");
                 return;
             }
@@ -96,6 +96,9 @@ class Query {
     }
 
     async query() {
+        // Initial pop
+        const population = { samu: { raw: 0, per: 0 }, svb: { raw: 0, per: 0 }, total: { raw: 0, per: 0 } };
+
         // Clear map
         layers.isochrones.clearLayers();
         layers.overlaps.clearLayers();
@@ -109,7 +112,6 @@ class Query {
             this.filter(0, ["HOSPITAL", "CENTRO", "CONSULTORIO", "UNIDAD"]);
         }
 
-
         // For each base (targeting filter)
         for (const base of this.filteredBases) {
             // If contains vehicles
@@ -121,28 +123,12 @@ class Query {
                 base.vehicles.forEach((vehicle) => {
                     // Check is active
                     if (vehicle.polygon) {
-                        //
+                        // Add it 
                         if (vehicle.type == VehicleType.SAMU) {
-                            // if (globalSamuIsochrone) {
-                            //     globalSamuIsochrone = utils.union(
-                            //         vehicle.polygon,
-                            //         globalSamuIsochrone
-                            //     );
-                            // } else {
-                            //     globalSamuIsochrone = vehicle.polygon;
-                            // }
                             samuIsochrone = utils.union(samuIsochrone, vehicle.polygon);
                         }
 
                         if (vehicle.type == VehicleType.SVB) {
-                            // if (globalSvbIsochrone) {
-                            //     globalSvbIsochrone = utils.union(
-                            //         vehicle.polygon,
-                            //         globalSvbIsochrone
-                            //     );
-                            // } else {
-                            //     globalSvbIsochrone = vehicle.polygon;
-                            // }
                             svbIsochrone = utils.union(svbIsochrone, vehicle.polygon);
                         }
                     }
@@ -150,66 +136,59 @@ class Query {
             }
         }
 
-        let globalIsochrone = utils.union(
-            samuIsochrone,
-            svbIsochrone
-        );
-
-        globalIsochrone = utils.intersect(
-            globalIsochrone,
-            this.bounds.features[0]
-        );
-
-        // Get pop
-        const population = { samu: { raw: 0, per: 0 }, svb: { raw: 0, per: 0 }, total: { raw: 0, per: 0 } };
-        const totalData = await popService.getPopulation(
-            globalIsochrone.geometry
-        );
-
-        const samuData = await popService.getPopulation(
-            samuIsochrone.geometry
-        );
-
-        const svbData = await popService.getPopulation(
-            svbIsochrone.geometry
-        );
-
-        if (samuData.error || svbData.error || totalData.error) {
-            console.error(samuData.error, svbData.error);
-            return;
-        } else {
-
-            const regionPop = this.regions.find((region) => region.id == this.region).population;
-
-            // Store pop
-            population.samu.raw = samuData.total_population;
-            population.svb.raw = svbData.total_population;
-            population.total.raw = totalData.total_population;
-
-            population.samu.per = utils.percentage(samuData.total_population, regionPop, 2);
-            population.svb.per = utils.percentage(svbData.total_population, regionPop, 2);
-            population.total.per = utils.percentage(totalData.total_population, regionPop, 2);
-
-            // Print 
-            const layerSVB = new GeoJSON(svbIsochrone, {
-                style: {
-                    color: VehicleColor.SVB,
-                },
-            });
-
-            const layerSAMU = new GeoJSON(samuIsochrone, {
-                style: {
-                    color: VehicleColor.SAMU,
-                },
-            });
-
-            layers.isochrones.addLayer(layerSVB).addTo(map);
-            layers.isochrones.addLayer(layerSAMU).addTo(map);
+        // If both, SAMU isochrone & SVB isochrone are empty, finish query
+        if (samuIsochrone == utils.emptyPolygon && svbIsochrone == utils.emptyPolygon) {
+            eventEmitter.emit("notification", "Consulta vacia", "is-warning");
+            return population;
         }
 
+        // Current region pop
+        const regionPop = this.regions.find((region) => region.id == this.region).population;
 
+        // Store pop
+        population.samu.raw = await this.getIsochronePopulation(samuIsochrone);
+        population.svb.raw = await this.getIsochronePopulation(svbIsochrone);
+        population.total.raw = population.samu.raw + population.svb.raw;
+
+        population.samu.per = utils.percentage(population.samu.raw, regionPop, 2);
+        population.svb.per = utils.percentage(population.svb.raw, regionPop, 2);
+        population.total.per = utils.percentage(population.total.raw, regionPop, 2);
+
+        // Render layers 
+        const layerSVB = new GeoJSON(svbIsochrone, {
+            style: {
+                color: VehicleColor.SVB,
+            },
+        });
+
+        const layerSAMU = new GeoJSON(samuIsochrone, {
+            style: {
+                color: VehicleColor.SAMU,
+            },
+        });
+
+        layers.isochrones.addLayer(layerSVB).addTo(map);
+        layers.isochrones.addLayer(layerSAMU).addTo(map);
 
         return population;
+    }
+
+    async getIsochronePopulation(isochrone) {
+        // Intersect SVB and SAMU isochrones with region bounds and get pop
+        if (isochrone != utils.emptyPolygon) {
+            isochrone = utils.intersect(isochrone, this.bounds.features[0]);
+
+            const data = await popService.getPopulation(
+                isochrone.geometry
+            );
+
+            if (data.error || isNaN(data.total_population)) {
+                eventEmitter.emit("notification", i18n("GENERIC_NETWORK_ERROR"), "is-danger");
+                return 0;
+            } else {
+                return data.total_population;
+            }
+        }
     }
 }
 export const query = new Query();
