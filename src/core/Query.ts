@@ -7,6 +7,7 @@ import { GeoJSON, LatLng } from "leaflet";
 import { VehicleColor, VehicleType } from "./Vehicle";
 import { popService } from "@/services/population.service";
 import { i18n } from "@/i18n"
+import { Overlap } from "@/core/Overlap";
 
 class Query {
 
@@ -142,6 +143,9 @@ class Query {
             return population;
         }
 
+        // Create overlap
+        const overlap = utils.intersect(samuIsochrone, svbIsochrone);
+
         // Current region pop
         const regionPop = this.regions.find((region) => region.id == this.region).population;
 
@@ -169,6 +173,10 @@ class Query {
 
         layers.isochrones.addLayer(layerSVB).addTo(map);
         layers.isochrones.addLayer(layerSAMU).addTo(map);
+
+        // Render overlap
+        const layerOverlap = new Overlap(overlap);
+        layerOverlap.show();
 
         return population;
     }
