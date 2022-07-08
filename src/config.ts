@@ -1,5 +1,5 @@
 export default {
     SERVER_URL: "http://gtirouter.dsic.upv.es:5015", // "http://127.0.0.1:5000",
     MARKER_SIZER: 41,
-    OVERLAP_COLOR: '#0cf533',
+    OVERLAP_COLOR: '#875171'
 }
