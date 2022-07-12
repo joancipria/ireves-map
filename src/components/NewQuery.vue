@@ -81,7 +81,7 @@
           </div>
 
           <div class="field">
-            <div class="control">
+            <div :class="{ 'is-loading': !finished }" class="control">
               <button
                 @click="launchQuery"
                 class="button is-success"
@@ -89,12 +89,6 @@
               >
                 {{ $t("LAUNCH_QUERY") }}
               </button>
-            </div>
-          </div>
-
-          <div class="field">
-            <div class="control">
-              <button @click="loadModel" class="button">Cargar modelo</button>
             </div>
           </div>
 
@@ -136,7 +130,6 @@ import TimeController from "@/components/TimeController.vue";
 import { VehicleType } from "@/core/Vehicle";
 import { BaseType } from "@/core/Base";
 import { dataExport } from "@/core/DataExport";
-import { loadModel } from "@/core/DataLoader";
 import { query } from "@/core/Query";
 
 @Options({
@@ -183,10 +176,6 @@ export default class NewQuery extends Vue {
     this.totalPopulation = await query.query();
     this.finished = true;
     this.results = true;
-  }
-
-  loadModel() {
-    loadModel();
   }
 }
 </script>

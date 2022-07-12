@@ -44,5 +44,8 @@
     "GENERATE_REPORT": "Generate report",
     "MODEL_NETWORK_ERROR": "The model could not be obtained. Error when connecting to server",
     "GENERIC_NETWORK_ERROR": "Error when connecting to server. Most of iReves Map functionalities may not work",
-    "BOUNDS_NETWORK_ERROR": "Region bounds could not be obtained. Error when connecting to server"    
+    "BOUNDS_NETWORK_ERROR": "Region bounds could not be obtained. Error when connecting to server",
+    "MODELS": "Models",
+    "LOAD_STATIC_MODEL": "Load static model",
+    "MODEL_LOADED": "Model loaded"    
 }

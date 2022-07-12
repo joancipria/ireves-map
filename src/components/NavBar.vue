@@ -55,6 +55,19 @@
           </div>
         </div>
         <!-- <a class="navbar-item"> {{ $t("ABOUT") }} </a> -->
+
+        <div class="navbar-item has-dropdown is-hoverable">
+          <a class="navbar-link"> {{ $t("MODELS") }} </a>
+          <div class="navbar-dropdown">
+            <a @click="loadModel()" class="navbar-item">
+              <span class="icon">
+                <i class="fas fa-magic" aria-hidden="true"></i>
+              </span>
+              {{ $t("LOAD_STATIC_MODEL") }}
+            </a>
+            <!-- <a @click="showExport" class="navbar-item" href="#">{{ $t("SAVED_QUERIES") }} </a> -->
+          </div>
+        </div>
       </div>
 
       <div class="navbar-end">
@@ -78,6 +91,7 @@
 <script lang="ts">
 import { Options, Vue } from "vue-class-component";
 import { eventEmitter } from "@/main";
+import { loadModel } from "@/core/DataLoader";
 
 @Options({
   data() {
@@ -95,6 +109,10 @@ export default class NavBar extends Vue {
 
   toggleSidebar(target: string) {
     eventEmitter.emit("toggle-sidebar", target);
+  }
+
+  loadModel(){
+    loadModel();
   }
 }
 </script>

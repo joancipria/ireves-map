@@ -44,5 +44,8 @@
     "GENERATE_REPORT": "Generar informe",
     "MODEL_NETWORK_ERROR": "No se pudo obtener el modelo. Error al conectar con el servidor",
     "GENERIC_NETWORK_ERROR": "Error al conectar con el servidor. La mayoría de las funcionalidades de iReves Map podrían no funcionar correctamente",
-    "BOUNDS_NETWORK_ERROR": "No se pudo obtener los límites geográficos seleccionados. Error al conectar con el servidor"
+    "BOUNDS_NETWORK_ERROR": "No se pudo obtener los límites geográficos seleccionados. Error al conectar con el servidor",
+    "MODELS": "Modelos",
+    "LOAD_STATIC_MODEL": "Cargar modelo estático",
+    "MODEL_LOADED": "Modelo cargado"    
 }
