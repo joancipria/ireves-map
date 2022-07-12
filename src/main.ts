@@ -17,8 +17,8 @@ import 'bulma/css/bulma.css'
 
 // Font Awesome
 import { library, dom } from "@fortawesome/fontawesome-svg-core";
-import { faAmbulance, faLayerGroup, faBicycle, faCar, faUpload, faHospitalSymbol, faSignOutAlt, faMapMarkerAlt, faUsers, faCog, faClock, faFileDownload, faFileExport, faSearch } from "@fortawesome/free-solid-svg-icons";
-library.add(faAmbulance, faLayerGroup, faBicycle, faCar, faUpload, faHospitalSymbol, faSignOutAlt, faMapMarkerAlt, faUsers, faCog, faClock, faFileDownload, faFileExport, faSearch);
+import { faAmbulance, faLayerGroup, faBicycle, faCar, faUpload, faHospitalSymbol, faSignOutAlt, faMapMarkerAlt, faUsers, faCog, faClock, faFileDownload, faFileExport, faSearch, faMagic } from "@fortawesome/free-solid-svg-icons";
+library.add(faAmbulance, faLayerGroup, faBicycle, faCar, faUpload, faHospitalSymbol, faSignOutAlt, faMapMarkerAlt, faUsers, faCog, faClock, faFileDownload, faFileExport, faSearch, faMagic);
 dom.watch();
 
 // Global variables
