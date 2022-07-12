@@ -108,7 +108,7 @@ class DataExport {
      * @memberof DataExport
      */
     private async takeMapSnapshot(): Promise<string> {
-        const base64Image = await domtoimage.toPng(document.getElementById("map"));
+        const base64Image = await domtoimage.toPng(document.getElementById("map"), { height: 1080, width: 1920 });
         return base64Image;
     }
 
