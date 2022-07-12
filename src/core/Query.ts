@@ -67,6 +67,7 @@ class Query {
     }
 
     async filter(region: number, typeFilter: string[]) {
+        this.filteredBases = [];
         this.region = region;
         // Get & show region bounds
         if (region != 0) {
