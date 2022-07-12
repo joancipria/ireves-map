@@ -82,7 +82,11 @@
 
           <div class="field">
             <div class="control">
-              <button @click="launchQuery" class="button is-success">
+              <button
+                @click="launchQuery"
+                class="button is-success"
+                :disabled="!finished"
+              >
                 {{ $t("LAUNCH_QUERY") }}
               </button>
             </div>
@@ -95,8 +99,8 @@
           </div>
 
           <hr />
-          <div v-if="finished">
-            <b>{{ $t("COVERED_POPULATION") }}:</b>
+          <div v-if="results">
+            <b>{{ $t("COVERED_POPULATION") }} SAMU & SVB:</b>
             {{ this.totalPopulation.total.per }}% ({{
               this.totalPopulation.total.raw
             }})<br />
@@ -154,7 +158,8 @@ import { query } from "@/core/Query";
 export default class NewQuery extends Vue {
   currentTypes!: string[]; // Current selected types
   currentRegion!: number; // Current selected region
-  finished: boolean = false; // Finished query flag
+  finished: boolean = true; // Finished query flag
+  results: boolean = false;
   totalPopulation = {
     samu: { raw: 0, per: 0 },
     svb: { raw: 0, per: 0 },
@@ -173,9 +178,11 @@ export default class NewQuery extends Vue {
   }
 
   async launchQuery() {
+    this.results = false;
     this.finished = false;
     this.totalPopulation = await query.query();
     this.finished = true;
+    this.results = true;
   }
 
   loadModel() {
