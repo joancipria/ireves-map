@@ -83,6 +83,9 @@ class Query {
         // Clear map
         layers.basesCluster.clearLayers();
         //layers.vehiclesCluster.clearLayers();
+        layers.isochrones.clearLayers();
+        layers.overlaps.clearLayers();
+
 
         // For each base
         bases.forEach((base: Base) => {
@@ -152,11 +155,9 @@ class Query {
         // Store pop
         population.samu.raw = await this.getIsochronePopulation(samuIsochrone);
         population.svb.raw = await this.getIsochronePopulation(svbIsochrone);
-        population.total.raw = population.samu.raw + population.svb.raw;
 
         population.samu.per = utils.percentage(population.samu.raw, regionPop, 2);
         population.svb.per = utils.percentage(population.svb.raw, regionPop, 2);
-        population.total.per = utils.percentage(population.total.raw, regionPop, 2);
 
         // Render layers 
         const layerSVB = new GeoJSON(svbIsochrone, {
@@ -175,16 +176,24 @@ class Query {
         layers.isochrones.addLayer(layerSAMU).addTo(map);
 
         // Render overlap
-        const layerOverlap = new Overlap(overlap);
-        layerOverlap.show();
+        if (overlap) {
+            const layerOverlap = new Overlap(overlap);
+            population.total.raw = await layerOverlap.getPopulation();
+            population.total.per = utils.percentage(population.total.raw, regionPop, 2);
+            layerOverlap.show();
+        }
 
         return population;
     }
 
     async getIsochronePopulation(isochrone) {
-        // Intersect SVB and SAMU isochrones with region bounds and get pop
+        // Intersect isochrone with region bounds and get pop
         if (isochrone != utils.emptyPolygon) {
             isochrone = utils.intersect(isochrone, this.bounds.features[0]);
+
+            if (!isochrone) {
+                return 0;
+            }
 
             const data = await popService.getPopulation(
                 isochrone.geometry
